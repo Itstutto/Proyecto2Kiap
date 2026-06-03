@@ -1,17 +1,17 @@
 //
-// Created by cesar on 1/6/2026.
+// Created by yense on 6/2/2026.
 //
 
-#include "PersonajePrincipal.h"
+#include "PersonajeEnemigo.h"
 
-PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero) : Personaje() {
-    this->genero = genero;
+PersonajeEnemigo::PersonajeEnemigo(const string &nombre, char genero): Personaje() {
     this->nombre = nombre;
+    this->genero = genero;
 }
 
-string PersonajePrincipal::getInfo() {
+string PersonajeEnemigo::getInfo() {
     stringstream s;
-    s<<"---------Personaje Principal--------"<<endl
+    s<<"---------Personaje Enemigo--------"<<endl
     <<"Nombre: "<<nombre<<endl
     <<"Genero: "<<(genero == 'M' ? "masculino" : genero == 'F' ? "Femenino" : "otro")<<endl
     <<"Vida: "<<vida<<endl

@@ -8,4 +8,6 @@ add_executable(Proyecto2Kiap main.cpp
         Personaje.h
         PersonajePrincipal.cpp
         PersonajePrincipal.h
-        Movimientos.h)
+        Movimientos.h
+        PersonajeEnemigo.cpp
+        PersonajeEnemigo.h)

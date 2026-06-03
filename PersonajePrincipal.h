@@ -8,8 +8,9 @@
 #include <sstream>
 
 class PersonajePrincipal : public Personaje{
-    char genero;
+private:
     string nombre;
+    char genero;
 public:
     PersonajePrincipal(const string &nombre, char genero);
     string getInfo() override;

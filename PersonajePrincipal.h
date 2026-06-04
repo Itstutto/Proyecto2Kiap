@@ -13,7 +13,7 @@ private:
     char genero;
 public:
     PersonajePrincipal(const string &nombre, char genero);
-    string getInfo() override;
+    std::string mostrar() override;
 
 };
 

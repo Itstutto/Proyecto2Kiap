@@ -4,10 +4,16 @@
 
 #include "Personaje.h"
 
+#include "ZonaInferior.h"
+
 Personaje::Personaje() {
     vida = 100.0;
     danioBase = 5.0;
     vivo = true;
+    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+    zonasCuerpo.insert(zonasCuerpo.end(), zonaSup->getZonas().begin(), zonaSup->getZonas().end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonaInf->getZonas().begin(), zonaInf->getZonas().end());
 }
 
 Personaje::Personaje(double vida, double danioBase) {

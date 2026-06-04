@@ -17,7 +17,7 @@ private:
 
 public:
     PersonajeEnemigo(const string &nombre, char genero);
-    string getInfo() override;
+    std::string mostrar() override;
 
 };
 

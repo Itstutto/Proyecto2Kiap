@@ -9,7 +9,7 @@ PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero) : Pers
     this->nombre = nombre;
 }
 
-string PersonajePrincipal::getInfo() {
+std::string PersonajePrincipal::mostrar(){
     stringstream s;
     s<<"---------Personaje Principal--------"<<endl
     <<"Nombre: "<<nombre<<endl

@@ -10,4 +10,26 @@ add_executable(Proyecto2Kiap main.cpp
         PersonajePrincipal.h
         Movimientos.h
         PersonajeEnemigo.cpp
-        PersonajeEnemigo.h)
+        PersonajeEnemigo.h
+        Movimiento.cpp
+        ZonaSuperior.cpp
+        ZonaSuperior.h
+        ZonasDelCuerpo.h
+        IMostrar.h
+        ZonaCuerpoBase.cpp
+        ZonaCuerpoBase.h
+        ZonaInferior.cpp
+        ZonaInferior.h
+        FactoryZonas.cpp
+        FactoryZonas.h
+        MovimientosSuperiores.cpp
+        MovimientosSuperiores.h
+        MovimientosInferiores.cpp
+        MovimientosInferiores.h
+        FactoryMovimientos.cpp
+        FactoryMovimientos.h
+        CreadorMovimientosSuperiores.h
+        CrearMovimientos.h
+        CreadorMovimientosInferiores.cpp
+        CreadorMovimientosInferiores.h
+)

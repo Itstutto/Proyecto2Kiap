@@ -9,7 +9,7 @@ PersonajeEnemigo::PersonajeEnemigo(const string &nombre, char genero): Personaje
     this->genero = genero;
 }
 
-string PersonajeEnemigo::getInfo() {
+std::string PersonajeEnemigo::mostrar() {
     stringstream s;
     s<<"---------Personaje Enemigo--------"<<endl
     <<"Nombre: "<<nombre<<endl
@@ -18,3 +18,4 @@ string PersonajeEnemigo::getInfo() {
     <<nombre<<(vivo ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
     return s.str();
 }
+

@@ -5,9 +5,11 @@
 #ifndef PROYECTO2KIAP_PERSONAJE_H
 #define PROYECTO2KIAP_PERSONAJE_H
 #include <iostream>
+
+#include "ZonaSuperior.h"
 using namespace std;
 
-class Personaje {
+class Personaje : public IMostrar{
 protected:
 
     //decorator de equipamiento de proteccion, pendiente
@@ -16,6 +18,7 @@ protected:
     double vida;
     double danioBase;
     bool vivo;
+    vector<ZonaDelCuerpo*> zonasCuerpo; //pendiente, para determinar que zonas del cuerpo tiene el personaje, y asi determinar que movimientos puede realizar
 
 public:
     Personaje();
@@ -27,8 +30,6 @@ public:
     void daniar(double cantidad);
 
     double getDanio();
-
-    virtual string getInfo() = 0;
 
 };
 

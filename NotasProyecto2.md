@@ -33,3 +33,20 @@ Personaje
 
 - Crear la clase `Enemigo` y asegurar su instancia.
 - Revisar patrones de diseño y consultar cuáles podrían utilizarse.
+
+------------------------------------------
+En Golpes, se le asignará un puntaje, dependiendo de que tipo se golpe sea.
+Strategy lo podemos usar con potenciadores del tipo de golpe, o de defensa.
+--(por ejemplo, peto defectuoso: no marca punto, bebida energética: marca el doble de puntos, etc.)
+
+-Hacer 2 archivos de texto, cada uno tiene que llenarse con zonas del cuerpo, uno para zona inferior y otra para zona superior
+en cada linea debe ir una zona diferente
+
+-Hacer que al final de la pelea, si gana se le dan unos puntos al personaje, y con esos puntos puede canjear nuevos movimientos,
+se le hace tabla para saber la información de cada personaje, como sus movimientos, puntos, etc.
+
+RealizarGolpe (clase por crear, que hará toda la lógica para saber si el golpe se dio o no)
+
+
+
+-Hacer las excepciones en todos los objetos que se crean con archivos

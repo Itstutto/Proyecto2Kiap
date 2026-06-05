@@ -1,1 +1,30 @@
-Facil,Bruce Lee,M,10,100,
+Facil,Bruce Lee,M,10,100
+Facil,Chuck Norris,M,10,100
+Facil,Jackie Chan,M,10,100
+Facil,Jet Li,M,10,100
+Facil,Van Damme,M,10,100
+Facil,Ng Mui,F,10,100
+Facil,Amanda Nunes,F,10,100
+Facil,Ronda Rousey,F,10,100
+Facil,Cris Cyborg,F,10,100
+Facil,Valentina Shevchenko,F,10,100
+Medio,Anderson Silva,M,20,100
+Medio,Georges St-Pierre,M,20,100
+Medio,Jon Jones,M,20,100
+Medio,Daniel Cormier,M,20,100
+Medio,Stipe Miocic,M,20,100
+Medio,Saori Yoshida,F,20,100
+Medio,Yokasta Valle,F,20,100
+Medio,Kayla Harrison,F,20,100
+Medio,Laura Bennet,F,20,100
+Medio,Laila Ali,F,20,100
+Dificil,Tyson Fury,M,30,100
+Dificil,Deontay Wilder,M,30,100
+Dificil,Anthony Joshua,M,30,100
+Dificil,Andy Ruiz Jr,M,30,100
+Dificil,Joseph Parker,M,30,100
+Dificil,Claressa Shields,F,30,100
+Dificil,Cecilia Braekhus,F,30,100
+Dificil,Christina Hammer,F,30,100
+Dificil,Franchon Crews Dezurn,F,30,100
+Dificil,Shelly-Ann Fraser-Pryce,F,30,100

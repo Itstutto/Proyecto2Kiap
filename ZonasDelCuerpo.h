@@ -16,6 +16,9 @@ private:
     double condicion; //determina que tan probable es que se realize un movimiento, con menor condicion menor probabilidad
 public:
     ZonaDelCuerpo(string nombre) {
+        if (nombre.empty()) {
+            throw invalid_argument("El nombre de la zona no puede estar vacío");
+        }
         this->nombre = nombre;
         condicion = 1;
     }

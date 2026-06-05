@@ -1,2 +1,5 @@
 superior
 Sonnal chirigui,Mano derecha,Pecho,10,1,Golpe de mano
+Sonnal chirigui,Mano izquierda,Pecho,10,1,Golpe de mano
+Chumook Montong chirigui,Mano derecha,Pecho,10,1,Golpe de mano
+Chumook Montong chirigui,Mano izquierda,Pecho,10,1,Golpe de mano

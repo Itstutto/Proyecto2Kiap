@@ -19,27 +19,82 @@ public:
         }
         vector<Personaje*> enemigos;
         string linea;
+        int numeroLinea = 0;
+
         while (getline(archivo, linea)) {
+            numeroLinea++;
+
+            // Ignorar líneas vacías
+            if (linea.empty()) {
+                continue;
+            }
+
             stringstream ss(linea);
-            string dif;
-            if (dif != dificultad) {
+            string dificultadArchivo, nombreEnemigo, generoStr, danioBaseStr, vidaStr;
+
+            // Leer dificultad del archivo
+            if (!getline(ss, dificultadArchivo, ',')) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la dificultad en el archivo de enemigos");
+            }
+
+            // Verificar si la dificultad coincide
+            if (dificultadArchivo != dificultad) {
                 continue; // Saltar enemigos que no coincidan con la dificultad
             }
-            string nombreEnemigo, generoStr, danioBaseStr, vidaStr;
-            getline(ss, nombreEnemigo, ',');
-            getline(ss, generoStr, ',');
-            getline(ss, danioBaseStr, ',');
-            getline(ss, vidaStr, ',');
+            // Leer los demás campos
+            if (!getline(ss, nombreEnemigo, ',')) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el nombre del enemigo");
+            }
+
+            if (nombreEnemigo.empty()) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": El nombre del enemigo no puede estar vacío");
+            }
+
+            if (!getline(ss, generoStr, ',')) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el género del enemigo");
+            }
+
+            if (!getline(ss, danioBaseStr, ',')) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el daño base del enemigo");
+            }
+
+            if (!getline(ss, vidaStr)) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la vida del enemigo");
+            }
+
+            // Convertir strings a números con validación
+            double danioBase;
+            double vida;
+            try {
+                danioBase = stod(danioBaseStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Daño base no es un número válido: " + danioBaseStr);
+            } catch (const out_of_range& e) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Daño base fuera de rango: " + danioBaseStr);
+            }
+
+            try {
+                vida = stod(vidaStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Vida no es un número válido: " + vidaStr);
+            } catch (const out_of_range& e) {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Vida fuera de rango: " + vidaStr);
+            }
+
+            // Validar género
             char genero = generoStr.empty() ? 'O' : generoStr[0]; // 'O' para otro si no se especifica
-            double danioBase = stod(danioBaseStr);
-            double vida = stod(vidaStr);
+            if (genero != 'M' && genero != 'F' && genero != 'O') {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Género inválido: " + string(1, genero));
+            }
+            // Crear el enemigo (el constructor validará los valores)
             enemigos.push_back(new PersonajeEnemigo(dificultad, nombreEnemigo, genero, danioBase, vida));
+
         }
 
         archivo.close();
         return enemigos;
-
     }
+
 };
 
 

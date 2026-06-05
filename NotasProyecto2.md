@@ -49,7 +49,7 @@ RealizarGolpe (clase por crear, que hará toda la lógica para saber si el golpe
 
 
 
--Hacer las excepciones en todos los objetos que se crean con archivos
+-Hacer las excepciones en todos los objetos que se crean con archivos(personajes, zonas, movimientos) revisar sus constructores
 -Llenar los archivos de textos: 
 -Movimientos: Todos
 Enemigos: 5 de cada dificultad de enemigos(en zonas inferiores y superiores)

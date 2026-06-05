@@ -5,6 +5,15 @@
 #include "PersonajePrincipal.h"
 
 PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida) : Personaje() {
+    if (nombre.empty()) {
+        throw invalid_argument("El nombre del personaje principal no puede estar vacío");
+    }
+    if (genero != 'M' && genero != 'F' && genero != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    }
+    if (vida <= 0) {
+        throw invalid_argument("La vida del personaje principal debe ser mayor a 0, recibido: " + to_string(vida));
+    }
     this->genero = genero;
     this->nombre = nombre;
 }

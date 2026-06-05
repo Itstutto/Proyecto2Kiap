@@ -12,12 +12,14 @@ using namespace std;
 
 class PersonajeEnemigo : public Personaje {
 private:
+    string dificultad;
     string nombre;
     char genero;
 
 public:
-    PersonajeEnemigo(const string &nombre, char genero);
+    PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida = 100);
     std::string mostrar() override;
+    string getNombre() override;
 
 };
 

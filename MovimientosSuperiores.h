@@ -9,7 +9,7 @@
 
 class MovimientosSuperiores : public Movimiento{
 public:
-    MovimientosSuperiores(string nombre, double danio,string info, string extremidad, string zonaImpacto);
+    MovimientosSuperiores(string nombre, double danio,double impacto,string info, string extremidad, string zonaImpacto);
     std::string mostrar() override;
 };
 

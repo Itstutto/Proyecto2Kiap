@@ -4,8 +4,8 @@
 
 #include "MovimientosSuperiores.h"
 
-MovimientosSuperiores::MovimientosSuperiores(string nombre, double danio, string info, string extremidad,
-    string zonaImpacto) : Movimiento(nombre,extremidad,zonaImpacto, danio, info) {
+MovimientosSuperiores::MovimientosSuperiores(string nombre, double danio,double impacto,string info,
+    string extremidad, string zonaImpacto) : Movimiento(nombre,extremidad,zonaImpacto, danio,impacto, info) {
 
 }
 

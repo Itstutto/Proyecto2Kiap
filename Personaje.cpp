@@ -4,6 +4,8 @@
 
 #include "Personaje.h"
 
+#include "ListMovInferiores.h"
+#include "ListMovSuperiores.h"
 #include "ZonaInferior.h"
 
 Personaje::Personaje() {
@@ -12,8 +14,10 @@ Personaje::Personaje() {
     vivo = true;
     ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
     ZonaInferior* zonaInf = ZonaInferior::getInstancia();
-    zonasCuerpo.insert(zonasCuerpo.end(), zonaSup->getZonas().begin(), zonaSup->getZonas().end());
-    zonasCuerpo.insert(zonasCuerpo.end(), zonaInf->getZonas().begin(), zonaInf->getZonas().end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonaSup->getElementos().begin(), zonaSup->getElementos().end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonaInf->getElementos().begin(), zonaInf->getElementos().end());
+
+
 }
 
 Personaje::Personaje(double vida, double danioBase) {
@@ -21,6 +25,7 @@ Personaje::Personaje(double vida, double danioBase) {
     this->danioBase = danioBase;
     vivo=true;
 }
+
 
 double Personaje::getDanio() {
     //temporal, para ver fucionalidad
@@ -35,8 +40,30 @@ void Personaje::daniar(double cantidad) {
     }
 }
 
+bool Personaje::puedeRealizarMovimiento(Movimiento *mov) {
+    for (const auto x : movimientos) {
+        if (x->getNombre() == mov->getNombre()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+ZonaDelCuerpo * Personaje::getZona(string nombreZona) {
+    for (const auto x : zonasCuerpo) {
+        if (x->getNombre() == nombreZona) {
+            return x;
+        }
+    }
+    return nullptr;
+}
+
 double Personaje::getVida() {
     return vida;
+}
+
+bool Personaje::isVivo() {
+    return vida>0;
 }
 
 void Personaje::sanar(double cantidad) {

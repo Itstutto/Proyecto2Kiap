@@ -16,8 +16,6 @@ add_executable(Proyecto2Kiap main.cpp
         ZonaSuperior.h
         ZonasDelCuerpo.h
         IMostrar.h
-        ZonaCuerpoBase.cpp
-        ZonaCuerpoBase.h
         ZonaInferior.cpp
         ZonaInferior.h
         FactoryZonas.cpp
@@ -32,4 +30,17 @@ add_executable(Proyecto2Kiap main.cpp
         CrearMovimientos.h
         CreadorMovimientosInferiores.cpp
         CreadorMovimientosInferiores.h
+        Vectores.cpp
+        Vectores.h
+        ListMovSuperiores.cpp
+        ListMovSuperiores.h
+        ListMovInferiores.cpp
+        ListMovInferiores.h
+        Pelea.cpp
+        Pelea.h
+        FactoryEnemigos.h
+        Simulacion.cpp
+        Simulacion.h
+        CargaPersonajePrincipal.h
+        ISerializar.h
 )

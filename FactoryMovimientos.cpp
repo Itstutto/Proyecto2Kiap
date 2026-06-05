@@ -35,20 +35,27 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
     while (getline(archivo, linea)) {
         if (!linea.empty()) {
             stringstream ss(linea);
-            string nombre, extremidad, zonaImpacto, danioStr, descripcion;
+            string nombre, extremidad, zonaImpacto, danioStr,impactoStr, descripcion;
             getline(ss, nombre, ',');
             getline(ss, extremidad, ',');
             getline(ss, zonaImpacto, ',');
             getline(ss, danioStr, ',');
+            getline(ss, impactoStr, ',');
             getline(ss, descripcion);
 
             double danio;
+            double impacto;
             try {
                 danio = stod(danioStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Daño no es un número válido: " + danioStr);
             }
-            movimientos.push_back(creador->crearMovimiento(nombre, danio, descripcion, extremidad, zonaImpacto));
+            try {
+                impacto = stod(impactoStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Impacto no es un número válido: " + impactoStr);
+            }
+            movimientos.push_back(creador->crearMovimiento(nombre, danio,impacto, descripcion, extremidad, zonaImpacto));
         }
     }
     return movimientos;

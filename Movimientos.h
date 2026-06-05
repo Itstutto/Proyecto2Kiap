@@ -6,6 +6,7 @@
 #define PROYECTO2KIAP_MOVIMIENTOS_H
 #include <iostream>
 #include <random>
+#include <sstream>
 #include "IMostrar.h"
 using namespace std;
 
@@ -15,13 +16,15 @@ protected:
     string extremidad; //brazo derecho, brazo izquierdo, cabeza, etc
     string zonaImpacto; //cabeza, torso, brazo, pierna, etc
     double danio;
+    double impacto;
     double dificultad; //determina que tan dificil es realizar el movimiento, con mayor dificultad menor probabilidad de realizarlo
     string info;
 public:
-    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,string info);
+    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info);
     virtual ~Movimiento() = default;
     string getNombre();
     double getDanio();
+    double getImpacto();
 
     bool realizarMovimiento() {
         random_device rd;
@@ -41,6 +44,8 @@ public:
     string getZonaImpacto(){
         return zonaImpacto;
     }
+
+    std::string mostrar() override;
 
 
 

@@ -12,7 +12,8 @@ private:
     string nombre;
     char genero;
 public:
-    PersonajePrincipal(const string &nombre, char genero);
+    PersonajePrincipal(const string &nombre, char genero, double vida);
+    string getNombre() override;
     std::string mostrar() override;
 
 };

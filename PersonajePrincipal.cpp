@@ -4,9 +4,13 @@
 
 #include "PersonajePrincipal.h"
 
-PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero) : Personaje() {
+PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida) : Personaje() {
     this->genero = genero;
     this->nombre = nombre;
+}
+
+string PersonajePrincipal::getNombre() {
+    return nombre;
 }
 
 std::string PersonajePrincipal::mostrar(){

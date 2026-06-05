@@ -1,0 +1,3 @@
+inferior
+Ap chagui,Pie derecho,Cabeza,20,2,Patada de frente
+Dollyo chagui,Pie derecho,Cabeza,30,3,Patada circular

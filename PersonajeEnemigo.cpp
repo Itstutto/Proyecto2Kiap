@@ -4,7 +4,8 @@
 
 #include "PersonajeEnemigo.h"
 
-PersonajeEnemigo::PersonajeEnemigo(const string &nombre, char genero): Personaje() {
+PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida ): Personaje(vida, danioBase) {
+    this->dificultad = dificultad;
     this->nombre = nombre;
     this->genero = genero;
 }
@@ -17,5 +18,9 @@ std::string PersonajeEnemigo::mostrar() {
     <<"Vida: "<<vida<<endl
     <<nombre<<(vivo ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
     return s.str();
+}
+
+string PersonajeEnemigo::getNombre() {
+    return nombre;
 }
 

@@ -25,6 +25,13 @@ public:
 
     double getCondicion() const { return condicion; }
 
+    void utilizar(double impacto) {
+        condicion -= impacto;
+        if (condicion < 0) {
+            condicion = 0;
+        }
+    }
+
     bool disponible() {
         random_device rd;
         mt19937 motor(rd());
@@ -36,6 +43,7 @@ public:
         }
         return true;
     }
+
     std::string mostrar() override {
         stringstream s;
         s<<"Zona: "<<nombre<<", Condicion: "<<condicion*100<<"% "<<endl;

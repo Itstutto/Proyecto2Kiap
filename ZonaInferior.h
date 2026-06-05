@@ -7,11 +7,11 @@
 #include <iostream>
 #include <vector>
 
-#include "ZonaCuerpoBase.h"
+#include "Vectores.h"
 #include "ZonasDelCuerpo.h"
 using namespace std;
 
-class ZonaInferior : public ZonaCuerpoBase{
+class ZonaInferior : public Vectores<ZonaDelCuerpo>{
 private:
     static ZonaInferior* instancia;
     ZonaInferior() = default;

@@ -4,8 +4,8 @@
 
 #include "MovimientosInferiores.h"
 
-MovimientosInferiores::MovimientosInferiores(string nombre, double danio, string info, string extremidad,
-    string zonaImpacto) : Movimiento(nombre, extremidad, zonaImpacto, danio, info) {
+MovimientosInferiores::MovimientosInferiores(string nombre, double danio,double impacto,string info,
+    string extremidad, string zonaImpacto) : Movimiento(nombre, extremidad, zonaImpacto, danio,impacto, info) {
 }
 
 std::string MovimientosInferiores::mostrar() {

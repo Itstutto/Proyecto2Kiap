@@ -54,3 +54,5 @@ RealizarGolpe (clase por crear, que hará toda la lógica para saber si el golpe
 -Movimientos: Todos
 Enemigos: 5 de cada dificultad de enemigos(en zonas inferiores y superiores)
 Personaje Principal : 1
+
+-Separar los metodos de simulacion en clases(puede ser) 

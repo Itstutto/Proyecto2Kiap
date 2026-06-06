@@ -15,6 +15,17 @@ public:
     ListMovInferiores(const ListMovInferiores&) = delete;
     ListMovInferiores& operator=(const ListMovInferiores&) = delete;
 
+    Movimiento* getMovimiento(const string& nombre, const string& zona) {
+
+        for (const auto x : elementos) {
+
+            if (x->getNombre() == nombre && x->getExtremidad() == zona) {
+                return x;
+            }
+        }
+        throw invalid_argument("No existe un movimiento con ese nombre y zona");
+    }
+
     static ListMovInferiores* getInstancia();
 };
 

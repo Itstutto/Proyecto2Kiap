@@ -6,6 +6,8 @@
 #define PROYECTO2KIAP_CARGAPERSONAJEPRINCIPAL_H
 #include <iostream>
 #include <fstream>
+
+#include "ListMovInferiores.h"
 using namespace std;
 #include "PersonajePrincipal.h"
 
@@ -69,10 +71,38 @@ public:
             throw invalid_argument("La vida debe ser mayor a 0, recibido: " + to_string(vida));
         }
 
+        PersonajePrincipal* p = new PersonajePrincipal(nombre, genero,vida);
+        stringstream ss;
+        string linea;
+        string zona;
+
+        //Las siguiente linea son solo nombres de movimientos y su zona
+
+        while (getline(archivo, linea)) {
+            if (linea.empty()) {
+                continue; // Saltar líneas vacías
+            }
+            ss.clear();
+            ss.str(linea);
+
+            getline(ss,nombre,',');
+            getline(ss,zona,',');
+            try {
+
+                p->agregarMovimiento(nombre ,zona);
+            }catch (const invalid_argument& e) {
+                cout << "Error al agregar movimiento '" << nombre << "' con zona '" << zona << "': " << e.what() << endl;
+            }
+        }
+
+
+
+
         archivo.close();
 
 
-        return new PersonajePrincipal(nombre, genero,vida);
+        // Devolver el personaje que acabamos de poblar (no crear uno nuevo vacío)
+        return p;
     }
 
     static Personaje* guardarPersonaje(PersonajePrincipal);

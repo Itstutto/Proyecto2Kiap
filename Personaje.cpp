@@ -5,18 +5,22 @@
 #include "Personaje.h"
 
 #include "ListMovInferiores.h"
-#include "ListMovSuperiores.h"
+
 #include "ZonaInferior.h"
 
 Personaje::Personaje() {
+
     vida = 100.0;
     danioBase = 5.0;
     vivo = true;
     ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
     ZonaInferior* zonaInf = ZonaInferior::getInstancia();
-    zonasCuerpo.insert(zonasCuerpo.end(), zonaSup->getElementos().begin(), zonaSup->getElementos().end());
-    zonasCuerpo.insert(zonasCuerpo.end(), zonaInf->getElementos().begin(), zonaInf->getElementos().end());
 
+    auto zonasSup = zonaSup->getElementos();
+    auto zonasInf = zonaInf->getElementos();
+
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasSup.begin(), zonasSup.end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasInf.begin(), zonasInf.end());
 
 }
 
@@ -24,6 +28,14 @@ Personaje::Personaje(double vida, double danioBase) {
     this->vida = vida;
     this->danioBase = danioBase;
     vivo=true;
+    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+
+    auto zonasSup = zonaSup->getElementos();
+    auto zonasInf = zonaInf->getElementos();
+
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasSup.begin(), zonasSup.end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasInf.begin(), zonasInf.end());
 }
 
 
@@ -41,12 +53,37 @@ void Personaje::daniar(double cantidad) {
 }
 
 bool Personaje::puedeRealizarMovimiento(Movimiento *mov) {
-    for (const auto x : movimientos) {
+    for (const auto x : movimientos.getElementos()) {
         if (x->getNombre() == mov->getNombre()) {
             return true;
         }
     }
     return false;
+}
+
+string Personaje::getMovimientos() {
+    return movimientos.mostrar();
+}
+
+void Personaje::agregarMovimiento(string nombre, string zona) {
+
+    Movimiento* mov = ListMovInferiores::getInstancia()->getMovimiento(nombre, zona);
+
+    movimientos.agregarElemento(mov);
+
+
+}
+
+Movimiento * Personaje::getMovimientoIndice(int indice) {
+    auto movs = movimientos.getElementos();
+    if (indice < 1 || indice > movs.size()) {
+        throw invalid_argument("Índice de movimiento fuera de rango, recibido: " + to_string(indice));
+    }
+    return movs[indice - 1];
+}
+
+int Personaje::getCantidadMovimientos() {
+    return movimientos.getElementos().size();
 }
 
 ZonaDelCuerpo * Personaje::getZona(string nombreZona) {

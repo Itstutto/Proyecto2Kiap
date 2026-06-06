@@ -1,13 +1,12 @@
-inferior
-Ap Chagui,Pie derecho,Cabeza,20,1,Patada de frente
-Ap Chagui, Pie izquierdo,Cabeza,20,1,Patada de frente
-Dollyo Chagui,Pie derecho,Cabeza,60,1,Patada circular
-Dollyo Chagui, Pie izquierdo,Cabeza,60,1,Patada circular
-Bandall Chagui, Pie derecho,Pecho,40,1,Patada medio circular
-Bandall Chagui, Pie izquierdo,Pecho,40,1,Patada medio circular
-Iop Chagui, Pie derecho,Pecho,20,1,Patada de lado
-Iop Chagui, Pie izquierdo,Pecho,20,1,Patada de lado
-Mondollyo Iop Chagui, Pie derecho,Pecho,40,1,Patada de lado circular
-Mondollyo Iop Chagui, Pie izquierdo,Pecho,40,1,Patada de lado circular
-Nako Chagui, Pie derecho,Cabeza,20,1,Patada de gancho
-Nako Chagui, Pie izquierdo,Cabeza,20,1,Patada de gancho
+Ap Chagui,Pie derecho,Cabeza,20,1,Patada de frente,1
+Ap Chagui,Pie izquierdo,Cabeza,20,1,Patada de frente,1
+Dollyo Chagui,Pie derecho,Cabeza,60,1,Patada circular,2
+Dollyo Chagui,Pie izquierdo,Cabeza,60,1,Patada circular,1
+Bandall Chagui,Pie derecho,Pecho,40,1,Patada medio circular,0.5
+Bandall Chagui,Pie izquierdo,Pecho,40,1,Patada medio circular,0.5
+Iop Chagui,Pie derecho,Pecho,20,1,Patada de lado,1
+Iop Chagui,Pie izquierdo,Pecho,20,1,Patada de lado,1
+Mondollyo Iop Chagui,Pie derecho,Pecho,40,1,Patada de lado circular,0.2
+Mondollyo Iop Chagui,Pie izquierdo,Pecho,40,1,Patada de lado circular,0.5
+Nako Chagui,Pie derecho,Cabeza,60,1,Patada de gancho,0.3
+Nako Chagui,Pie izquierdo,Cabeza,60,1,Patada de gancho,1

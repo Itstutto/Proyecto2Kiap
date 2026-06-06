@@ -1,0 +1,3 @@
+Cesar,M,100
+Ap Chagui,Pie derecho
+Ap Chagui,Pie izquierdo

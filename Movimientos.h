@@ -20,7 +20,7 @@ protected:
     double dificultad; //determina que tan dificil es realizar el movimiento, con mayor dificultad menor probabilidad de realizarlo
     string info;
 public:
-    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info);
+    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad);
     virtual ~Movimiento() = default;
     string getNombre();
     double getDanio();
@@ -32,6 +32,7 @@ public:
         uniform_int_distribution<int> distribucion(1,100);
 
         int posibilidad = distribucion(motor);
+
         if (posibilidad>dificultad*100) {
             return false;
         }
@@ -47,6 +48,11 @@ public:
 
     std::string mostrar() override;
 
+    bool operator==(const Movimiento &otro) const {
+        return nombre == otro.nombre &&
+               extremidad == otro.extremidad &&
+               zonaImpacto == otro.zonaImpacto;
+    }
 
 
 };

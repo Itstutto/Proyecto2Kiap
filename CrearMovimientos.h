@@ -10,7 +10,7 @@
 class CrearMovimientos {
 public:
         virtual ~CrearMovimientos() = default;
-        virtual Movimiento* crearMovimiento(const string& nombre, double danio, double impacto, string info, string extremidad, string zonaImpacto) = 0;
+        virtual Movimiento* crearMovimiento(const string& nombre, double danio, double impacto, string info, string extremidad, string zonaImpacto, double dificultad) = 0;
 };
 
 

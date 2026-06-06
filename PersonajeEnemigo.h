@@ -20,6 +20,7 @@ public:
     PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida = 100);
     std::string mostrar() override;
     string getNombre() override;
+    bool operator==(const PersonajeEnemigo &otro) const;
 
 };
 

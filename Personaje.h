@@ -20,7 +20,7 @@ protected:
     double danioBase;
     bool vivo;
     vector<ZonaDelCuerpo*> zonasCuerpo; //para determinar que zonas del cuerpo tiene el personaje, y asi determinar que movimientos puede realizar
-    vector<Movimiento*> movimientos; //para determinar que movimientos puede realizar el personaje, y asi determinar que zonas del cuerpo puede atacar
+    Vectores<Movimiento> movimientos;
 public:
     Personaje();
     Personaje(double vida, double danioBase);
@@ -33,6 +33,10 @@ public:
     void daniar(double cantidad);
 
     bool puedeRealizarMovimiento(Movimiento* mov);
+    string getMovimientos();
+    void agregarMovimiento(string nombre, string zona);
+    Movimiento* getMovimientoIndice(int indice);
+    int getCantidadMovimientos();
 
     ZonaDelCuerpo* getZona(string nombreZona);
 

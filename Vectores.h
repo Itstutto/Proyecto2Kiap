@@ -11,12 +11,13 @@
 using namespace std;
 template <typename T>
 class Vectores : public IMostrar{
-private:
+protected:
     vector<T*> elementos;
 public:
     void agregarElemento(T* elemento) {
+
         for (const auto x : elementos) {
-            if (x->getNombre() == elemento->getNombre()) {
+            if (x == elemento) {
                 throw invalid_argument("Ya existe un elemento con ese nombre");
             }
         }

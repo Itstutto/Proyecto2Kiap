@@ -8,9 +8,74 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <random>
 using namespace std;
 
 class FactoryEnemigos {
+private:
+    static void cargarMovimientosFacil(Personaje* enemigo) {
+        //se elige al azar 4 movimientos con danio base menor a 20
+        random_device rd;
+        mt19937 motor(rd());
+        uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
+        int cantidad = 0;
+        while (cantidad < 2) {
+            int seleccion = distribucion(motor);
+            Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
+            if (mov->getDanio() <= 20) {
+                try {
+                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                } catch (const invalid_argument& e) {
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    continue;
+                }
+                cantidad++;
+            }
+
+        }
+    }
+
+    static void cargarMovimientosMedia(Personaje* enemigo) {
+        //se elige al azar 4 movimientos con danio base entre 20 y 40
+        random_device rd;
+        mt19937 motor(rd());
+        uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
+        int cantidad = 0;
+        while (cantidad < 2) {
+            int seleccion = distribucion(motor);
+            Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
+            if (mov->getDanio() >= 20 && mov->getDanio() < 40) {
+                try {
+                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                } catch (const invalid_argument& e) {
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    continue;
+                }
+                cantidad++;
+            }
+        }
+    }
+
+    static void cargarMovimientosDificil(Personaje* enemigo) {
+        //se elige al azar 4 movimientos con danio base mayor a 40
+        random_device rd;
+        mt19937 motor(rd());
+        uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
+        int cantidad = 0;
+        while (cantidad < 2) {
+            int seleccion = distribucion(motor);
+            Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
+            if (mov->getDanio() >= 40) {
+                try {
+                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                } catch (const invalid_argument& e) {
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    continue;
+                }
+                cantidad++;
+            }
+        }
+    }
 public:
     static vector<Personaje*> crearEnemigo(const string& nombre, string dificultad) {
         ifstream archivo(nombre);
@@ -87,7 +152,17 @@ public:
                 throw invalid_argument("Línea " + to_string(numeroLinea) + ": Género inválido: " + string(1, genero));
             }
             // Crear el enemigo (el constructor validará los valores)
-            enemigos.push_back(new PersonajeEnemigo(dificultad, nombreEnemigo, genero, danioBase, vida));
+            PersonajeEnemigo* enemigo = new PersonajeEnemigo(dificultad, nombreEnemigo, genero, danioBase, vida);
+            if (dificultad == "Facil") {
+                cargarMovimientosFacil(enemigo);
+            } else if (dificultad == "Media") {
+                cargarMovimientosMedia(enemigo);
+            } else if (dificultad == "Dificil") {
+                cargarMovimientosDificil(enemigo);
+            } else {
+                throw invalid_argument("Dificultad desconocida: " + dificultad);
+            }
+            enemigos.push_back(enemigo);
 
         }
 

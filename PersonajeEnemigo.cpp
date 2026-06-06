@@ -42,3 +42,7 @@ string PersonajeEnemigo::getNombre() {
     return nombre;
 }
 
+bool PersonajeEnemigo::operator==(const PersonajeEnemigo &otro) const {
+    return nombre == otro.nombre;
+}
+

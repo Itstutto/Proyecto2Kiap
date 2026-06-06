@@ -5,14 +5,13 @@
 #include "FactoryMovimientos.h"
 
 #include "CreadorMovimientosInferiores.h"
-#include "CreadorMovimientosSuperiores.h"
 #include "CrearMovimientos.h"
 
 vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) {
     /*sintaxis de archivos
      *tipo: inferior/superior
-     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion
-     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion
+     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
+     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
      *...
      */
     vector<Movimiento*> movimientos;
@@ -23,23 +22,10 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
 
     string linea;
 
-    // Primera línea: tipo de movimiento
-    if (!getline(archivo, linea)) {
-        throw runtime_error("Archivo de movimientos vacío: " + nombre);
-    }
-
-    if (linea.empty()) {
-        throw runtime_error("Archivo de movimientos: Primera línea vacía (debe contener 'superior' o 'inferior')");
-    }
 
     CrearMovimientos* creador;
-    if (linea == "superior") {
-        creador = new CreadorMovimientosSuperiores();
-    } else if (linea == "inferior") {
-        creador = new CreadorMovimientosInferiores();
-    } else {
-        throw runtime_error("Tipo de movimiento no reconocido: '" + linea + "' (debe ser 'superior' o 'inferior')");
-    }
+    creador = new CreadorMovimientosInferiores();
+
 
     int numeroLinea = 1; // contador de líneas
 
@@ -52,7 +38,7 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
         }
 
         stringstream ss(linea);
-        string nombreMov, extremidad, zonaImpacto, danioStr, impactoStr, descripcion;
+        string nombreMov, extremidad, zonaImpacto, danioStr, impactoStr, descripcion, dificultadStr;
 
         // Leer todos los campos separados por coma
         if (!getline(ss, nombreMov, ',')) {
@@ -85,13 +71,18 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el impacto");
         }
 
-        if (!getline(ss, descripcion)) {
+        if (!getline(ss, descripcion, ',')) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la descripción");
+        }
+
+        if (!getline(ss, dificultadStr)) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la dificultad");
         }
 
         // Convertir a números con validación
         double danio;
         double impacto;
+        double dificultad;
         try {
             danio = stod(danioStr);
         } catch (const invalid_argument& e) {
@@ -107,8 +98,15 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
         } catch (const out_of_range& e) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Impacto fuera de rango: '" + impactoStr + "'");
         }
+        try {
+            dificultad = stod(dificultadStr);
+        } catch (const invalid_argument& e) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Dificultad no es un número válido: '" + dificultadStr + "'");
+        } catch (const out_of_range& e) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Dificultad fuera de rango: '" + dificultadStr + "'");
+        }
 
-        movimientos.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto));
+        movimientos.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, dificultad));
     }
 
     archivo.close();

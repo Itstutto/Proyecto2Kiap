@@ -12,8 +12,8 @@
 #include "ZonaInferior.h"
 using namespace std;
 int main() {
-
     Simulacion simulacion;
+    simulacion.zonaPelea('f');
 
     return 0;
 }

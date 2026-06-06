@@ -53,6 +53,10 @@ public:
         return s.str();
     }
 
+    bool operator==(const ZonaDelCuerpo &otro) const {
+        return nombre == otro.nombre;
+    }
+
 };
 
 

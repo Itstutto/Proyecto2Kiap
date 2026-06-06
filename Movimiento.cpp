@@ -4,7 +4,7 @@
 
 #include "Movimientos.h"
 
-Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, double danio,double impacto, string info) {
+Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, double danio,double impacto, string info, double dificultad) {
     if (nombre.empty()) {
         throw invalid_argument("El nombre del movimiento no puede estar vacío");
     }
@@ -27,6 +27,7 @@ Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, doub
     this->danio = danio;
     this->impacto = impacto;
     this->info = info;
+    this->dificultad = dificultad;
 }
 
 string Movimiento::getNombre() {

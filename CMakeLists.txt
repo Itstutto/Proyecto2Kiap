@@ -20,20 +20,15 @@ add_executable(Proyecto2Kiap main.cpp
         ZonaInferior.h
         FactoryZonas.cpp
         FactoryZonas.h
-        MovimientosSuperiores.cpp
-        MovimientosSuperiores.h
         MovimientosInferiores.cpp
         MovimientosInferiores.h
         FactoryMovimientos.cpp
         FactoryMovimientos.h
-        CreadorMovimientosSuperiores.h
         CrearMovimientos.h
         CreadorMovimientosInferiores.cpp
         CreadorMovimientosInferiores.h
         Vectores.cpp
         Vectores.h
-        ListMovSuperiores.cpp
-        ListMovSuperiores.h
         ListMovInferiores.cpp
         ListMovInferiores.h
         Pelea.cpp
@@ -43,4 +38,6 @@ add_executable(Proyecto2Kiap main.cpp
         Simulacion.h
         CargaPersonajePrincipal.h
         ISerializar.h
+        MovimientosPersonaje.cpp
+        MovimientosPersonaje.h
 )

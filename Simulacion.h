@@ -6,6 +6,7 @@
 #define PROYECTO2KIAP_SIMULACION_H
 #include "Personaje.h"
 #include "PersonajeEnemigo.h"
+#include <random>
 
 
 class Simulacion {
@@ -28,6 +29,8 @@ private:
 public:
     Simulacion();
     void ejecutarSimulacion();
+    void zonaPelea(char tipo); //tipo facil, medio, dificil
+    Movimiento* menuPersonajePrincipal();
 };
 
 

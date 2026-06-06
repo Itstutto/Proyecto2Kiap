@@ -5,6 +5,7 @@
 #include "PersonajePrincipal.h"
 
 PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida) : Personaje() {
+
     if (nombre.empty()) {
         throw invalid_argument("El nombre del personaje principal no puede estar vacío");
     }

@@ -41,7 +41,10 @@ Simulacion::Simulacion() {
     enemigoActual = nullptr;
 }
 
+
+
 void Simulacion::ejecutarSimulacion() {
+    menuInicial();
     int round = 1;
 
 
@@ -54,6 +57,91 @@ void Simulacion::ejecutarSimulacion() {
         menuEntrePeleas();
     }
 
+    if (personajePrincipal->isVivo()) {
+        cout<<"Felicidades, has ganado la simulacion!"<<endl;
+    } else {
+        cout<<"Lo siento, has perdido la simulacion :c"<<endl;
+    }
+    Guardar::guardarPersonajePrincipal(personajePrincipal, rutaPersonajePrincipal);
+    Guardar::guardarEnemigos(enemigosFacil, rutaEnemigos);
+    Guardar::guardarEnemigos(enemigosMedia, rutaEnemigos);
+    Guardar::guardarEnemigos(enemigosDificil, rutaEnemigos);
+
+
+}
+
+void Simulacion::menuInicial() {
+    cout<<"Bienvenido a Kiap"<<endl;
+    int opcion = 0;
+    do {
+        cout<<"Datos del personaje principal:"<<endl;
+        cout<<personajePrincipal->mostrar() << endl;
+        cout<<"1. Iniciar Combate"<<endl;
+        cout<<"2. Cambiar Nombre"<<endl;
+        cout<<"3. Cambiar Genero"<<endl;
+        cout<<"4. Reiniciar estadisticas"<<endl;
+        cin>>opcion;
+        if (cin.fail()) {
+            cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 4." << endl;
+            cin.clear(); // Limpiar el estado de error
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
+            continue;
+        }
+        switch (opcion) {
+            case 1: {
+                cout<<"Iniciando combate..."<<endl;
+                break;
+            }
+            case 2: {
+                string nuevoNombre;
+                cout<<"Ingrese el nuevo nombre: ";
+                cin>>nuevoNombre;
+                try{
+                    personajePrincipal->setNombre(nuevoNombre);
+                    cout<<"Nombre cambiado exitosamente"<<endl;
+                }catch (const invalid_argument& e) {
+                    cout<<"Error al cambiar el nombre: "<<e.what()<<endl;
+                    continue;
+                }
+                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                break;
+            }
+            case 3: {
+                char nuevoGenero;
+                cout<<"Ingrese el nuevo genero (M/F/O): ";
+                cin>>nuevoGenero;
+                try {
+                    personajePrincipal->setGenero(nuevoGenero);
+                    cout<<"Genero cambiado exitosamente"<<endl;
+                }catch (const invalid_argument& e) {
+                    cout<<"Error al cambiar el genero: "<<e.what()<<endl;
+                    continue;
+                }
+                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                break;
+            }
+            case 4: {
+                personajePrincipal->reiniciarEstadisticas();
+                for (auto enemigo : enemigosFacil) {
+                    enemigo->reiniciarEstadisticas();
+                }
+                for (auto enemigo : enemigosMedia) {
+                    enemigo->reiniciarEstadisticas();
+                }
+                for (auto enemigo : enemigosDificil) {
+                    enemigo->reiniciarEstadisticas();
+                }
+                cout<<"Estadisticas reiniciadas exitosamente"<<endl;
+                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                break;
+            }
+            default: {
+                cout << "Opción no válida. Por favor, ingrese un número entre 1 y 4." << endl;
+                break;
+            }
+        }
+
+    }while (opcion < 1 || opcion > 4);
 }
 
 void Simulacion::menuEntrePeleas() {

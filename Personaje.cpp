@@ -10,9 +10,41 @@
 
 Personaje::Personaje() {
 
+    nombre = "Desconocido";
+    genero = 'O';
     vida = 100.0;
     danioBase = 5.0;
     vivo = true;
+    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+
+
+    auto zonasInf = zonaInf->getElementos();
+    auto zonasSup = zonaSup->getElementos();
+
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasInf.begin(), zonasInf.end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasSup.begin(), zonasSup.end());
+
+}
+
+Personaje::Personaje(const string &nombre, char genero, double vida, double danioBase) {
+    if (nombre.empty()) {
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
+    }
+    if (genero != 'M' && genero != 'F' && genero != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    }
+    if (vida <= 0) {
+        throw invalid_argument("La vida del personaje debe ser mayor a 0, recibido: " + to_string(vida));
+    }
+    if (danioBase < 0) {
+        throw invalid_argument("El daño base del personaje no puede ser negativo, recibido: " + to_string(danioBase));
+    }
+    this->genero = genero;
+    this->nombre = nombre;
+    this->vida = vida;
+    this->danioBase = danioBase;
+    vivo=true;
     ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
     ZonaInferior* zonaInf = ZonaInferior::getInstancia();
 
@@ -21,12 +53,22 @@ Personaje::Personaje() {
 
     zonasCuerpo.insert(zonasCuerpo.end(), zonasSup.begin(), zonasSup.end());
     zonasCuerpo.insert(zonasCuerpo.end(), zonasInf.begin(), zonasInf.end());
-
 }
 
-Personaje::Personaje(double vida, double danioBase) {
+Personaje::Personaje(const string &nombre, char genero, double vida) {
+    if (nombre.empty()) {
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
+    }
+    if (genero != 'M' && genero != 'F' && genero != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    }
+    if (vida <= 0) {
+        throw invalid_argument("La vida del personaje debe ser mayor a 0, recibido: " + to_string(vida));
+    }
+    this->genero = genero;
+    this->nombre = nombre;
     this->vida = vida;
-    this->danioBase = danioBase;
+    this->danioBase = 5.0; // Valor por defecto
     vivo=true;
     ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
     ZonaInferior* zonaInf = ZonaInferior::getInstancia();
@@ -98,6 +140,45 @@ ZonaDelCuerpo * Personaje::getZona(string nombreZona) {
 
 double Personaje::getVida() {
     return vida;
+}
+
+void Personaje::setNombre(const string &nombre) {
+    if (nombre.empty()) {
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
+    }
+    this->nombre = nombre;
+}
+
+void Personaje::setGenero(char genero) {
+    if (genero != 'M' && genero != 'F' && genero != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    }
+    this->genero = genero;
+}
+
+void Personaje::reiniciarEstadisticas() {
+    vida = 100.0;
+    danioBase = 5.0;
+    bool cond = vivo = true;
+    movimientos.vaciar();
+    for (const auto& zona : zonasCuerpo) {
+        if (zona) {
+            delete zona; // Liberar memoria de cada zona
+        }
+    }
+    zonasCuerpo.clear(); // Limpiar el vector de zonas
+
+    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+
+
+    auto zonasInf = zonaInf->getElementos();
+    auto zonasSup = zonaSup->getElementos();
+
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasInf.begin(), zonasInf.end());
+    zonasCuerpo.insert(zonasCuerpo.end(), zonasSup.begin(), zonasSup.end());
+
+
 }
 
 bool Personaje::isVivo() {

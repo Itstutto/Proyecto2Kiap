@@ -63,6 +63,12 @@ public:
         return s.str();
     }
 
+    void vaciar() {
+        for (auto& elemento : elementos) {
+            delete elemento; // Liberar memoria de cada elemento
+        }
+        elementos.clear(); // Limpiar el vector
+    }
 };
 
 

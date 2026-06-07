@@ -4,7 +4,7 @@
 
 #include "PersonajeEnemigo.h"
 
-PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida ): Personaje(vida, danioBase) {
+PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida ): Personaje(nombre,genero,vida, danioBase) {
     if (dificultad != "Facil" && dificultad != "Media" && dificultad != "Dificil") {
         throw invalid_argument("Dificultad inválida: '" + dificultad + "'. Debe ser 'Facil', 'Media' o 'Dificil'");
     }
@@ -22,8 +22,6 @@ PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre
     }
 
     this->dificultad = dificultad;
-    this->nombre = nombre;
-    this->genero = genero;
 }
 
 std::string PersonajeEnemigo::mostrar() {
@@ -62,5 +60,11 @@ bool PersonajeEnemigo::sanar(int cantidad) {
         vida = 100; // Limitar la vida máxima a 100
     }
     return true;
+}
+
+string PersonajeEnemigo::serializar() {
+    stringstream ss;
+    ss << dificultad << "," << nombre << "," << genero << "," << danioBase << "," << vida;
+    return ss.str();
 }
 

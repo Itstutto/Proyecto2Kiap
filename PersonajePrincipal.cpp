@@ -4,7 +4,7 @@
 
 #include "PersonajePrincipal.h"
 
-PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida) : Personaje() {
+PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida, int puntosCuracion, int puntosExperiencia) : Personaje(nombre, genero, vida) {
 
     if (nombre.empty()) {
         throw invalid_argument("El nombre del personaje principal no puede estar vacío");
@@ -15,10 +15,8 @@ PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double
     if (vida <= 0) {
         throw invalid_argument("La vida del personaje principal debe ser mayor a 0, recibido: " + to_string(vida));
     }
-    this->genero = genero;
-    this->nombre = nombre;
-    this->puntosCuracion = 0;
-    this->puntosExperiencia = 0;
+    this->puntosCuracion = puntosCuracion;
+    this->puntosExperiencia = puntosExperiencia;
 }
 
 string PersonajePrincipal::getNombre() {
@@ -76,4 +74,20 @@ bool PersonajePrincipal::sanar(int cantidad) {
     return true;
 
 
+}
+
+void PersonajePrincipal::reiniciarEstadisticas() {
+    Personaje::reiniciarEstadisticas();
+    puntosCuracion = 0;
+    puntosExperiencia = 0;
+}
+
+string PersonajePrincipal::serializar() {
+    stringstream ss;
+    ss<<nombre<<","<<genero<<","<<vida<<","<<puntosCuracion<<","<<puntosExperiencia<<endl;
+    for (const auto& mov : movimientos.getElementos()) {
+        ss << mov->getNombre() << "," << mov->getExtremidad();
+    }
+
+    return ss.str();
 }

@@ -7,15 +7,17 @@
 #include <iostream>
 
 #include "Movimientos.h"
+#include "Serializar.h"
 #include "ZonaSuperior.h"
 using namespace std;
 
-class Personaje : public IMostrar{
+class Personaje : public IMostrar, public Serializar{
 protected:
 
     //decorator de equipamiento de proteccion, pendiente
     //decorator de objetos para hacer daño, pendiente
-
+    string nombre;
+    char genero;
     double vida;
     double danioBase;
     bool vivo;
@@ -23,11 +25,16 @@ protected:
     Vectores<Movimiento> movimientos;
 public:
     Personaje();
-    Personaje(double vida, double danioBase);
+    Personaje(const string &nombre,char genero,double vida, double danioBase);
+    Personaje(const string &nombre,char genero,double vida);
     virtual ~Personaje() = default;
 
     virtual string getNombre() = 0;
     double getVida();
+    void setNombre(const string& nombre);
+    void setGenero(char genero);
+    virtual void reiniciarEstadisticas();
+
     bool isVivo();
     virtual bool sanar(int cantidad) = 0;
     void daniar(double cantidad);

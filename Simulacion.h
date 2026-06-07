@@ -9,6 +9,7 @@
 #include <random>
 
 #include "GestorCombates.h"
+#include "Guardar.h"
 
 
 class Simulacion {
@@ -32,9 +33,11 @@ private:
 public:
     Simulacion();
     void ejecutarSimulacion();
+    void menuInicial();
     void menuEntrePeleas();
     void tienda();
     void zonaPelea(char tipo); //tipo facil, medio, dificil
+
 };
 
 

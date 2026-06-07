@@ -26,9 +26,14 @@ public:
         string nombre;
         string generoStr;
         string vidaStr;
+        string puntosCuracionStr;
+        string puntosExperienciaStr;
 
         char genero;
         double vida;
+        int puntosCuracion;
+        int puntosExperiencia;
+
         if (!getline(archivo,nombre,',')) {
             cout<<"Ingrese el nombre del personaje: ";
             getline(cin, nombre);
@@ -47,31 +52,50 @@ public:
         if (genero != 'M' && genero != 'F' && genero != 'O') {
             throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
         }
-        if (!getline(archivo,vidaStr)) {
+        if (!getline(archivo,vidaStr,',') || vidaStr.empty()) {
             vida = 100; // Valor por defecto
-            cout << "Vida no especificada. Se usará valor por defecto: " << vida << endl;
         }
         else {
-            if (vidaStr.empty()) {
-                vida = 100; // Valor por defecto si está vacío
-                cout << "Vida vacía. Se usará valor por defecto: " << vida << endl;
-            } else {
-                try {
-                    vida = stod(vidaStr);
-                } catch (const invalid_argument& e) {
-                    throw invalid_argument("Vida no es un número válido: '" + vidaStr + "'");
-                } catch (const out_of_range& e) {
-                    throw invalid_argument("Vida fuera de rango: '" + vidaStr + "'");
-                }
+            try {
+                vida = stod(vidaStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Vida no es un número válido: '" + vidaStr + "'");
+            } catch (const out_of_range& e) {
+                throw invalid_argument("Vida fuera de rango: '" + vidaStr + "'");
             }
         }
+        if (!getline(archivo,puntosCuracionStr,',')) {
+            puntosCuracion = 3; // Valor por defecto
+        }
+        else {
+            try {
+                puntosCuracion = stoi(puntosCuracionStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Puntos de curación no es un número válido: '" + puntosCuracionStr + "'");
+            } catch (const out_of_range& e) {
+                throw invalid_argument("Puntos de curación fuera de rango: '" + puntosCuracionStr + "'");
+            }
+        }
+        if (!getline(archivo,puntosExperienciaStr,',')) {
+            puntosExperiencia = 0; // Valor por defecto
+        }
+        else {
+            try {
+                puntosExperiencia = stoi(puntosExperienciaStr);
+            } catch (const invalid_argument& e) {
+                throw invalid_argument("Puntos de experiencia no es un número válido: '" + puntosExperienciaStr + "'");
+            } catch (const out_of_range& e) {
+                throw invalid_argument("Puntos de experiencia fuera de rango: '" + puntosExperienciaStr + "'");
+            }
+        }
+
 
         // Validar vida positiva
         if (vida <= 0) {
             throw invalid_argument("La vida debe ser mayor a 0, recibido: " + to_string(vida));
         }
 
-        PersonajePrincipal* p = new PersonajePrincipal(nombre, genero,vida);
+        PersonajePrincipal* p = new PersonajePrincipal(nombre, genero,vida, puntosCuracion, puntosExperiencia);
         stringstream ss;
         string linea;
         string zona;

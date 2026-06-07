@@ -44,4 +44,6 @@ add_executable(Proyecto2Kiap main.cpp
         CombatePrincipal.h
         CombateEnemigo.h
         GestorCombates.h
+        Guardar.h
+        Serializar.h
 )

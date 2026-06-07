@@ -42,7 +42,25 @@ string PersonajeEnemigo::getNombre() {
     return nombre;
 }
 
+string PersonajeEnemigo::getDificultad() {
+    return dificultad;
+}
+
 bool PersonajeEnemigo::operator==(const PersonajeEnemigo &otro) const {
     return nombre == otro.nombre;
+}
+
+bool PersonajeEnemigo::sanar(int cantidad) {
+    if (cantidad < 0) {
+        throw invalid_argument("La cantidad a sanar no puede ser negativa: " + to_string(cantidad));
+    }
+    if (!vivo) {
+        return false; // No se puede sanar a un personaje muerto
+    }
+    vida += cantidad;
+    if (vida > 100) {
+        vida = 100; // Limitar la vida máxima a 100
+    }
+    return true;
 }
 

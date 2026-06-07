@@ -11,10 +11,15 @@ class PersonajePrincipal : public Personaje{
 private:
     string nombre;
     char genero;
+    int puntosCuracion;
+    int puntosExperiencia;
 public:
     PersonajePrincipal(const string &nombre, char genero, double vida);
     string getNombre() override;
+    int getPuntosCuracion();
+    int getPuntosExperiencia();
     std::string mostrar() override;
+    bool sanar(int cantidad) override;
 ;
 
 };

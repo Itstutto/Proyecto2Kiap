@@ -103,9 +103,4 @@ bool Personaje::isVivo() {
     return vida>0;
 }
 
-void Personaje::sanar(double cantidad) {
-    vida+=cantidad;
-    if (vida>100.0) {
-        vida = 100.0;
-    }
-}
+

@@ -17,10 +17,20 @@ PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double
     }
     this->genero = genero;
     this->nombre = nombre;
+    this->puntosCuracion = 0;
+    this->puntosExperiencia = 0;
 }
 
 string PersonajePrincipal::getNombre() {
     return nombre;
+}
+
+int PersonajePrincipal::getPuntosCuracion() {
+        return puntosCuracion;
+}
+
+int PersonajePrincipal::getPuntosExperiencia() {
+    return puntosExperiencia;
 }
 
 std::string PersonajePrincipal::mostrar(){
@@ -31,4 +41,22 @@ std::string PersonajePrincipal::mostrar(){
     <<"Vida: "<<vida<<endl
     <<nombre<<(vivo ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
     return s.str();
+}
+
+bool PersonajePrincipal::sanar(int cantidad) {
+    if (cantidad < 0) {
+        throw invalid_argument("La cantidad de curación no puede ser negativa: " + to_string(cantidad));
+    }
+
+    if (puntosCuracion <= cantidad || cantidad <= 0) {
+        return false; // No hay suficientes puntos de curación
+    }
+    vida+=cantidad;
+    if (vida>100) {
+        vida = 100;
+    }
+    puntosCuracion-=cantidad;
+    return true;
+
+
 }

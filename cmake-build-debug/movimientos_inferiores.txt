@@ -6,7 +6,7 @@ Bandall Chagui,Pie derecho,Pecho,40,1,Patada medio circular,0.5
 Bandall Chagui,Pie izquierdo,Pecho,40,1,Patada medio circular,0.5
 Iop Chagui,Pie derecho,Pecho,20,1,Patada de lado,1
 Iop Chagui,Pie izquierdo,Pecho,20,1,Patada de lado,1
-Mondollyo Iop Chagui,Pie derecho,Pecho,40,1,Patada de lado circular,0.2
-Mondollyo Iop Chagui,Pie izquierdo,Pecho,40,1,Patada de lado circular,0.5
-Nako Chagui,Pie derecho,Cabeza,60,1,Patada de gancho,0.3
-Nako Chagui,Pie izquierdo,Cabeza,60,1,Patada de gancho,1
+Mondollyo Iop Chagui,Pie derecho,Pecho,40,1,Patada de lado circular,0.8
+Mondollyo Iop Chagui,Pie izquierdo,Pecho,40,1,Patada de lado circular,0.8
+Nako Chagui,Pie derecho,Cabeza,60,1,Patada de gancho,0.7
+Nako Chagui,Pie izquierdo,Cabeza,60,1,Patada de gancho,0.7

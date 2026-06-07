@@ -40,4 +40,8 @@ add_executable(Proyecto2Kiap main.cpp
         ISerializar.h
         MovimientosPersonaje.cpp
         MovimientosPersonaje.h
+        EstrategiaCombate.h
+        CombatePrincipal.h
+        CombateEnemigo.h
+        GestorCombates.h
 )

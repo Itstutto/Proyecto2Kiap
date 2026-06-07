@@ -36,10 +36,10 @@ public:
         }
         else {
             p2->daniar(mov->getDanio());
-            zonaUtilizada->utilizar(mov->getDanio()/100);
+            zonaUtilizada->utilizar(mov->getImpacto() / 100);
+
             s<<p1->getNombre()<<" golpeó a "<<p2->getNombre()<<" con el movimiento "<<mov->getNombre()<<", causando "<<mov->getDanio()<<" de daño"<<endl;
         }
-        zonaUtilizada->utilizar(mov->getImpacto()/100);
         return s.str();
     }
 };

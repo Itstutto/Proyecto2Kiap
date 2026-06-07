@@ -29,7 +29,7 @@ public:
     virtual string getNombre() = 0;
     double getVida();
     bool isVivo();
-    void sanar(double cantidad);
+    virtual bool sanar(int cantidad) = 0;
     void daniar(double cantidad);
 
     bool puedeRealizarMovimiento(Movimiento* mov);

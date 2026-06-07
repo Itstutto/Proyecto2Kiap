@@ -56,3 +56,9 @@ Enemigos: 5 de cada dificultad de enemigos(en zonas inferiores y superiores)
 Personaje Principal : 1
 
 -Separar los metodos de simulacion en clases(puede ser) 
+-Ponerle un atributo al personaje principal, recuperar, y otro atributo que tenga guardado la experiencia 
+-Posibilidad de que el enemigo se cure
+
+-Agregar costo a los movimientos en el archivo 
+
+

@@ -38,7 +38,7 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
         }
 
         stringstream ss(linea);
-        string nombreMov, extremidad, zonaImpacto, danioStr, impactoStr, descripcion, dificultadStr;
+        string nombreMov, extremidad, zonaImpacto, danioStr, impactoStr, descripcion, dificultadStr,costoStr;
 
         // Leer todos los campos separados por coma
         if (!getline(ss, nombreMov, ',')) {
@@ -75,14 +75,19 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la descripción");
         }
 
-        if (!getline(ss, dificultadStr)) {
+        if (!getline(ss, dificultadStr, ',')) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la dificultad");
+        }
+
+        if (!getline(ss, costoStr)) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el costo");
         }
 
         // Convertir a números con validación
         double danio;
         double impacto;
         double dificultad;
+        int costo;
         try {
             danio = stod(danioStr);
         } catch (const invalid_argument& e) {
@@ -106,7 +111,15 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Dificultad fuera de rango: '" + dificultadStr + "'");
         }
 
-        movimientos.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, dificultad));
+        try {
+            costo = stoi(costoStr);
+        } catch (const invalid_argument& e) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Costo no es un número válido: '" + costoStr + "'");
+        } catch (const out_of_range& e) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Costo fuera de rango: '" + costoStr + "'");
+        }
+
+        movimientos.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, dificultad,costo));
     }
 
     archivo.close();

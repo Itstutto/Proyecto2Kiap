@@ -54,7 +54,8 @@ void Personaje::daniar(double cantidad) {
 
 bool Personaje::puedeRealizarMovimiento(Movimiento *mov) {
     for (const auto x : movimientos.getElementos()) {
-        if (x->getNombre() == mov->getNombre()) {
+        bool realizar = *x==*mov;
+        if (realizar) {
             return true;
         }
     }

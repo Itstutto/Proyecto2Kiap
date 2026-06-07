@@ -20,6 +20,7 @@ public:
         }
         if (!p1->puedeRealizarMovimiento(mov)) {
             s<<p1->getNombre()<<" no pudo golpear a "<<p2->getNombre()<<" porque no sabe realizar el movimiento "<<mov->getNombre()<<endl;
+            return s.str();
         }
 
         ZonaDelCuerpo* zonaUtilizada = p1->getZona(mov->getExtremidad());

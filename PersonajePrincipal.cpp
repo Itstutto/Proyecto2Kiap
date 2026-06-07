@@ -33,6 +33,23 @@ int PersonajePrincipal::getPuntosExperiencia() {
     return puntosExperiencia;
 }
 
+void PersonajePrincipal::ganarExperiencia(int cantidad) {
+    if (cantidad < 0) {
+        throw invalid_argument("La cantidad de experiencia ganada no puede ser negativa: " + to_string(cantidad));
+    }
+    puntosExperiencia += cantidad;
+}
+
+void PersonajePrincipal::comprar(int cantidad) {
+    if (cantidad < 0) {
+        throw invalid_argument("La cantidad a comprar no puede ser negativa: " + to_string(cantidad));
+    }
+    if (cantidad>puntosExperiencia) {
+        throw invalid_argument("No tienes suficientes puntos de experiencia para comprar esta cantidad de puntos de curación, te faltan " + to_string(cantidad-puntosExperiencia) + " puntos");
+    }
+    puntosExperiencia -= cantidad;
+}
+
 std::string PersonajePrincipal::mostrar(){
     stringstream s;
     s<<"---------Personaje Principal--------"<<endl

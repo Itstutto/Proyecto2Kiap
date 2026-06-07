@@ -15,11 +15,12 @@ public:
         cout<<p->getNombre()<<", Vida: "<<p->getVida()<<endl;
 
         cout<<"Elija una accion: "<<endl;
-        cout<<"1. Atacar"<<endl;
-        cout<<"2. Ver informacion del rival"<<endl;
+
 
         int opcion = 0;
         while (opcion < 1 || opcion > 3) {
+            cout<<"1. Atacar"<<endl;
+            cout<<"2. Ver informacion del rival"<<endl;
             cout<<"Opcion: ";
             cin >> opcion;
             if (cin.fail()) {
@@ -54,6 +55,8 @@ public:
                 case 2: {
                     cout<<"Informacion del rival: "<<endl;
                     cout<<c->mostrar()<<endl;
+                    opcion = 0;
+                    break;
                 }
                 case 3: {
 

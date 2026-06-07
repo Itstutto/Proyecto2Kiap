@@ -19,12 +19,14 @@ protected:
     double impacto;
     double dificultad; //determina que tan dificil es realizar el movimiento, con mayor dificultad menor probabilidad de realizarlo
     string info;
+    int costo;
 public:
-    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad);
+    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad,int costo);
     virtual ~Movimiento() = default;
     string getNombre();
     double getDanio();
     double getImpacto();
+    int getCosto();
 
     bool realizarMovimiento() {
         random_device rd;

@@ -8,7 +8,7 @@
 #include "PersonajeEnemigo.h"
 
 
-class CombateEnemigo : EstrategiaCombate{
+class CombateEnemigo : public EstrategiaCombate{
 public:
     ~CombateEnemigo() override = default;
     Movimiento* ejecutarEstrategia(Personaje* p, Personaje* c) override {

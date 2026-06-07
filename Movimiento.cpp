@@ -4,7 +4,7 @@
 
 #include "Movimientos.h"
 
-Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, double danio,double impacto, string info, double dificultad) {
+Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, double danio,double impacto, string info, double dificultad, int costo) {
     if (nombre.empty()) {
         throw invalid_argument("El nombre del movimiento no puede estar vacío");
     }
@@ -28,6 +28,10 @@ Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, doub
     this->impacto = impacto;
     this->info = info;
     this->dificultad = dificultad;
+    if (costo < 0) {
+        throw invalid_argument("El costo no puede ser negativo: " + to_string(costo));
+    }
+    this->costo = costo;
 }
 
 string Movimiento::getNombre() {
@@ -42,9 +46,13 @@ double Movimiento::getImpacto() {
     return impacto;
 }
 
+int Movimiento::getCosto() {
+    return costo;
+}
+
 std::string Movimiento::mostrar() {
     std::stringstream s;
     s << "Movimiento: " << nombre << " (Extremidad: " << extremidad
-      << ", Zona: " << zonaImpacto << ", Daño: " << danio << ")" << std::endl;
+      << ", Zona: " << zonaImpacto << ", Daño: " << danio <<", Costo: "<< costo<< ")" << std::endl;
     return s.str();
 }

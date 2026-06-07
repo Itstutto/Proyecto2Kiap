@@ -18,6 +18,8 @@ public:
     string getNombre() override;
     int getPuntosCuracion();
     int getPuntosExperiencia();
+    void ganarExperiencia(int cantidad);
+    void comprar(int cantidad);
     std::string mostrar() override;
     bool sanar(int cantidad) override;
 ;

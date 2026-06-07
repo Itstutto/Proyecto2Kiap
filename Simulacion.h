@@ -8,6 +8,8 @@
 #include "PersonajeEnemigo.h"
 #include <random>
 
+#include "GestorCombates.h"
+
 
 class Simulacion {
 private:
@@ -18,6 +20,7 @@ private:
     vector<Personaje*> enemigosFacil;
     vector<Personaje*> enemigosMedia;
     vector<Personaje*> enemigosDificil;
+    GestorCombates gestorCombates;
 
     string rutaPersonajePrincipal;
     string rutaEnemigos;
@@ -29,8 +32,9 @@ private:
 public:
     Simulacion();
     void ejecutarSimulacion();
+    void menuEntrePeleas();
+    void tienda();
     void zonaPelea(char tipo); //tipo facil, medio, dificil
-    Movimiento* menuPersonajePrincipal();
 };
 
 

@@ -21,7 +21,8 @@ public:
                 throw invalid_argument("Ya existe un elemento con ese nombre");
             }
         }
-        elementos.push_back(elemento);
+        T* copia = new T(*elemento); // Crear una copia independiente en el heap
+        elementos.push_back(copia);
     }
     void agregarElemento(vector<T*> elementos) {
         for (const auto x : elementos) {

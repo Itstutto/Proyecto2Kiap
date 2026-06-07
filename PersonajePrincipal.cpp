@@ -4,6 +4,8 @@
 
 #include "PersonajePrincipal.h"
 
+#include "ListMovInferiores.h"
+
 PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida, int puntosCuracion, int puntosExperiencia) : Personaje(nombre, genero, vida) {
 
     if (nombre.empty()) {
@@ -80,13 +82,15 @@ void PersonajePrincipal::reiniciarEstadisticas() {
     Personaje::reiniciarEstadisticas();
     puntosCuracion = 0;
     puntosExperiencia = 0;
+    movimientos.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie derecho"));
+    movimientos.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie izquierdo"));
 }
 
 string PersonajePrincipal::serializar() {
     stringstream ss;
     ss<<nombre<<","<<genero<<","<<vida<<","<<puntosCuracion<<","<<puntosExperiencia<<endl;
     for (const auto& mov : movimientos.getElementos()) {
-        ss << mov->getNombre() << "," << mov->getExtremidad();
+        ss << mov->getNombre() << "," << mov->getExtremidad()<<endl;
     }
 
     return ss.str();

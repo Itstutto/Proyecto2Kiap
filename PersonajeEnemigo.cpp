@@ -68,3 +68,9 @@ string PersonajeEnemigo::serializar() {
     return ss.str();
 }
 
+void PersonajeEnemigo::reiniciarEstadisticas() {
+    vida = 100.0;
+    danioBase = 5.0;
+    vivo = true;
+}
+

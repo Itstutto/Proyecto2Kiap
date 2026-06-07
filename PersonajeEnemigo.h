@@ -22,7 +22,7 @@ public:
     bool operator==(const PersonajeEnemigo &otro) const;
     bool sanar(int cantidad) override;
     string serializar() override;
-
+    void reiniciarEstadisticas() override;
 
 
 };

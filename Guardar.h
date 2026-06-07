@@ -22,7 +22,7 @@ public:
         archivo.close();
     }
     static void guardarEnemigos(vector<Personaje*> enemigos, string &ruta) {
-        ofstream archivo(ruta);
+        ofstream archivo(ruta , ios::app); // Abrir en modo append para agregar al final del archivo
         if (!archivo.is_open()) {
             throw runtime_error("No se pudo abrir el archivo para guardar los enemigos: " + ruta);
         }

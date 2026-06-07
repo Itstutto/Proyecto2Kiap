@@ -76,7 +76,7 @@ public:
                 throw invalid_argument("Puntos de curación fuera de rango: '" + puntosCuracionStr + "'");
             }
         }
-        if (!getline(archivo,puntosExperienciaStr,',')) {
+        if (!getline(archivo,puntosExperienciaStr)) {
             puntosExperiencia = 0; // Valor por defecto
         }
         else {

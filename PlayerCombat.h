@@ -11,7 +11,7 @@
 class PlayerCombat : public CombatStrategy{
 public:
     ~PlayerCombat() override = default;
-    Movimiento* executeStrategy(Character* p, Character* c) override {
+    Movement* executeStrategy(Character* p, Character* c) override {
         cout<<p->getName()<<", Vida: "<<p->getHealth()<<endl;
 
         cout<<"Elija una accion: "<<endl;
@@ -54,7 +54,7 @@ public:
                 }
                 case 2: {
                     cout<<"Informacion del rival: "<<endl;
-                    cout<<c->mostrar()<<endl;
+                    cout<<c->show()<<endl;
                     option = 0;
                     break;
                 }

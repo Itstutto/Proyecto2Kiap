@@ -5,13 +5,13 @@
 #ifndef PROYECTO2KIAP_CREADORMOVIMIENTOSINFERIORES_H
 #define PROYECTO2KIAP_CREADORMOVIMIENTOSINFERIORES_H
 #include "MakeMoves.h"
-#include "MovimientosInferiores.h"
+#include "ObjectMovement.h"
 
 
 class MovementMaker : public MakeMoves{
 public:
-    Movimiento* makeMove(const string& name, double damage, double impact, string info, string limb, string impactZone, double difficulty, int cost) override {
-        return new MovimientosInferiores(name, damage, impact, info, limb, impactZone, difficulty,cost);
+    Movement* makeMove(const string& name, double damage, double impact, string info, string limb, string impactZone, double difficulty, int cost) override {
+        return new ObjectMovement(name, damage, impact, info, limb, impactZone, difficulty,cost);
     }
 
 };

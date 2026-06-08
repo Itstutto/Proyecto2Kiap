@@ -7,10 +7,10 @@
 #include <iostream>
 using namespace std;
 
-class Serializar {
+class Serialize {
 public:
-    virtual ~Serializar() = default;
-    virtual string serializar() = 0;
+    virtual ~Serialize() = default;
+    virtual string serialize() = 0;
 };
 
 

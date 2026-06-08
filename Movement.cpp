@@ -2,9 +2,9 @@
 // Created by cesar on 3/6/2026.
 //
 
-#include "Movimientos.h"
+#include "Movement.h"
 
-Movimiento::Movimiento(string name,string limb, string impactZone, double damage,double impact, string info, double difficulty, int cost) {
+Movement::Movement(string name,string limb, string impactZone, double damage,double impact, string info, double difficulty, int cost) {
     if (name.empty()) {
         throw invalid_argument("El name del movimiento no puede estar vacío");
     }
@@ -34,23 +34,23 @@ Movimiento::Movimiento(string name,string limb, string impactZone, double damage
     this->cost = cost;
 }
 
-string Movimiento::getName() {
+string Movement::getName() {
     return name;
 }
 
-double Movimiento::getDamage() {
+double Movement::getDamage() {
     return damage;
 }
 
-double Movimiento::getImpacto() {
+double Movement::getImpact() {
     return impact;
 }
 
-int Movimiento::getCosto() {
+int Movement::getCost() {
     return cost;
 }
 
-std::string Movimiento::mostrar() {
+std::string Movement::show() {
     std::stringstream s;
     s << "Movimiento: " << name << " (Extremidad: " << limb
       << ", Zona: " << impactZone << ", Daño: " << damage <<", Costo: "<< cost<< ")" << std::endl;

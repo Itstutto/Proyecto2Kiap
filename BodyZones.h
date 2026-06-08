@@ -7,53 +7,53 @@
 #include <iostream>
 #include <random>
 #include <sstream>
-#include "IMostrar.h"
+#include "IShow.h"
 using namespace std;
 
-class ZonaDelCuerpo : public IMostrar{
+class BodyZone : public IShow{
 private:
     string name;
-    double condicion; //determina que tan probable es que se realize un movimiento, con menor condicion menor probabilidad
+    double condition; //determina que tan probable es que se realize un movimiento, con menor condition menor probabilidad
 public:
-    ZonaDelCuerpo(string name) {
+    BodyZone(string name) {
         if (name.empty()) {
             throw invalid_argument("El name de la zone no puede estar vacío");
         }
         this->name = name;
-        condicion = 1;
+        condition = 1;
     }
 
     string getName() const { return name; }
     void setName(const std::string& n) { name = n; }
 
-    double getCondicion() const { return condicion; }
+    double getCondicion() const { return condition; }
 
-    void utilizar(double impact) {
-        condicion -= impact;
-        if (condicion < 0) {
-            condicion = 0;
+    void use(double impact) {
+        condition -= impact;
+        if (condition < 0) {
+            condition = 0;
         }
     }
 
-    bool disponible() {
+    bool available() {
         random_device rd;
         mt19937 engine(rd());
-        uniform_int_distribution<int> distribucion(1,100);
+        uniform_int_distribution<int> distribution(1,100);
 
-        int posibilidad = distribucion(engine);
-        if (posibilidad>condicion*100) {
+        int posibility = distribution(engine);
+        if (posibility>condition*100) {
             return false;
         }
         return true;
     }
 
-    std::string mostrar() override {
+    std::string show() override {
         stringstream s;
-        s<<"Zona: "<<name<<", Condicion: "<<condicion*100<<"% "<<endl;
+        s<<"Zona: "<<name<<", Condicion: "<<condition*100<<"% "<<endl;
         return s.str();
     }
 
-    bool operator==(const ZonaDelCuerpo &other) const {
+    bool operator==(const BodyZone &other) const {
         return name == other.name;
     }
 

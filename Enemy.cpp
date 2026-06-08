@@ -24,7 +24,7 @@ Enemy::Enemy(const string &difficulty,const string &name, char gender, double da
     this->difficulty = difficulty;
 }
 
-std::string Enemy::mostrar() {
+std::string Enemy::show() {
     stringstream s;
     s<<"---------Personaje Enemigo--------"<<endl
     <<"Nombre: "<<name<<endl
@@ -62,7 +62,7 @@ bool Enemy::heal(int amount) {
     return true;
 }
 
-string Enemy::serializar() {
+string Enemy::serialize() {
     stringstream ss;
     ss << difficulty << "," << name << "," << gender << "," << damage << "," << health;
     return ss.str();

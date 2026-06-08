@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-#include "ListMovInferiores.h"
+#include "LowerMovList.h"
 
 Player::Player(const string &name, char gender, double health, int healPoints, int expPoints) : Character(name, gender, health) {
 
@@ -50,7 +50,7 @@ void Player::buy(int amount) {
     expPoints -= amount;
 }
 
-std::string Player::mostrar(){
+std::string Player::show(){
     stringstream s;
     s<<"---------Character Principal--------"<<endl
     <<"Nombre: "<<name<<endl
@@ -82,15 +82,15 @@ void Player::resetStats() {
     Character::resetStats();
     healPoints = 0;
     expPoints = 0;
-    movements.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie derecho"));
-    movements.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie izquierdo"));
+    movements.addElement(LowerMovList::getInstance()->getMovement("Ap Chagui", "Pie derecho"));
+    movements.addElement(LowerMovList::getInstance()->getMovement("Ap Chagui", "Pie izquierdo"));
 }
 
-string Player::serializar() {
+string Player::serialize() {
     stringstream ss;
     ss<<name<<","<<gender<<","<<health<<","<<healPoints<<","<<expPoints<<endl;
-    for (const auto& mov : movements.getElementos()) {
-        ss << mov->getName() << "," << mov->getExtremidad()<<endl;
+    for (const auto& mov : movements.getElements()) {
+        ss << mov->getName() << "," << mov->getLimb()<<endl;
     }
 
     return ss.str();

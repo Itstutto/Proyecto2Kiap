@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "ListMovInferiores.h"
+#include "LowerMovList.h"
 using namespace std;
 #include "Player.h"
 

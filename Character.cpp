@@ -4,9 +4,9 @@
 
 #include "Character.h"
 
-#include "ListMovInferiores.h"
+#include "LowerMovList.h"
 
-#include "ZonaInferior.h"
+#include "LowerZone.h"
 
 Character::Character() {
 
@@ -15,12 +15,12 @@ Character::Character() {
     health = 100.0;
     damage = 5.0;
     alive = true;
-    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
-    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+    LowerZone* zonaInf = LowerZone::getInstance();
+    UpperZone* zonaSup = UpperZone::getInstance();
 
 
-    auto zonasInf = zonaInf->getElementos();
-    auto zonasSup = zonaSup->getElementos();
+    auto zonasInf = zonaInf->getElements();
+    auto zonasSup = zonaSup->getElements();
 
     bodyZones.insert(bodyZones.end(), zonasInf.begin(), zonasInf.end());
     bodyZones.insert(bodyZones.end(), zonasSup.begin(), zonasSup.end());
@@ -45,11 +45,11 @@ Character::Character(const string &name, char gender, double health, double dama
     this->health = health;
     this->damage = damage;
     alive=true;
-    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
-    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+    UpperZone* zonaSup = UpperZone::getInstance();
+    LowerZone* zonaInf = LowerZone::getInstance();
 
-    auto zonasSup = zonaSup->getElementos();
-    auto zonasInf = zonaInf->getElementos();
+    auto zonasSup = zonaSup->getElements();
+    auto zonasInf = zonaInf->getElements();
 
     bodyZones.insert(bodyZones.end(), zonasSup.begin(), zonasSup.end());
     bodyZones.insert(bodyZones.end(), zonasInf.begin(), zonasInf.end());
@@ -70,11 +70,11 @@ Character::Character(const string &name, char gender, double health) {
     this->health = health;
     this->damage = 5.0; // Valor por defecto
     alive=true;
-    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
-    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
+    UpperZone* zonaSup = UpperZone::getInstance();
+    LowerZone* zonaInf = LowerZone::getInstance();
 
-    auto zonasSup = zonaSup->getElementos();
-    auto zonasInf = zonaInf->getElementos();
+    auto zonasSup = zonaSup->getElements();
+    auto zonasInf = zonaInf->getElements();
 
     bodyZones.insert(bodyZones.end(), zonasSup.begin(), zonasSup.end());
     bodyZones.insert(bodyZones.end(), zonasInf.begin(), zonasInf.end());
@@ -94,8 +94,8 @@ void Character::hurt(double amount) {
     }
 }
 
-bool Character::canMakeMove(Movimiento *mov) {
-    for (const auto x : movements.getElementos()) {
+bool Character::canMakeMove(Movement *mov) {
+    for (const auto x : movements.getElements()) {
         bool realizar = *x==*mov;
         if (realizar) {
             return true;
@@ -105,20 +105,20 @@ bool Character::canMakeMove(Movimiento *mov) {
 }
 
 string Character::getMovements() {
-    return movements.mostrar();
+    return movements.show();
 }
 
 void Character::addMovement(string name, string zone) {
 
-    Movimiento* mov = ListMovInferiores::getInstancia()->getMovimiento(name, zone);
+    Movement* mov = LowerMovList::getInstance()->getMovement(name, zone);
 
-    movements.agregarElemento(mov);
+    movements.addElement(mov);
 
 
 }
 
-Movimiento * Character::getIndexMovement(int index) {
-    auto movs = movements.getElementos();
+Movement * Character::getIndexMovement(int index) {
+    auto movs = movements.getElements();
     if (index < 1 || index > movs.size()) {
         throw invalid_argument("Índice de movimiento fuera de rango, recibido: " + to_string(index));
     }
@@ -126,10 +126,10 @@ Movimiento * Character::getIndexMovement(int index) {
 }
 
 int Character::getAmountMovements() {
-    return movements.getElementos().size();
+    return movements.getElements().size();
 }
 
-ZonaDelCuerpo * Character::getZone(string zoneName) {
+BodyZone * Character::getZone(string zoneName) {
     for (const auto x : bodyZones) {
         if (x->getName() == zoneName) {
             return x;
@@ -160,20 +160,20 @@ void Character::resetStats() {
     health = 100.0;
     damage = 5.0;
     bool cond = alive = true;
-    movements.vaciar();
+    movements.clear();
     for (const auto& zone : bodyZones) {
         if (zone) {
             delete zone; // Liberar memoria de cada zone
         }
     }
-    bodyZones.clear(); // Limpiar el vector de zonas
+    bodyZones.clear(); // Limpiar el vector de zones
 
-    ZonaInferior* zonaInf = ZonaInferior::getInstancia();
-    ZonaSuperior* zonaSup = ZonaSuperior::getInstancia();
+    LowerZone* zonaInf = LowerZone::getInstance();
+    UpperZone* zonaSup = UpperZone::getInstance();
 
 
-    auto zonasInf = zonaInf->getElementos();
-    auto zonasSup = zonaSup->getElementos();
+    auto zonasInf = zonaInf->getElements();
+    auto zonasSup = zonaSup->getElements();
 
     bodyZones.insert(bodyZones.end(), zonasInf.begin(), zonasInf.end());
     bodyZones.insert(bodyZones.end(), zonasSup.begin(), zonasSup.end());

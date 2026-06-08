@@ -4,13 +4,13 @@
 
 #ifndef PROYECTO2KIAP_PELEA_H
 #define PROYECTO2KIAP_PELEA_H
-#include "Movimientos.h"
+#include "Movement.h"
 #include "Character.h"
 #include <sstream>
 
-class Pelea {
+class Fight {
 public:
-    static string pelear(Character* p1, Movimiento* mov, Character* p2) {
+    static string fight(Character* p1, Movement* mov, Character* p2) {
         stringstream s;
         if (!p1->isAlive()) {
             throw invalid_argument("El personaje 1 está muerto y no puede atacar");
@@ -23,21 +23,21 @@ public:
             return s.str();
         }
 
-        ZonaDelCuerpo* zonaUtilizada = p1->getZone(mov->getExtremidad());
+        BodyZone* zoneUsed = p1->getZone(mov->getLimb());
 
-        if (!zonaUtilizada) {
-            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la limb "<<mov->getExtremidad()<<endl;
+        if (!zoneUsed) {
+            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la limb "<<mov->getLimb()<<endl;
             return s.str();
         }
-        else if (!zonaUtilizada->disponible()) {
+        else if (!zoneUsed->available()) {
             s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" por cansancio"<<endl;
         }
-        else if (!mov->realizarMovimiento()) {
+        else if (!mov->makeMove()) {
             s<<p1->getName()<<" fallo el golpe"<<endl;
         }
         else {
             p2->hurt(mov->getDamage());
-            zonaUtilizada->utilizar(mov->getImpacto() / 100);
+            zoneUsed->use(mov->getImpact() / 100);
 
             s<<p1->getName()<<" golpeó a "<<p2->getName()<<" con el movimiento "<<mov->getName()<<", causando "<<mov->getDamage()<<" de daño"<<endl;
         }

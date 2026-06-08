@@ -11,7 +11,7 @@
 class EnemyCombat : public CombatStrategy{
 public:
     ~EnemyCombat() override = default;
-    Movimiento* executeStrategy(Character* p, Character* c) override {
+    Movement* executeStrategy(Character* p, Character* c) override {
         //seleccionar un movimiento al azar de los movements disponibles del enemy
         int extraDifficulty = 0;
         if (dynamic_cast<Enemy*>(p)) {

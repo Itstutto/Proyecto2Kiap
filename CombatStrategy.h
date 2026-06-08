@@ -10,7 +10,7 @@
 class CombatStrategy {
 public:
     virtual ~CombatStrategy() = default;
-    virtual Movimiento* executeStrategy(Character* p, Character* c) = 0;
+    virtual Movement* executeStrategy(Character* p, Character* c) = 0;
 };
 
 

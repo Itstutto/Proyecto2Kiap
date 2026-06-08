@@ -1,19 +1,19 @@
 #include <iostream>
 
 #include "LoadPlayer.h"
-#include "FactoryMovimientos.h"
-#include "FactoryZonas.h"
-#include "ListMovInferiores.h"
-#include "Movimientos.h"
+#include "MovementsFactory.h"
+#include "ZonesFactory.h"
+#include "LowerMovList.h"
+#include "Movement.h"
 #include "Character.h"
 #include "Enemy.h"
 #include "Player.h"
-#include "Simulacion.h"
-#include "ZonaInferior.h"
+#include "Simulation.h"
+#include "LowerZone.h"
 using namespace std;
 int main() {
-    Simulacion simulacion;
-    simulacion.ejecutarSimulacion();
+    Simulation simulacion;
+    simulacion.execSimulation();
 
     return 0;
 }

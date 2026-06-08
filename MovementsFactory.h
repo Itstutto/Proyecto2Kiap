@@ -8,14 +8,14 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include "Movimientos.h"
-#include "MovimientosInferiores.h"
+#include "Movement.h"
+#include "ObjectMovement.h"
 
 //cr
 
-class FactoryMovimientos {
+class MovementsFactory {
 public:
-    static vector<Movimiento*> crearMovimientos(const string& name);
+    static vector<Movement*> createMovements(const string& name);
 
 };
 

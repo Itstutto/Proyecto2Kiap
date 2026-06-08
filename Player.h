@@ -18,10 +18,10 @@ public:
     int getExpPoints();
     void gainExp(int amount);
     void buy(int amount);
-    std::string mostrar() override;
+    std::string show() override;
     bool heal(int amount) override;
     void resetStats() override;
-    string serializar() override;
+    string serialize() override;
 
 };
 

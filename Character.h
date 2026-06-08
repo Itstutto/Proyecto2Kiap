@@ -6,12 +6,12 @@
 #define PROYECTO2KIAP_PERSONAJE_H
 #include <iostream>
 
-#include "Movimientos.h"
-#include "Serializar.h"
-#include "ZonaSuperior.h"
+#include "Movement.h"
+#include "Serialize.h"
+#include "UpperZone.h"
 using namespace std;
 
-class Character : public IMostrar, public Serializar{
+class Character : public IShow, public Serialize{
 protected:
 
     //decorator de equipamiento de proteccion, pendiente
@@ -21,8 +21,8 @@ protected:
     double health;
     double damage;
     bool alive;
-    vector<ZonaDelCuerpo*> bodyZones; //para determinar que zonas del cuerpo tiene el personaje, y asi determinar que movements puede realizar
-    Vectores<Movimiento> movements;
+    vector<BodyZone*> bodyZones; //para determinar que zones del cuerpo tiene el personaje, y asi determinar que movements puede realizar
+    Vectors<Movement> movements;
 public:
     Character();
     Character(const string &name,char gender,double health, double damage);
@@ -39,13 +39,13 @@ public:
     virtual bool heal(int amount) = 0;
     void hurt(double amount);
 
-    bool canMakeMove(Movimiento* mov);
+    bool canMakeMove(Movement* mov);
     string getMovements();
     void addMovement(string name, string zone);
-    Movimiento* getIndexMovement(int index);
+    Movement* getIndexMovement(int index);
     int getAmountMovements();
 
-    ZonaDelCuerpo* getZone(string zoneName);
+    BodyZone* getZone(string zoneName);
 
     double getDamage();
 

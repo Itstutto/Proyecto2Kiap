@@ -7,10 +7,10 @@
 #include <iostream>
 #include <random>
 #include <sstream>
-#include "IMostrar.h"
+#include "IShow.h"
 using namespace std;
 
-class Movimiento : public IMostrar{
+class Movement : public IShow{
 protected:
     string name;
     string limb; //brazo derecho, brazo izquierdo, cabeza, etc
@@ -21,36 +21,36 @@ protected:
     string info;
     int cost;
 public:
-    Movimiento(string name, string limb, string impactZone, double damage,double impact,string info, double difficulty,int cost);
-    virtual ~Movimiento() = default;
+    Movement(string name, string limb, string impactZone, double damage,double impact,string info, double difficulty,int cost);
+    ~Movement() override = default;
     string getName();
     double getDamage();
-    double getImpacto();
-    int getCosto();
+    double getImpact();
+    int getCost();
 
-    bool realizarMovimiento() {
+    bool makeMove() {
         random_device rd;
         mt19937 engine(rd());
-        uniform_int_distribution<int> distribucion(1,100);
+        uniform_int_distribution<int> distribution(1,100);
 
-        int posibilidad = distribucion(engine);
+        int posibility = distribution(engine);
 
-        if (posibilidad>difficulty*100) {
+        if (posibility>difficulty*100) {
             return false;
         }
         return true;
     }
 
-    string getExtremidad(){
+    string getLimb(){
         return limb;
     }
-    string getZonaImpacto(){
+    string getImpactZone(){
         return impactZone;
     }
 
-    std::string mostrar() override;
+    std::string show() override;
 
-    bool operator==(const Movimiento &other) const {
+    bool operator==(const Movement &other) const {
         return name == other.name &&
                limb == other.limb &&
                impactZone == other.impactZone;

@@ -6,10 +6,10 @@
 #define PROYECTO2KIAP_IMOSTRAR_H
 #include <iostream>
 
-class IMostrar {
+class IShow {
 public:
-    virtual ~IMostrar() = default;
-    virtual std::string mostrar() = 0;
+    virtual ~IShow() = default;
+    virtual std::string show() = 0;
 };
 
 

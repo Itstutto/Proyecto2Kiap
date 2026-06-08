@@ -8,42 +8,38 @@ add_executable(Proyecto2Kiap main.cpp
         Character.h
         Player.cpp
         Player.h
-        Movimientos.h
+        Movement.h
         Enemy.cpp
         Enemy.h
-        Movimiento.cpp
-        ZonaSuperior.cpp
-        ZonaSuperior.h
-        ZonasDelCuerpo.h
-        IMostrar.h
-        ZonaInferior.cpp
-        ZonaInferior.h
-        FactoryZonas.cpp
-        FactoryZonas.h
-        MovimientosInferiores.cpp
-        MovimientosInferiores.h
-        FactoryMovimientos.cpp
-        FactoryMovimientos.h
+        Movement.cpp
+        UpperZone.cpp
+        UpperZone.h
+        BodyZones.h
+        IShow.h
+        LowerZone.cpp
+        LowerZone.h
+        ZonesFactory.cpp
+        ZonesFactory.h
+        ObjectMovement.cpp
+        ObjectMovement.h
+        MovementsFactory.cpp
+        MovementsFactory.h
         MakeMoves.h
         MovementMaker.cpp
         MovementMaker.h
-        Vectores.cpp
-        Vectores.h
-        ListMovInferiores.cpp
-        ListMovInferiores.h
-        Pelea.cpp
-        Pelea.h
-        FactoryEnemigos.h
-        Simulacion.cpp
-        Simulacion.h
+        Vectors.h
+        LowerMovList.cpp
+        LowerMovList.h
+        Fight.cpp
+        Fight.h
+        EnemyFactory.h
+        Simulation.cpp
+        Simulation.h
         loadPlayer.h
-        ISerializar.h
-        MovimientosPersonaje.cpp
-        MovimientosPersonaje.h
         CombatStrategy.h
         PlayerCombat.h
         EnemyCombat.h
-        GestorCombates.h
-        Guardar.h
-        Serializar.h
+        CombatManager.h
+        Save.h
+        Serialize.h
 )

@@ -8,7 +8,7 @@ Character
 └── Enemigo (categorías 1, 2 y 3)
 ```
 
-- Dependiendo del género, se puede utilizar el patrón **Singleton** (pendiente de analizar).
+- Dependiendo del género, se puede use el patrón **Singleton** (pendiente de analizar).
 - Implementar la mecánica de hacer enojar al oponente.
 - Avisar cuando se utilicen objetos; esto incrementa el daño causado.
 - Crear un **Factory** para generar los tipos de movimiento.
@@ -17,8 +17,8 @@ Character
 
 ## Singleton
 
-- Debe contener las zonas superiores e inferiores.
-- Utilizar archivos de configuración con las zonas.
+- Debe contener las zones superiores e inferiores.
+- Utilizar archivos de configuración con las zones.
 - Cargar estos datos al inicio de la simulación.
 
 ## Decorador
@@ -31,15 +31,15 @@ Character
 
 # Pendientes para el Martes 7
 
-- Crear la clase `Enemigo` y asegurar su instancia.
+- Crear la clase `Enemigo` y asegurar su instance.
 - Revisar patrones de diseño y consultar cuáles podrían utilizarse.
 
 ------------------------------------------
-En Golpes, se le asignará un puntaje, dependiendo de que tipo se golpe sea.
-Strategy lo podemos usar con potenciadores del tipo de golpe, o de defensa.
+En Golpes, se le asignará un puntaje, dependiendo de que type se golpe sea.
+Strategy lo podemos usar con potenciadores del type de golpe, o de defensa.
 --(por ejemplo, peto defectuoso: no marca punto, bebida energética: marca el doble de puntos, etc.)
 
--Hacer 2 archivos de texto, cada uno tiene que llenarse con zonas del cuerpo, uno para zone inferior y otra para zone superior
+-Hacer 2 archivos de texto, cada uno tiene que llenarse con zones del cuerpo, uno para zone inferior y otra para zone superior
 en cada line debe ir una zone diferente
 
 -Hacer que al final de la pelea, si gana se le dan unos puntos al personaje, y con esos puntos puede canjear nuevos movements,
@@ -49,10 +49,10 @@ RealizarGolpe (clase por crear, que hará toda la lógica para saber si el golpe
 
 
 
--Hacer las excepciones en todos los objetos que se crean con archivos(personajes, zonas, movements) revisar sus constructores
+-Hacer las excepciones en todos los objetos que se crean con archivos(personajes, zones, movements) revisar sus constructores
 -Llenar los archivos de textos: 
 -Movimientos: Todos
-Enemigos: 5 de cada difficulty de enemigos(en zonas inferiores y superiores)
+Enemigos: 5 de cada difficulty de enemies(en zones inferiores y superiores)
 Character Principal : 1
 
 -Separar los metodos de simulacion en clases(puede ser) 

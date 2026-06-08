@@ -16,12 +16,12 @@ private:
 
 public:
     Enemy(const string &difficulty,const string &name, char gender, double damage, double health = 100);
-    std::string mostrar() override;
+    std::string show() override;
     string getName() override;
     string getDifficulty();
     bool operator==(const Enemy &other) const;
     bool heal(int amount) override;
-    string serializar() override;
+    string serialize() override;
     void resetStats() override;
 
 

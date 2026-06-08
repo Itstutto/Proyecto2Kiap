@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "CargaPersonajePrincipal.h"
+#include "LoadPlayer.h"
 #include "FactoryMovimientos.h"
 #include "FactoryZonas.h"
 #include "ListMovInferiores.h"

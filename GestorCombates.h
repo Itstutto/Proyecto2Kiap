@@ -4,12 +4,12 @@
 
 #ifndef PROYECTO2KIAP_GESTORCOMBATES_H
 #define PROYECTO2KIAP_GESTORCOMBATES_H
-#include "EstrategiaCombate.h"
+#include "CombatStrategy.h"
 
 
 class GestorCombates {
 private:
-        EstrategiaCombate* estrategia;
+        CombatStrategy* estrategia;
 public:
     GestorCombates() {
         estrategia = nullptr;
@@ -17,13 +17,13 @@ public:
     ~GestorCombates() {
         delete estrategia;
     }
-    Movimiento* ejecutarEstrategia(Character* p, Character* c) {
+    Movimiento* executeStrategy(Character* p, Character* c) {
         if (!estrategia) {
             throw runtime_error("No se ha establecido una estrategia de combate");
         }
-        return estrategia->ejecutarEstrategia(p,c);
+        return estrategia->executeStrategy(p,c);
     }
-    void setEstrategia(EstrategiaCombate* nuevaEstrategia) {
+    void setEstrategia(CombatStrategy* nuevaEstrategia) {
         if (estrategia) {
             delete estrategia;
         }

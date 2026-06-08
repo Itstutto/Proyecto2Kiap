@@ -13,15 +13,15 @@ using namespace std;
 class Movimiento : public IMostrar{
 protected:
     string name;
-    string extremidad; //brazo derecho, brazo izquierdo, cabeza, etc
-    string zonaImpacto; //cabeza, torso, brazo, pierna, etc
-    double danio;
-    double impacto;
+    string limb; //brazo derecho, brazo izquierdo, cabeza, etc
+    string impactZone; //cabeza, torso, brazo, pierna, etc
+    double damage;
+    double impact;
     double difficulty; //determina que tan dificil es realizar el movimiento, con mayor difficulty menor probabilidad de realizarlo
     string info;
-    int costo;
+    int cost;
 public:
-    Movimiento(string name, string extremidad, string zonaImpacto, double danio,double impacto,string info, double difficulty,int costo);
+    Movimiento(string name, string limb, string impactZone, double damage,double impact,string info, double difficulty,int cost);
     virtual ~Movimiento() = default;
     string getName();
     double getDamage();
@@ -30,10 +30,10 @@ public:
 
     bool realizarMovimiento() {
         random_device rd;
-        mt19937 motor(rd());
+        mt19937 engine(rd());
         uniform_int_distribution<int> distribucion(1,100);
 
-        int posibilidad = distribucion(motor);
+        int posibilidad = distribucion(engine);
 
         if (posibilidad>difficulty*100) {
             return false;
@@ -42,18 +42,18 @@ public:
     }
 
     string getExtremidad(){
-        return extremidad;
+        return limb;
     }
     string getZonaImpacto(){
-        return zonaImpacto;
+        return impactZone;
     }
 
     std::string mostrar() override;
 
     bool operator==(const Movimiento &other) const {
         return name == other.name &&
-               extremidad == other.extremidad &&
-               zonaImpacto == other.zonaImpacto;
+               limb == other.limb &&
+               impactZone == other.impactZone;
     }
 
 

@@ -6,48 +6,48 @@
 #define PROYECTO2KIAP_FACTORYZONAS_H
 #include "ZonasDelCuerpo.h"
 #include <fstream>
-//Fabrica zonas del cuerpo a partir de un archivo de texto
+//Fabrica zonas del cuerpo a partir de un file de texto
 
 class FactoryZonas {
 public:
-    static vector<ZonaDelCuerpo*> crearZonas(const string& nombreArchivo) {
+    static vector<ZonaDelCuerpo*> crearZonas(const string& fileName) {
         vector<ZonaDelCuerpo*> zonas;
-        ifstream archivo(nombreArchivo);
-        if (!archivo.is_open()) {
-            throw runtime_error("No se pudo abrir el archivo: " + nombreArchivo);
+        ifstream file(fileName);
+        if (!file.is_open()) {
+            throw runtime_error("No se pudo abrir el file: " + fileName);
         }
 
-        string linea;
+        string line;
         int numeroLinea = 0;
 
-        while (getline(archivo, linea)) {
+        while (getline(file, line)) {
             numeroLinea++;
 
             // Ignorar líneas vacías
-            if (linea.empty()) {
+            if (line.empty()) {
                 continue;
             }
 
             // Validar que el name de zone no esté vacío
-            if (linea.length() == 0) {
+            if (line.length() == 0) {
                 throw invalid_argument("Línea " + to_string(numeroLinea) + ": El name de la zone no puede estar vacío");
             }
 
             // Verificar si ya existe la zone (evitar duplicados)
             for (const auto& zonaExistente : zonas) {
-                if (zonaExistente->getName() == linea) {
-                    throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone '" + linea + "' ya existe");
+                if (zonaExistente->getName() == line) {
+                    throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone '" + line + "' ya existe");
                 }
             }
             // Crear la zone (el constructor de ZonaDelCuerpo también validará)
-            zonas.push_back(new ZonaDelCuerpo(linea));
+            zonas.push_back(new ZonaDelCuerpo(line));
         }
 
-        archivo.close();
+        file.close();
 
         // Validar que se cargó al menos una zone
         if (zonas.empty()) {
-            throw runtime_error("Archivo de zonas vacío o sin datos válidos: " + nombreArchivo);
+            throw runtime_error("Archivo de zonas vacío o sin datos válidos: " + fileName);
         }
 
         return zonas;

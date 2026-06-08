@@ -26,7 +26,7 @@ public:
         ZonaDelCuerpo* zonaUtilizada = p1->getZone(mov->getExtremidad());
 
         if (!zonaUtilizada) {
-            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la extremidad "<<mov->getExtremidad()<<endl;
+            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la limb "<<mov->getExtremidad()<<endl;
             return s.str();
         }
         else if (!zonaUtilizada->disponible()) {

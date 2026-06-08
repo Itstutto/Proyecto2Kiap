@@ -4,58 +4,58 @@
 
 #ifndef PROYECTO2KIAP_COMBATEPRINCIPAL_H
 #define PROYECTO2KIAP_COMBATEPRINCIPAL_H
-#include "EstrategiaCombate.h"
+#include "CombatStrategy.h"
 #include "Player.h"
 
 
-class CombatePrincipal : public EstrategiaCombate{
+class PlayerCombat : public CombatStrategy{
 public:
-    ~CombatePrincipal() override = default;
-    Movimiento* ejecutarEstrategia(Character* p, Character* c) override {
+    ~PlayerCombat() override = default;
+    Movimiento* executeStrategy(Character* p, Character* c) override {
         cout<<p->getName()<<", Vida: "<<p->getHealth()<<endl;
 
         cout<<"Elija una accion: "<<endl;
 
 
-        int opcion = 0;
-        while (opcion < 1 || opcion > 3) {
+        int option = 0;
+        while (option < 1 || option > 3) {
             cout<<"1. Atacar"<<endl;
             cout<<"2. Ver informacion del rival"<<endl;
             cout<<"Opcion: ";
-            cin >> opcion;
+            cin >> option;
             if (cin.fail()) {
                 cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 2." << endl;
                 cin.clear(); // Limpiar el estado de error
                 cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
                 continue;
-            } else if (opcion < 1 || opcion > 3) {
+            } else if (option < 1 || option > 3) {
                 cout << "Opción no válida. Por favor, ingrese un número entre 1 y 2." << endl;
                 continue;
             }
 
 
 
-            switch (opcion) {
+            switch (option) {
                 case 1: {
                     cout<<"Elija un movimiento: "<<endl;
                     cout<<p->getMovements()<<endl;
-                    int opcionMovimiento = -1;
-                    while (opcionMovimiento < 1 || opcionMovimiento > p->getAmountMovements()) {
+                    int movementOption = -1;
+                    while (movementOption < 1 || movementOption > p->getAmountMovements()) {
                         cout<<"Opcion: ";
-                        cin>>opcionMovimiento;
+                        cin>>movementOption;
                         // Validar que la opción sea un número válido
-                        if (cin.fail() || opcionMovimiento < 1 || opcionMovimiento > p->getMovements().size()) {
+                        if (cin.fail() || movementOption < 1 || movementOption > p->getMovements().size()) {
                             cout << "Opción inválida. Por favor, ingrese un número entre 1 y " << p->getMovements().size() << "." << endl;
                             cin.clear(); // Limpiar el estado de error
                             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
                         }
                     }
-                    return p->getIndexMovement(opcionMovimiento);
+                    return p->getIndexMovement(movementOption);
                 }
                 case 2: {
                     cout<<"Informacion del rival: "<<endl;
                     cout<<c->mostrar()<<endl;
-                    opcion = 0;
+                    option = 0;
                     break;
                 }
                 case 3: {
@@ -64,7 +64,7 @@ public:
                     if (pp) {
                         cout<<"Puntos de curacion disponibles: "<<pp->getHealPoints()<<endl;
                         cout<<"Vida: "<<pp->getHealth()<<endl;
-                        cout<<"Ingrese la amount de puntos de curacion a usar: ";
+                        cout<<"Ingrese la cantidad de puntos de curacion a usar: ";
                         int healPoints = 0;
                         try {
                             cin>>healPoints;

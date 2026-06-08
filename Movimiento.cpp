@@ -4,34 +4,34 @@
 
 #include "Movimientos.h"
 
-Movimiento::Movimiento(string name,string extremidad, string zonaImpacto, double danio,double impacto, string info, double difficulty, int costo) {
+Movimiento::Movimiento(string name,string limb, string impactZone, double damage,double impact, string info, double difficulty, int cost) {
     if (name.empty()) {
         throw invalid_argument("El name del movimiento no puede estar vacío");
     }
-    if (extremidad.empty()) {
-        throw invalid_argument("La extremidad no puede estar vacía");
+    if (limb.empty()) {
+        throw invalid_argument("La limb no puede estar vacía");
     }
-    if (zonaImpacto.empty()) {
-        throw invalid_argument("La zone de impacto no puede estar vacía");
+    if (impactZone.empty()) {
+        throw invalid_argument("La zone de impact no puede estar vacía");
     }
-    if (danio < 0) {
-        throw invalid_argument("El daño no puede ser negativo: " + to_string(danio));
+    if (damage < 0) {
+        throw invalid_argument("El daño no puede ser negativo: " + to_string(damage));
     }
-    if (impacto < 0 || impacto > 1) {
-        throw invalid_argument("El impacto debe estar entre 0 y 1, recibido: " + to_string(impacto));
+    if (impact < 0 || impact > 1) {
+        throw invalid_argument("El impact debe estar entre 0 y 1, recibido: " + to_string(impact));
     }
 
     this->name = name;
-    this->extremidad = extremidad;
-    this->zonaImpacto = zonaImpacto;
-    this->danio = danio;
-    this->impacto = impacto;
+    this->limb = limb;
+    this->impactZone = impactZone;
+    this->damage = damage;
+    this->impact = impact;
     this->info = info;
     this->difficulty = difficulty;
-    if (costo < 0) {
-        throw invalid_argument("El costo no puede ser negativo: " + to_string(costo));
+    if (cost < 0) {
+        throw invalid_argument("El cost no puede ser negativo: " + to_string(cost));
     }
-    this->costo = costo;
+    this->cost = cost;
 }
 
 string Movimiento::getName() {
@@ -39,20 +39,20 @@ string Movimiento::getName() {
 }
 
 double Movimiento::getDamage() {
-    return danio;
+    return damage;
 }
 
 double Movimiento::getImpacto() {
-    return impacto;
+    return impact;
 }
 
 int Movimiento::getCosto() {
-    return costo;
+    return cost;
 }
 
 std::string Movimiento::mostrar() {
     std::stringstream s;
-    s << "Movimiento: " << name << " (Extremidad: " << extremidad
-      << ", Zona: " << zonaImpacto << ", Daño: " << danio <<", Costo: "<< costo<< ")" << std::endl;
+    s << "Movimiento: " << name << " (Extremidad: " << limb
+      << ", Zona: " << impactZone << ", Daño: " << damage <<", Costo: "<< cost<< ")" << std::endl;
     return s.str();
 }

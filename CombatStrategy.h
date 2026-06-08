@@ -7,10 +7,10 @@
 #include "Character.h"
 
 
-class EstrategiaCombate {
+class CombatStrategy {
 public:
-    virtual ~EstrategiaCombate() = default;
-    virtual Movimiento* ejecutarEstrategia(Character* p, Character* c) = 0;
+    virtual ~CombatStrategy() = default;
+    virtual Movimiento* executeStrategy(Character* p, Character* c) = 0;
 };
 
 

@@ -12,7 +12,7 @@ Character
 - Implementar la mecánica de hacer enojar al oponente.
 - Avisar cuando se utilicen objetos; esto incrementa el daño causado.
 - Crear un **Factory** para generar los tipos de movimiento.
-- Dependiendo de la zone de impacto, la potencia de los golpes se verá afectada.
+- Dependiendo de la zone de impact, la potencia de los golpes se verá afectada.
 - **Extremidad** y **Zona de Impacto** utilizarán los mismos datos.
 
 ## Singleton
@@ -40,7 +40,7 @@ Strategy lo podemos usar con potenciadores del tipo de golpe, o de defensa.
 --(por ejemplo, peto defectuoso: no marca punto, bebida energética: marca el doble de puntos, etc.)
 
 -Hacer 2 archivos de texto, cada uno tiene que llenarse con zonas del cuerpo, uno para zone inferior y otra para zone superior
-en cada linea debe ir una zone diferente
+en cada line debe ir una zone diferente
 
 -Hacer que al final de la pelea, si gana se le dan unos puntos al personaje, y con esos puntos puede canjear nuevos movements,
 se le hace tabla para saber la información de cada personaje, como sus movements, puntos, etc.
@@ -57,8 +57,8 @@ Character Principal : 1
 
 -Separar los metodos de simulacion en clases(puede ser) 
 -Ponerle un atributo al personaje principal, recuperar, y other atributo que tenga guardado la experiencia 
--Posibilidad de que el enemigo se cure
+-Posibilidad de que el enemy se cure
 
--Agregar costo a los movements en el archivo 
+-Agregar cost a los movements en el file 
 
 

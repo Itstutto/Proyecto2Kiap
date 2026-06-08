@@ -24,9 +24,9 @@ add_executable(Proyecto2Kiap main.cpp
         MovimientosInferiores.h
         FactoryMovimientos.cpp
         FactoryMovimientos.h
-        CrearMovimientos.h
-        CreadorMovimientosInferiores.cpp
-        CreadorMovimientosInferiores.h
+        MakeMoves.h
+        MovementMaker.cpp
+        MovementMaker.h
         Vectores.cpp
         Vectores.h
         ListMovInferiores.cpp
@@ -36,13 +36,13 @@ add_executable(Proyecto2Kiap main.cpp
         FactoryEnemigos.h
         Simulacion.cpp
         Simulacion.h
-        CargaPersonajePrincipal.h
+        loadPlayer.h
         ISerializar.h
         MovimientosPersonaje.cpp
         MovimientosPersonaje.h
-        EstrategiaCombate.h
-        CombatePrincipal.h
-        CombateEnemigo.h
+        CombatStrategy.h
+        PlayerCombat.h
+        EnemyCombat.h
         GestorCombates.h
         Guardar.h
         Serializar.h

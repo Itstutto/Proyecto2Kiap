@@ -4,41 +4,41 @@
 
 #include "FactoryMovimientos.h"
 
-#include "CreadorMovimientosInferiores.h"
-#include "CrearMovimientos.h"
+#include "MovementMaker.h"
+#include "MakeMoves.h"
 
 vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
     /*sintaxis de archivos
      *tipo: inferior/superior
-     *name,extremidad,zonaImpacto,danio,impacto,descripcion,difficulty
-     *name,extremidad,zonaImpacto,danio,impacto,descripcion,difficulty
+     *name,limb,impactZone,damage,impact,descripcion,difficulty
+     *name,limb,impactZone,damage,impact,descripcion,difficulty
      *...
      */
     vector<Movimiento*> movements;
-    ifstream archivo(name);
-    if (!archivo.is_open()) {
-        throw runtime_error("No se pudo abrir el archivo: " + name);
+    ifstream file(name);
+    if (!file.is_open()) {
+        throw runtime_error("No se pudo abrir el file: " + name);
     }
 
-    string linea;
+    string line;
 
 
-    CrearMovimientos* creador;
-    creador = new CreadorMovimientosInferiores();
+    MakeMoves* creador;
+    creador = new MovementMaker();
 
 
     int numeroLinea = 1; // contador de líneas
 
-    while (getline(archivo, linea)) {
+    while (getline(file, line)) {
         numeroLinea++;
 
         // Ignorar líneas vacías
-        if (linea.empty()) {
+        if (line.empty()) {
             continue;
         }
 
-        stringstream ss(linea);
-        string nombreMov, extremidad, zonaImpacto, danioStr, impactoStr, descripcion, dificultadStr,costoStr;
+        stringstream ss(line);
+        string nombreMov, limb, impactZone, danioStr, impactoStr, descripcion, dificultadStr,costoStr;
 
         // Leer todos los campos separados por coma
         if (!getline(ss, nombreMov, ',')) {
@@ -49,26 +49,26 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": El name del movimiento no puede estar vacío");
         }
 
-        if (!getline(ss, extremidad, ',')) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la extremidad");
+        if (!getline(ss, limb, ',')) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la limb");
         }
-        if (extremidad.empty()) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La extremidad no puede estar vacía");
-        }
-
-        if (!getline(ss, zonaImpacto, ',')) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la zone de impacto");
+        if (limb.empty()) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La limb no puede estar vacía");
         }
 
-        if (zonaImpacto.empty()) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone de impacto no puede estar vacía");
+        if (!getline(ss, impactZone, ',')) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la zone de impact");
+        }
+
+        if (impactZone.empty()) {
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone de impact no puede estar vacía");
         }
         if (!getline(ss, danioStr, ',')) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el daño");
         }
 
         if (!getline(ss, impactoStr, ',')) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el impacto");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el impact");
         }
 
         if (!getline(ss, descripcion, ',')) {
@@ -80,16 +80,16 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
         }
 
         if (!getline(ss, costoStr)) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el costo");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el cost");
         }
 
         // Convertir a números con validación
-        double danio;
-        double impacto;
+        double damage;
+        double impact;
         double difficulty;
-        int costo;
+        int cost;
         try {
-            danio = stod(danioStr);
+            damage = stod(danioStr);
         } catch (const invalid_argument& e) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Daño no es un número válido: '" + danioStr + "'");
         } catch (const out_of_range& e) {
@@ -97,7 +97,7 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
         }
 
         try {
-            impacto = stod(impactoStr);
+            impact = stod(impactoStr);
         } catch (const invalid_argument& e) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Impacto no es un número válido: '" + impactoStr + "'");
         } catch (const out_of_range& e) {
@@ -112,17 +112,17 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
         }
 
         try {
-            costo = stoi(costoStr);
+            cost = stoi(costoStr);
         } catch (const invalid_argument& e) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Costo no es un número válido: '" + costoStr + "'");
         } catch (const out_of_range& e) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Costo fuera de rango: '" + costoStr + "'");
         }
 
-        movements.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, difficulty,costo));
+        movements.push_back(creador->makeMove(nombreMov, damage, impact, descripcion, limb, impactZone, difficulty,cost));
     }
 
-    archivo.close();
+    file.close();
 
     return movements;
 }

@@ -28,8 +28,8 @@ public:
 
     double getCondicion() const { return condicion; }
 
-    void utilizar(double impacto) {
-        condicion -= impacto;
+    void utilizar(double impact) {
+        condicion -= impact;
         if (condicion < 0) {
             condicion = 0;
         }
@@ -37,10 +37,10 @@ public:
 
     bool disponible() {
         random_device rd;
-        mt19937 motor(rd());
+        mt19937 engine(rd());
         uniform_int_distribution<int> distribucion(1,100);
 
-        int posibilidad = distribucion(motor);
+        int posibilidad = distribucion(engine);
         if (posibilidad>condicion*100) {
             return false;
         }

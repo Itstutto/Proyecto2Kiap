@@ -4,9 +4,9 @@
 
 #include "Simulacion.h"
 
-#include "CargaPersonajePrincipal.h"
-#include "CombateEnemigo.h"
-#include "CombatePrincipal.h"
+#include "LoadPlayer.h"
+#include "EnemyCombat.h"
+#include "PlayerCombat.h"
 #include "FactoryEnemigos.h"
 #include "FactoryMovimientos.h"
 #include "FactoryZonas.h"
@@ -26,7 +26,7 @@ Simulacion::Simulacion() {
         ZonaSuperior::getInstancia()->agregarElemento(FactoryZonas::crearZonas(rutaZonaSuperior)); // Cargar zonas superiores
         ZonaInferior::getInstancia()->agregarElemento(FactoryZonas::crearZonas(rutaZonaInferior)); // Cargar zonas inferiores
         // Cargar personaje principal
-        personajePrincipal = CargaPersonajePrincipal::cargarPersonaje(rutaPersonajePrincipal);
+        personajePrincipal = LoadPlayer::loadPlayer(rutaPersonajePrincipal);
         // Cargar enemigos
         enemigosFacil = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Facil"); // Cargar enemigos de difficulty fácil
         enemigosMedia = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Media"); // Cargar enemigos de difficulty media
@@ -72,7 +72,7 @@ void Simulacion::ejecutarSimulacion() {
 
 void Simulacion::menuInicial() {
     cout<<"Bienvenido a Kiap"<<endl;
-    int opcion = 0;
+    int option = 0;
     do {
         cout<<"Datos del personaje principal:"<<endl;
         cout<<personajePrincipal->mostrar() << endl;
@@ -80,14 +80,14 @@ void Simulacion::menuInicial() {
         cout<<"2. Cambiar Nombre"<<endl;
         cout<<"3. Cambiar Genero"<<endl;
         cout<<"4. Reiniciar estadisticas"<<endl;
-        cin>>opcion;
+        cin>>option;
         if (cin.fail()) {
             cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 4." << endl;
             cin.clear(); // Limpiar el estado de error
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
             continue;
         }
-        switch (opcion) {
+        switch (option) {
             case 1: {
                 cout<<"Iniciando combate..."<<endl;
                 break;
@@ -103,7 +103,7 @@ void Simulacion::menuInicial() {
                     cout<<"Error al cambiar el name: "<<e.what()<<endl;
                     continue;
                 }
-                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                option = 0; // Reiniciar opción para mostrar el menú nuevamente
                 break;
             }
             case 3: {
@@ -117,22 +117,22 @@ void Simulacion::menuInicial() {
                     cout<<"Error al cambiar el gender: "<<e.what()<<endl;
                     continue;
                 }
-                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                option = 0; // Reiniciar opción para mostrar el menú nuevamente
                 break;
             }
             case 4: {
                 personajePrincipal->resetStats();
-                for (auto enemigo : enemigosFacil) {
-                    enemigo->resetStats();
+                for (auto enemy : enemigosFacil) {
+                    enemy->resetStats();
                 }
-                for (auto enemigo : enemigosMedia) {
-                    enemigo->resetStats();
+                for (auto enemy : enemigosMedia) {
+                    enemy->resetStats();
                 }
-                for (auto enemigo : enemigosDificil) {
-                    enemigo->resetStats();
+                for (auto enemy : enemigosDificil) {
+                    enemy->resetStats();
                 }
                 cout<<"Estadisticas reiniciadas exitosamente"<<endl;
-                opcion = 0; // Reiniciar opción para mostrar el menú nuevamente
+                option = 0; // Reiniciar opción para mostrar el menú nuevamente
                 break;
             }
             default: {
@@ -141,23 +141,23 @@ void Simulacion::menuInicial() {
             }
         }
 
-    }while (opcion < 1 || opcion > 4);
+    }while (option < 1 || option > 4);
 }
 
 void Simulacion::menuEntrePeleas() {
-    int opcion = 0;
-    while (opcion < 1 || opcion > 2) {
-        cout<<"Elija una opcion: "<<endl;
+    int option = 0;
+    while (option < 1 || option > 2) {
+        cout<<"Elija una option: "<<endl;
         cout<<"1. Ir a la tienda"<<endl;
         cout<<"2. Continuar a la siguiente pelea"<<endl;
-        cin>>opcion;
+        cin>>option;
         if (cin.fail()) {
             cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 2." << endl;
             cin.clear(); // Limpiar el estado de error
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
             continue;
         }
-        switch (opcion) {
+        switch (option) {
             case 1: {
                 tienda();
                 break;
@@ -182,9 +182,9 @@ void Simulacion::tienda() {
         return;
     }
     vector<Movimiento*> movimientosDisponibles = ListMovInferiores::getInstancia()->getElementos();
-    int opcion = 0;
+    int option = 0;
     cout<<"Bienvenido a la tienda, elija que movimiento desea buy"<<endl;
-    while (opcion < 1 || opcion > movimientosDisponibles.size()) {
+    while (option < 1 || option > movimientosDisponibles.size()) {
         Player* pp = dynamic_cast<Player*>(personajePrincipal);
         if (!pp) {
             cout<<"Usted no es un personaje principal, jale de aqui"<<endl;
@@ -197,40 +197,40 @@ void Simulacion::tienda() {
         }
         cout<<index<<") Salir de la tienda"<<endl;
         cout<<"Opcion: ";
-        cin>>opcion;
-        if (cin.fail() || opcion < 1 || opcion > movimientosDisponibles.size()+1) {
+        cin>>option;
+        if (cin.fail() || option < 1 || option > movimientosDisponibles.size()+1) {
             cout << "Opción inválida. Por favor, ingrese un número entre 1 y " << movimientosDisponibles.size()+1 << "." << endl;
             cin.clear(); // Limpiar el estado de error
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
             continue;
         }
-        if (opcion == movimientosDisponibles.size()+1) {
+        if (option == movimientosDisponibles.size()+1) {
             cout<<"Saliendo de la tienda..."<<endl;
             break;
         }
-        if (personajePrincipal->canMakeMove(movimientosDisponibles[opcion-1])) {
+        if (personajePrincipal->canMakeMove(movimientosDisponibles[option-1])) {
             cout<<"Ya tienes ese movimiento, elige other"<<endl;
-            opcion = 0;
+            option = 0;
             continue;
         }
-        if (pp->getExpPoints() < movimientosDisponibles[opcion-1]->getCosto()) {
+        if (pp->getExpPoints() < movimientosDisponibles[option-1]->getCosto()) {
             cout<<"No tienes suficientes puntos de experiencia para buy este movimiento, sigue peleando para ganar mas puntos"<<endl;
-            opcion = 0;
+            option = 0;
             continue;
         }
 
-        personajePrincipal->addMovement(movimientosDisponibles[opcion-1]->getName(), movimientosDisponibles[opcion-1]->getExtremidad());
-        pp->buy(movimientosDisponibles[opcion-1]->getCosto());
-        cout<<"Has comprado el movimiento "<<movimientosDisponibles[opcion-1]->getName()<<", te quedan "<<pp->getExpPoints()<<" puntos de experiencia"<<endl;
+        personajePrincipal->addMovement(movimientosDisponibles[option-1]->getName(), movimientosDisponibles[option-1]->getExtremidad());
+        pp->buy(movimientosDisponibles[option-1]->getCosto());
+        cout<<"Has comprado el movimiento "<<movimientosDisponibles[option-1]->getName()<<", te quedan "<<pp->getExpPoints()<<" puntos de experiencia"<<endl;
     }
 }
 
 
 void Simulacion::zonaPelea(char tipo) {
-    // elegir un personaje enemigo al azar de la difficulty correspondiente
+    // elegir un personaje enemy al azar de la difficulty correspondiente
 
     random_device rd;
-    mt19937 motor(rd());
+    mt19937 engine(rd());
     uniform_int_distribution<int> distribucion(0,tipo == 'f' ? (enemigosFacil.size()-1 ): tipo == 'm' ? (enemigosMedia.size()-1) : (enemigosDificil.size()-1));
     uniform_int_distribution<int> expPoints(20,35);
     enemigoActual = nullptr;
@@ -240,7 +240,7 @@ void Simulacion::zonaPelea(char tipo) {
     vector<Character*> enemigos = tipo == 'f' ? enemigosFacil : tipo == 'm' ? enemigosMedia : enemigosDificil;
 
     while (!enemigoActual) {
-        seleccion = distribucion(motor);
+        seleccion = distribucion(engine);
         if (enemigos[seleccion]->isAlive()) {
             enemigoActual = enemigos[seleccion];
             break;
@@ -254,8 +254,8 @@ void Simulacion::zonaPelea(char tipo) {
     cout<<"Acaba de iniciar una pelea contra "<<enemigoActual->getName()<<endl;
 
     while (personajePrincipal->isAlive() && enemigoActual->isAlive()) {
-        gestorCombates.setEstrategia(new CombatePrincipal());
-        Movimiento* mov = gestorCombates.ejecutarEstrategia(personajePrincipal, enemigoActual);
+        gestorCombates.setEstrategia(new PlayerCombat());
+        Movimiento* mov = gestorCombates.executeStrategy(personajePrincipal, enemigoActual);
         if (!mov) {
             cout<<"Has decidido curarte en este turno"<<endl;
         }
@@ -266,8 +266,8 @@ void Simulacion::zonaPelea(char tipo) {
             cout<<"Has derrotado a "<<enemigoActual->getName()<<", ganando 20 puntos de experiencia"<<endl;
             break;
         }
-        gestorCombates.setEstrategia(new CombateEnemigo());
-        mov = gestorCombates.ejecutarEstrategia(enemigoActual, personajePrincipal);
+        gestorCombates.setEstrategia(new EnemyCombat());
+        mov = gestorCombates.executeStrategy(enemigoActual, personajePrincipal);
         if (!mov) {
             cout<<enemigoActual->getName()<<" ha decidido curarse en este turno"<<endl;
         }
@@ -283,7 +283,7 @@ void Simulacion::zonaPelea(char tipo) {
             cout<<"Error al otorgar experiencia, usted no es personaje principal tramposo"<<endl;
             return;
         }
-        int experienciaGanada = expPoints(motor);
+        int experienciaGanada = expPoints(engine);
         pp->gainExp(experienciaGanada);
         cout<<"Has ganado "<<experienciaGanada<<" puntos de experiencia"<<endl;
     } else {

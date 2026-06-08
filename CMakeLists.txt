@@ -4,8 +4,8 @@ project(Proyecto2Kiap)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Proyecto2Kiap main.cpp
-        Personaje.cpp
-        Personaje.h
+        Character.cpp
+        Character.h
         PersonajePrincipal.cpp
         PersonajePrincipal.h
         Movimientos.h

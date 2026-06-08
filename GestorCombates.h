@@ -17,7 +17,7 @@ public:
     ~GestorCombates() {
         delete estrategia;
     }
-    Movimiento* ejecutarEstrategia(Personaje* p, Personaje* c) {
+    Movimiento* ejecutarEstrategia(Character* p, Character* c) {
         if (!estrategia) {
             throw runtime_error("No se ha establecido una estrategia de combate");
         }

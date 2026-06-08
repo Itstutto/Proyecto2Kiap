@@ -11,8 +11,8 @@
 class CombateEnemigo : public EstrategiaCombate{
 public:
     ~CombateEnemigo() override = default;
-    Movimiento* ejecutarEstrategia(Personaje* p, Personaje* c) override {
-        //seleccionar un movimiento al azar de los movimientos disponibles del enemigo
+    Movimiento* ejecutarEstrategia(Character* p, Character* c) override {
+        //seleccionar un movimiento al azar de los movements disponibles del enemigo
         int adicionalDificultad = 0;
         if (dynamic_cast<PersonajeEnemigo*>(p)) {
             PersonajeEnemigo* enemigo = dynamic_cast<PersonajeEnemigo*>(p);
@@ -26,19 +26,19 @@ public:
         }
         random_device rd;
         mt19937 motor(rd());
-        uniform_int_distribution<int> distribucion1(1, p->getCantidadMovimientos()+5);
+        uniform_int_distribution<int> distribucion1(1, p->getAmountMovements()+5);
         uniform_int_distribution<int> distribucion2(0+adicionalDificultad, 15+adicionalDificultad);
 
         int indiceMovimiento = distribucion1(motor);
 
-        if (indiceMovimiento > p->getCantidadMovimientos()) {
+        if (indiceMovimiento > p->getAmountMovements()) {
             int cantidadSanar = distribucion2(motor);
-            cout<<p->getNombre()<<" ha decidido sanar en este turno, recuperando "<<cantidadSanar<<" puntos de vida"<<endl;
-            p->sanar(cantidadSanar);
+            cout<<p->getName()<<" ha decidido heal en este turno, recuperando "<<cantidadSanar<<" puntos de health"<<endl;
+            p->heal(cantidadSanar);
             return nullptr;
         }
 
-        return p->getMovimientoIndice(indiceMovimiento);
+        return p->getIndexMovement(indiceMovimiento);
     }
 };
 

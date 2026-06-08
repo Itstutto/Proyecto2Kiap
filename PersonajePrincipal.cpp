@@ -6,23 +6,23 @@
 
 #include "ListMovInferiores.h"
 
-PersonajePrincipal::PersonajePrincipal(const string &nombre, char genero, double vida, int puntosCuracion, int puntosExperiencia) : Personaje(nombre, genero, vida) {
+PersonajePrincipal::PersonajePrincipal(const string &name, char gender, double health, int puntosCuracion, int puntosExperiencia) : Character(name, gender, health) {
 
-    if (nombre.empty()) {
-        throw invalid_argument("El nombre del personaje principal no puede estar vacío");
+    if (name.empty()) {
+        throw invalid_argument("El name del personaje principal no puede estar vacío");
     }
-    if (genero != 'M' && genero != 'F' && genero != 'O') {
-        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    if (gender != 'M' && gender != 'F' && gender != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
-    if (vida <= 0) {
-        throw invalid_argument("La vida del personaje principal debe ser mayor a 0, recibido: " + to_string(vida));
+    if (health <= 0) {
+        throw invalid_argument("La health del personaje principal debe ser mayor a 0, recibido: " + to_string(health));
     }
     this->puntosCuracion = puntosCuracion;
     this->puntosExperiencia = puntosExperiencia;
 }
 
-string PersonajePrincipal::getNombre() {
-    return nombre;
+string PersonajePrincipal::getName() {
+    return name;
 }
 
 int PersonajePrincipal::getPuntosCuracion() {
@@ -33,64 +33,64 @@ int PersonajePrincipal::getPuntosExperiencia() {
     return puntosExperiencia;
 }
 
-void PersonajePrincipal::ganarExperiencia(int cantidad) {
-    if (cantidad < 0) {
-        throw invalid_argument("La cantidad de experiencia ganada no puede ser negativa: " + to_string(cantidad));
+void PersonajePrincipal::ganarExperiencia(int amount) {
+    if (amount < 0) {
+        throw invalid_argument("La amount de experiencia ganada no puede ser negativa: " + to_string(amount));
     }
-    puntosExperiencia += cantidad;
+    puntosExperiencia += amount;
 }
 
-void PersonajePrincipal::comprar(int cantidad) {
-    if (cantidad < 0) {
-        throw invalid_argument("La cantidad a comprar no puede ser negativa: " + to_string(cantidad));
+void PersonajePrincipal::comprar(int amount) {
+    if (amount < 0) {
+        throw invalid_argument("La amount a comprar no puede ser negativa: " + to_string(amount));
     }
-    if (cantidad>puntosExperiencia) {
-        throw invalid_argument("No tienes suficientes puntos de experiencia para comprar esta cantidad de puntos de curación, te faltan " + to_string(cantidad-puntosExperiencia) + " puntos");
+    if (amount>puntosExperiencia) {
+        throw invalid_argument("No tienes suficientes puntos de experiencia para comprar esta amount de puntos de curación, te faltan " + to_string(amount-puntosExperiencia) + " puntos");
     }
-    puntosExperiencia -= cantidad;
+    puntosExperiencia -= amount;
 }
 
 std::string PersonajePrincipal::mostrar(){
     stringstream s;
-    s<<"---------Personaje Principal--------"<<endl
-    <<"Nombre: "<<nombre<<endl
-    <<"Genero: "<<(genero == 'M' ? "masculino" : genero == 'F' ? "Femenino" : "otro")<<endl
-    <<"Vida: "<<vida<<endl
-    <<nombre<<(vivo ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
+    s<<"---------Character Principal--------"<<endl
+    <<"Nombre: "<<name<<endl
+    <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "otro")<<endl
+    <<"Vida: "<<health<<endl
+    <<name<<(alive ? " sigue con health" : " ya no sigue con health :c")<<endl;
     return s.str();
 }
 
-bool PersonajePrincipal::sanar(int cantidad) {
-    if (cantidad < 0) {
-        throw invalid_argument("La cantidad de curación no puede ser negativa: " + to_string(cantidad));
+bool PersonajePrincipal::heal(int amount) {
+    if (amount < 0) {
+        throw invalid_argument("La amount de curación no puede ser negativa: " + to_string(amount));
     }
 
-    if (puntosCuracion <= cantidad || cantidad <= 0) {
+    if (puntosCuracion <= amount || amount <= 0) {
         return false; // No hay suficientes puntos de curación
     }
-    vida+=cantidad;
-    if (vida>100) {
-        vida = 100;
+    health+=amount;
+    if (health>100) {
+        health = 100;
     }
-    puntosCuracion-=cantidad;
+    puntosCuracion-=amount;
     return true;
 
 
 }
 
-void PersonajePrincipal::reiniciarEstadisticas() {
-    Personaje::reiniciarEstadisticas();
+void PersonajePrincipal::resetStats() {
+    Character::resetStats();
     puntosCuracion = 0;
     puntosExperiencia = 0;
-    movimientos.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie derecho"));
-    movimientos.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie izquierdo"));
+    movements.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie derecho"));
+    movements.agregarElemento(ListMovInferiores::getInstancia()->getMovimiento("Ap Chagui", "Pie izquierdo"));
 }
 
 string PersonajePrincipal::serializar() {
     stringstream ss;
-    ss<<nombre<<","<<genero<<","<<vida<<","<<puntosCuracion<<","<<puntosExperiencia<<endl;
-    for (const auto& mov : movimientos.getElementos()) {
-        ss << mov->getNombre() << "," << mov->getExtremidad()<<endl;
+    ss<<name<<","<<gender<<","<<health<<","<<puntosCuracion<<","<<puntosExperiencia<<endl;
+    for (const auto& mov : movements.getElementos()) {
+        ss << mov->getName() << "," << mov->getExtremidad()<<endl;
     }
 
     return ss.str();

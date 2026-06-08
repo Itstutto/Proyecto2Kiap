@@ -13,7 +13,7 @@ using namespace std;
 
 class CargaPersonajePrincipal {
 public:
-    static Personaje* cargarPersonaje(const string& nombreArchivo) {
+    static Character* cargarPersonaje(const string& nombreArchivo) {
         ifstream archivo(nombreArchivo);
         if (!archivo.is_open()) {
             archivo.close();
@@ -23,41 +23,41 @@ public:
             nuevoArchivo.close();
             archivo.open(nombreArchivo);
         }
-        string nombre;
+        string name;
         string generoStr;
         string vidaStr;
         string puntosCuracionStr;
         string puntosExperienciaStr;
 
-        char genero;
-        double vida;
+        char gender;
+        double health;
         int puntosCuracion;
         int puntosExperiencia;
 
-        if (!getline(archivo,nombre,',')) {
-            cout<<"Ingrese el nombre del personaje: ";
-            getline(cin, nombre);
+        if (!getline(archivo,name,',')) {
+            cout<<"Ingrese el name del personaje: ";
+            getline(cin, name);
         }
-        if (nombre.empty()) { // Validar nombre no vacío
-            throw invalid_argument("El nombre del personaje no puede estar vacío");
+        if (name.empty()) { // Validar name no vacío
+            throw invalid_argument("El name del personaje no puede estar vacío");
         }
         if (!getline(archivo,generoStr,',')) {
-            cout<<"Ingrese el genero del personaje (M/F/O): ";
-            cin>>genero;
+            cout<<"Ingrese el gender del personaje (M/F/O): ";
+            cin>>gender;
             cin.ignore();
         }else{
-            genero = generoStr.empty() ? 'O' : generoStr[0];
+            gender = generoStr.empty() ? 'O' : generoStr[0];
         }
         // Validar género válido
-        if (genero != 'M' && genero != 'F' && genero != 'O') {
-            throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+        if (gender != 'M' && gender != 'F' && gender != 'O') {
+            throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
         }
         if (!getline(archivo,vidaStr,',') || vidaStr.empty()) {
-            vida = 100; // Valor por defecto
+            health = 100; // Valor por defecto
         }
         else {
             try {
-                vida = stod(vidaStr);
+                health = stod(vidaStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Vida no es un número válido: '" + vidaStr + "'");
             } catch (const out_of_range& e) {
@@ -90,17 +90,17 @@ public:
         }
 
 
-        // Validar vida positiva
-        if (vida <= 0) {
-            throw invalid_argument("La vida debe ser mayor a 0, recibido: " + to_string(vida));
+        // Validar health positiva
+        if (health <= 0) {
+            throw invalid_argument("La health debe ser mayor a 0, recibido: " + to_string(health));
         }
 
-        PersonajePrincipal* p = new PersonajePrincipal(nombre, genero,vida, puntosCuracion, puntosExperiencia);
+        PersonajePrincipal* p = new PersonajePrincipal(name, gender,health, puntosCuracion, puntosExperiencia);
         stringstream ss;
         string linea;
-        string zona;
+        string zone;
 
-        //Las siguiente linea son solo nombres de movimientos y su zona
+        //Las siguiente linea son solo nombres de movements y su zone
 
         while (getline(archivo, linea)) {
             if (linea.empty()) {
@@ -109,13 +109,13 @@ public:
             ss.clear();
             ss.str(linea);
 
-            getline(ss,nombre,',');
-            getline(ss,zona,',');
+            getline(ss,name,',');
+            getline(ss,zone,',');
             try {
 
-                p->agregarMovimiento(nombre ,zona);
+                p->addMovement(name ,zone);
             }catch (const invalid_argument& e) {
-                cout << "Error al agregar movimiento '" << nombre << "' con zona '" << zona << "': " << e.what() << endl;
+                cout << "Error al agregar movimiento '" << name << "' con zone '" << zone << "': " << e.what() << endl;
             }
         }
 
@@ -129,7 +129,7 @@ public:
         return p;
     }
 
-    static Personaje* guardarPersonaje(PersonajePrincipal);
+    static Character* guardarPersonaje(PersonajePrincipal);
 };
 
 

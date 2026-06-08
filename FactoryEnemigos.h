@@ -13,76 +13,76 @@ using namespace std;
 
 class FactoryEnemigos {
 private:
-    static void cargarMovimientosFacil(Personaje* enemigo) {
-        //se elige al azar 4 movimientos con danio base menor a 20
+    static void cargarMovimientosFacil(Character* enemigo) {
+        //se elige al azar 4 movements con danio base menor a 20
         random_device rd;
         mt19937 motor(rd());
         uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
-        int cantidad = 0;
-        while (cantidad < 2) {
+        int amount = 0;
+        while (amount < 2) {
             int seleccion = distribucion(motor);
             Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
-            if (mov->getDanio() <= 20) {
+            if (mov->getDamage() <= 20) {
                 try {
-                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                    enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
                     // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
                     continue;
                 }
-                cantidad++;
+                amount++;
             }
 
         }
     }
 
-    static void cargarMovimientosMedia(Personaje* enemigo) {
-        //se elige al azar 4 movimientos con danio base entre 20 y 40
+    static void cargarMovimientosMedia(Character* enemigo) {
+        //se elige al azar 4 movements con danio base entre 20 y 40
         random_device rd;
         mt19937 motor(rd());
         uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
-        int cantidad = 0;
-        while (cantidad < 2) {
+        int amount = 0;
+        while (amount < 2) {
             int seleccion = distribucion(motor);
             Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
-            if (mov->getDanio() >= 20 && mov->getDanio() < 40) {
+            if (mov->getDamage() >= 20 && mov->getDamage() < 40) {
                 try {
-                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                    enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
                     // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
                     continue;
                 }
-                cantidad++;
+                amount++;
             }
         }
     }
 
-    static void cargarMovimientosDificil(Personaje* enemigo) {
-        //se elige al azar 4 movimientos con danio base mayor a 40
+    static void cargarMovimientosDificil(Character* enemigo) {
+        //se elige al azar 4 movements con danio base mayor a 40
         random_device rd;
         mt19937 motor(rd());
         uniform_int_distribution<int> distribucion(0, ListMovInferiores::getInstancia()->getElementos().size() - 1);
-        int cantidad = 0;
-        while (cantidad < 2) {
+        int amount = 0;
+        while (amount < 2) {
             int seleccion = distribucion(motor);
             Movimiento* mov = ListMovInferiores::getInstancia()->getElementos()[seleccion];
-            if (mov->getDanio() >= 40) {
+            if (mov->getDamage() >= 40) {
                 try {
-                    enemigo->agregarMovimiento(mov->getNombre(), mov->getExtremidad());
+                    enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
                     // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
                     continue;
                 }
-                cantidad++;
+                amount++;
             }
         }
     }
 public:
-    static vector<Personaje*> crearEnemigo(const string& nombre, string dificultad) {
-        ifstream archivo(nombre);
+    static vector<Character*> crearEnemigo(const string& name, string dificultad) {
+        ifstream archivo(name);
         if (!archivo.is_open()) {
-            throw runtime_error("No se pudo abrir el archivo de enemigos: " + nombre);
+            throw runtime_error("No se pudo abrir el archivo de enemigos: " + name);
         }
-        vector<Personaje*> enemigos;
+        vector<Character*> enemigos;
         string linea;
         int numeroLinea = 0;
 
@@ -108,11 +108,11 @@ public:
             }
             // Leer los demás campos
             if (!getline(ss, nombreEnemigo, ',')) {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el nombre del enemigo");
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el name del enemigo");
             }
 
             if (nombreEnemigo.empty()) {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": El nombre del enemigo no puede estar vacío");
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": El name del enemigo no puede estar vacío");
             }
 
             if (!getline(ss, generoStr, ',')) {
@@ -124,14 +124,14 @@ public:
             }
 
             if (!getline(ss, vidaStr)) {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la vida del enemigo");
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la health del enemigo");
             }
 
             // Convertir strings a números con validación
-            double danioBase;
-            double vida;
+            double damage;
+            double health;
             try {
-                danioBase = stod(danioBaseStr);
+                damage = stod(danioBaseStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Línea " + to_string(numeroLinea) + ": Daño base no es un número válido: " + danioBaseStr);
             } catch (const out_of_range& e) {
@@ -139,7 +139,7 @@ public:
             }
 
             try {
-                vida = stod(vidaStr);
+                health = stod(vidaStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Línea " + to_string(numeroLinea) + ": Vida no es un número válido: " + vidaStr);
             } catch (const out_of_range& e) {
@@ -147,12 +147,12 @@ public:
             }
 
             // Validar género
-            char genero = generoStr.empty() ? 'O' : generoStr[0]; // 'O' para otro si no se especifica
-            if (genero != 'M' && genero != 'F' && genero != 'O') {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Género inválido: " + string(1, genero));
+            char gender = generoStr.empty() ? 'O' : generoStr[0]; // 'O' para otro si no se especifica
+            if (gender != 'M' && gender != 'F' && gender != 'O') {
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Género inválido: " + string(1, gender));
             }
             // Crear el enemigo (el constructor validará los valores)
-            PersonajeEnemigo* enemigo = new PersonajeEnemigo(dificultad, nombreEnemigo, genero, danioBase, vida);
+            PersonajeEnemigo* enemigo = new PersonajeEnemigo(dificultad, nombreEnemigo, gender, damage, health);
             if (dificultad == "Facil") {
                 cargarMovimientosFacil(enemigo);
             } else if (dificultad == "Media") {

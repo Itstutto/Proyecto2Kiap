@@ -4,15 +4,15 @@
 
 #include "Movimientos.h"
 
-Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, double danio,double impacto, string info, double dificultad, int costo) {
-    if (nombre.empty()) {
-        throw invalid_argument("El nombre del movimiento no puede estar vacío");
+Movimiento::Movimiento(string name,string extremidad, string zonaImpacto, double danio,double impacto, string info, double dificultad, int costo) {
+    if (name.empty()) {
+        throw invalid_argument("El name del movimiento no puede estar vacío");
     }
     if (extremidad.empty()) {
         throw invalid_argument("La extremidad no puede estar vacía");
     }
     if (zonaImpacto.empty()) {
-        throw invalid_argument("La zona de impacto no puede estar vacía");
+        throw invalid_argument("La zone de impacto no puede estar vacía");
     }
     if (danio < 0) {
         throw invalid_argument("El daño no puede ser negativo: " + to_string(danio));
@@ -21,7 +21,7 @@ Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, doub
         throw invalid_argument("El impacto debe estar entre 0 y 1, recibido: " + to_string(impacto));
     }
 
-    this->nombre = nombre;
+    this->name = name;
     this->extremidad = extremidad;
     this->zonaImpacto = zonaImpacto;
     this->danio = danio;
@@ -34,11 +34,11 @@ Movimiento::Movimiento(string nombre,string extremidad, string zonaImpacto, doub
     this->costo = costo;
 }
 
-string Movimiento::getNombre() {
-    return nombre;
+string Movimiento::getName() {
+    return name;
 }
 
-double Movimiento::getDanio() {
+double Movimiento::getDamage() {
     return danio;
 }
 
@@ -52,7 +52,7 @@ int Movimiento::getCosto() {
 
 std::string Movimiento::mostrar() {
     std::stringstream s;
-    s << "Movimiento: " << nombre << " (Extremidad: " << extremidad
+    s << "Movimiento: " << name << " (Extremidad: " << extremidad
       << ", Zona: " << zonaImpacto << ", Daño: " << danio <<", Costo: "<< costo<< ")" << std::endl;
     return s.str();
 }

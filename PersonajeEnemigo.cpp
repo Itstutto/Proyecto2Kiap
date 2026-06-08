@@ -4,21 +4,21 @@
 
 #include "PersonajeEnemigo.h"
 
-PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida ): Personaje(nombre,genero,vida, danioBase) {
+PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &name, char gender, double damage, double health ): Character(name,gender,health, damage) {
     if (dificultad != "Facil" && dificultad != "Media" && dificultad != "Dificil") {
         throw invalid_argument("Dificultad inválida: '" + dificultad + "'. Debe ser 'Facil', 'Media' o 'Dificil'");
     }
-    if (nombre.empty()) {
-        throw invalid_argument("El nombre del enemigo no puede estar vacío");
+    if (name.empty()) {
+        throw invalid_argument("El name del enemigo no puede estar vacío");
     }
-    if (genero != 'M' && genero != 'F' && genero != 'O') {
-        throw invalid_argument("Género inválido: '" + string(1, genero) + "'. Debe ser M, F u O");
+    if (gender != 'M' && gender != 'F' && gender != 'O') {
+        throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
-    if (danioBase < 0) {
-        throw invalid_argument("El daño base no puede ser negativo: " + to_string(danioBase));
+    if (damage < 0) {
+        throw invalid_argument("El daño base no puede ser negativo: " + to_string(damage));
     }
-    if (vida <= 0) {
-        throw invalid_argument("La vida del enemigo debe ser mayor a 0, recibido: " + to_string(vida));
+    if (health <= 0) {
+        throw invalid_argument("La health del enemigo debe ser mayor a 0, recibido: " + to_string(health));
     }
 
     this->dificultad = dificultad;
@@ -26,18 +26,18 @@ PersonajeEnemigo::PersonajeEnemigo(const string &dificultad,const string &nombre
 
 std::string PersonajeEnemigo::mostrar() {
     stringstream s;
-    s<<"---------Personaje Enemigo--------"<<endl
-    <<"Nombre: "<<nombre<<endl
+    s<<"---------Character Enemigo--------"<<endl
+    <<"Nombre: "<<name<<endl
     <<"Dificultad: "<<dificultad<<endl
-    <<"Genero: "<<(genero == 'M' ? "masculino" : genero == 'F' ? "Femenino" : "otro")<<endl
-    <<"Vida: "<<vida<<endl
-    <<"Daño Base: "<<danioBase<<endl
-    <<nombre<<(vivo ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
+    <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "otro")<<endl
+    <<"Vida: "<<health<<endl
+    <<"Daño Base: "<<damage<<endl
+    <<name<<(alive ? " sigue con health" : " ya no sigue con health :c")<<endl;
     return s.str();
 }
 
-string PersonajeEnemigo::getNombre() {
-    return nombre;
+string PersonajeEnemigo::getName() {
+    return name;
 }
 
 string PersonajeEnemigo::getDificultad() {
@@ -45,32 +45,32 @@ string PersonajeEnemigo::getDificultad() {
 }
 
 bool PersonajeEnemigo::operator==(const PersonajeEnemigo &otro) const {
-    return nombre == otro.nombre;
+    return name == otro.name;
 }
 
-bool PersonajeEnemigo::sanar(int cantidad) {
-    if (cantidad < 0) {
-        throw invalid_argument("La cantidad a sanar no puede ser negativa: " + to_string(cantidad));
+bool PersonajeEnemigo::heal(int amount) {
+    if (amount < 0) {
+        throw invalid_argument("La amount a heal no puede ser negativa: " + to_string(amount));
     }
-    if (!vivo) {
-        return false; // No se puede sanar a un personaje muerto
+    if (!alive) {
+        return false; // No se puede heal a un personaje muerto
     }
-    vida += cantidad;
-    if (vida > 100) {
-        vida = 100; // Limitar la vida máxima a 100
+    health += amount;
+    if (health > 100) {
+        health = 100; // Limitar la health máxima a 100
     }
     return true;
 }
 
 string PersonajeEnemigo::serializar() {
     stringstream ss;
-    ss << dificultad << "," << nombre << "," << genero << "," << danioBase << "," << vida;
+    ss << dificultad << "," << name << "," << gender << "," << damage << "," << health;
     return ss.str();
 }
 
-void PersonajeEnemigo::reiniciarEstadisticas() {
-    vida = 100.0;
-    danioBase = 5.0;
-    vivo = true;
+void PersonajeEnemigo::resetStats() {
+    health = 100.0;
+    damage = 5.0;
+    alive = true;
 }
 

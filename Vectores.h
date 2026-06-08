@@ -18,7 +18,7 @@ public:
 
         for (const auto x : elementos) {
             if (x == elemento) {
-                throw invalid_argument("Ya existe un elemento con ese nombre");
+                throw invalid_argument("Ya existe un elemento con ese name");
             }
         }
         T* copia = new T(*elemento); // Crear una copia independiente en el heap
@@ -31,13 +31,13 @@ public:
     }
 
 
-    T* getElemento(const string& nombre) {
+    T* getElemento(const string& name) {
         for (const auto x : elementos) {
-            if (x->getNombre() == nombre) {
+            if (x->getName() == name) {
                 return x;
             }
         }
-        throw invalid_argument("No existe un elemento con ese nombre");
+        throw invalid_argument("No existe un elemento con ese name");
     }
 
     vector<T*> getElementos() {

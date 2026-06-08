@@ -4,7 +4,7 @@
 
 #ifndef PROYECTO2KIAP_SIMULACION_H
 #define PROYECTO2KIAP_SIMULACION_H
-#include "Personaje.h"
+#include "Character.h"
 #include "PersonajeEnemigo.h"
 #include <random>
 
@@ -14,13 +14,13 @@
 
 class Simulacion {
 private:
-    //atributos para manejar la simulacion, como personajes, movimientos, etc
+    //atributos para manejar la simulacion, como personajes, movements, etc
 
-    Personaje* personajePrincipal;
-    Personaje* enemigoActual;
-    vector<Personaje*> enemigosFacil;
-    vector<Personaje*> enemigosMedia;
-    vector<Personaje*> enemigosDificil;
+    Character* personajePrincipal;
+    Character* enemigoActual;
+    vector<Character*> enemigosFacil;
+    vector<Character*> enemigosMedia;
+    vector<Character*> enemigosDificil;
     GestorCombates gestorCombates;
 
     string rutaPersonajePrincipal;

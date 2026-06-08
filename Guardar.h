@@ -6,14 +6,14 @@
 #define PROYECTO2KIAP_GUARDAR_H
 #include <iostream>
 #include <fstream>
-#include "Personaje.h"
+#include "Character.h"
 #include "PersonajePrincipal.h"
 #include "Vectores.h"
 using namespace std;
 
 class Guardar {
 public:
-    static void guardarPersonajePrincipal(Personaje* p, string &ruta){
+    static void guardarPersonajePrincipal(Character* p, string &ruta){
         ofstream archivo(ruta);
         if (!archivo.is_open()) {
             throw runtime_error("No se pudo abrir el archivo para guardar el personaje principal: " + ruta);
@@ -21,7 +21,7 @@ public:
         archivo << p->serializar() << endl;
         archivo.close();
     }
-    static void guardarEnemigos(vector<Personaje*> enemigos, string &ruta) {
+    static void guardarEnemigos(vector<Character*> enemigos, string &ruta) {
         ofstream archivo(ruta , ios::app); // Abrir en modo append para agregar al final del archivo
         if (!archivo.is_open()) {
             throw runtime_error("No se pudo abrir el archivo para guardar los enemigos: " + ruta);

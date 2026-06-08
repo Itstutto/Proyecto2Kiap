@@ -5,7 +5,7 @@
 #include "FactoryZonas.h"
 #include "ListMovInferiores.h"
 #include "Movimientos.h"
-#include "Personaje.h"
+#include "Character.h"
 #include "PersonajeEnemigo.h"
 #include "PersonajePrincipal.h"
 #include "Simulacion.h"

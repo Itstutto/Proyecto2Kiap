@@ -7,22 +7,22 @@
 #include<iostream>
 #include<sstream>
 
-#include "Personaje.h"
+#include "Character.h"
 using namespace std;
 
-class PersonajeEnemigo : public Personaje {
+class PersonajeEnemigo : public Character {
 private:
     string dificultad;
 
 public:
-    PersonajeEnemigo(const string &dificultad,const string &nombre, char genero, double danioBase, double vida = 100);
+    PersonajeEnemigo(const string &dificultad,const string &name, char gender, double damage, double health = 100);
     std::string mostrar() override;
-    string getNombre() override;
+    string getName() override;
     string getDificultad();
     bool operator==(const PersonajeEnemigo &otro) const;
-    bool sanar(int cantidad) override;
+    bool heal(int amount) override;
     string serializar() override;
-    void reiniciarEstadisticas() override;
+    void resetStats() override;
 
 
 };

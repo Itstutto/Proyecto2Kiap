@@ -28,24 +28,24 @@ public:
                 continue;
             }
 
-            // Validar que el nombre de zona no esté vacío
+            // Validar que el name de zone no esté vacío
             if (linea.length() == 0) {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": El nombre de la zona no puede estar vacío");
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": El name de la zone no puede estar vacío");
             }
 
-            // Verificar si ya existe la zona (evitar duplicados)
+            // Verificar si ya existe la zone (evitar duplicados)
             for (const auto& zonaExistente : zonas) {
-                if (zonaExistente->getNombre() == linea) {
-                    throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zona '" + linea + "' ya existe");
+                if (zonaExistente->getName() == linea) {
+                    throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone '" + linea + "' ya existe");
                 }
             }
-            // Crear la zona (el constructor de ZonaDelCuerpo también validará)
+            // Crear la zone (el constructor de ZonaDelCuerpo también validará)
             zonas.push_back(new ZonaDelCuerpo(linea));
         }
 
         archivo.close();
 
-        // Validar que se cargó al menos una zona
+        // Validar que se cargó al menos una zone
         if (zonas.empty()) {
             throw runtime_error("Archivo de zonas vacío o sin datos válidos: " + nombreArchivo);
         }

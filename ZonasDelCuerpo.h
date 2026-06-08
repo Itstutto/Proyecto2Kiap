@@ -12,19 +12,19 @@ using namespace std;
 
 class ZonaDelCuerpo : public IMostrar{
 private:
-    string nombre;
+    string name;
     double condicion; //determina que tan probable es que se realize un movimiento, con menor condicion menor probabilidad
 public:
-    ZonaDelCuerpo(string nombre) {
-        if (nombre.empty()) {
-            throw invalid_argument("El nombre de la zona no puede estar vacío");
+    ZonaDelCuerpo(string name) {
+        if (name.empty()) {
+            throw invalid_argument("El name de la zone no puede estar vacío");
         }
-        this->nombre = nombre;
+        this->name = name;
         condicion = 1;
     }
 
-    string getNombre() const { return nombre; }
-    void setNombre(const std::string& n) { nombre = n; }
+    string getName() const { return name; }
+    void setName(const std::string& n) { name = n; }
 
     double getCondicion() const { return condicion; }
 
@@ -49,12 +49,12 @@ public:
 
     std::string mostrar() override {
         stringstream s;
-        s<<"Zona: "<<nombre<<", Condicion: "<<condicion*100<<"% "<<endl;
+        s<<"Zona: "<<name<<", Condicion: "<<condicion*100<<"% "<<endl;
         return s.str();
     }
 
     bool operator==(const ZonaDelCuerpo &otro) const {
-        return nombre == otro.nombre;
+        return name == otro.name;
     }
 
 };

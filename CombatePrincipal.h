@@ -11,8 +11,8 @@
 class CombatePrincipal : public EstrategiaCombate{
 public:
     ~CombatePrincipal() override = default;
-    Movimiento* ejecutarEstrategia(Personaje* p, Personaje* c) override {
-        cout<<p->getNombre()<<", Vida: "<<p->getVida()<<endl;
+    Movimiento* ejecutarEstrategia(Character* p, Character* c) override {
+        cout<<p->getName()<<", Vida: "<<p->getHealth()<<endl;
 
         cout<<"Elija una accion: "<<endl;
 
@@ -38,19 +38,19 @@ public:
             switch (opcion) {
                 case 1: {
                     cout<<"Elija un movimiento: "<<endl;
-                    cout<<p->getMovimientos()<<endl;
+                    cout<<p->getMovements()<<endl;
                     int opcionMovimiento = -1;
-                    while (opcionMovimiento < 1 || opcionMovimiento > p->getCantidadMovimientos()) {
+                    while (opcionMovimiento < 1 || opcionMovimiento > p->getAmountMovements()) {
                         cout<<"Opcion: ";
                         cin>>opcionMovimiento;
                         // Validar que la opción sea un número válido
-                        if (cin.fail() || opcionMovimiento < 1 || opcionMovimiento > p->getMovimientos().size()) {
-                            cout << "Opción inválida. Por favor, ingrese un número entre 1 y " << p->getMovimientos().size() << "." << endl;
+                        if (cin.fail() || opcionMovimiento < 1 || opcionMovimiento > p->getMovements().size()) {
+                            cout << "Opción inválida. Por favor, ingrese un número entre 1 y " << p->getMovements().size() << "." << endl;
                             cin.clear(); // Limpiar el estado de error
                             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
                         }
                     }
-                    return p->getMovimientoIndice(opcionMovimiento);
+                    return p->getIndexMovement(opcionMovimiento);
                 }
                 case 2: {
                     cout<<"Informacion del rival: "<<endl;
@@ -63,15 +63,15 @@ public:
                     PersonajePrincipal* pp = dynamic_cast<PersonajePrincipal*>(p);
                     if (pp) {
                         cout<<"Puntos de curacion disponibles: "<<pp->getPuntosCuracion()<<endl;
-                        cout<<"Vida: "<<pp->getVida()<<endl;
-                        cout<<"Ingrese la cantidad de puntos de curacion a usar: ";
+                        cout<<"Vida: "<<pp->getHealth()<<endl;
+                        cout<<"Ingrese la amount de puntos de curacion a usar: ";
                         int puntosCuracion = 0;
                         try {
                             cin>>puntosCuracion;
                             if (cin.fail()){
                                 throw invalid_argument("Entrada inválida. Por favor, ingrese un número entero para los puntos de curación.");
                             }
-                            pp->sanar(puntosCuracion);
+                            pp->heal(puntosCuracion);
 
                         }catch (const invalid_argument& e) {
                             cout<<"No se ingreso un numero valido"<<endl;

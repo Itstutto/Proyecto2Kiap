@@ -15,7 +15,7 @@
 
 class FactoryMovimientos {
 public:
-    static vector<Movimiento*> crearMovimientos(const string& nombre);
+    static vector<Movimiento*> crearMovimientos(const string& name);
 
 };
 

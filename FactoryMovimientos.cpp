@@ -7,17 +7,17 @@
 #include "CreadorMovimientosInferiores.h"
 #include "CrearMovimientos.h"
 
-vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) {
+vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &name) {
     /*sintaxis de archivos
      *tipo: inferior/superior
-     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
-     *nombre,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
+     *name,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
+     *name,extremidad,zonaImpacto,danio,impacto,descripcion,dificultad
      *...
      */
-    vector<Movimiento*> movimientos;
-    ifstream archivo(nombre);
+    vector<Movimiento*> movements;
+    ifstream archivo(name);
     if (!archivo.is_open()) {
-        throw runtime_error("No se pudo abrir el archivo: " + nombre);
+        throw runtime_error("No se pudo abrir el archivo: " + name);
     }
 
     string linea;
@@ -42,11 +42,11 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
 
         // Leer todos los campos separados por coma
         if (!getline(ss, nombreMov, ',')) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el nombre del movimiento");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el name del movimiento");
         }
 
         if (nombreMov.empty()) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": El nombre del movimiento no puede estar vacío");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": El name del movimiento no puede estar vacío");
         }
 
         if (!getline(ss, extremidad, ',')) {
@@ -57,11 +57,11 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
         }
 
         if (!getline(ss, zonaImpacto, ',')) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la zona de impacto");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la zone de impacto");
         }
 
         if (zonaImpacto.empty()) {
-            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zona de impacto no puede estar vacía");
+            throw invalid_argument("Línea " + to_string(numeroLinea) + ": La zone de impacto no puede estar vacía");
         }
         if (!getline(ss, danioStr, ',')) {
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta el daño");
@@ -119,10 +119,10 @@ vector<Movimiento *> FactoryMovimientos::crearMovimientos(const string &nombre) 
             throw invalid_argument("Línea " + to_string(numeroLinea) + ": Costo fuera de rango: '" + costoStr + "'");
         }
 
-        movimientos.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, dificultad,costo));
+        movements.push_back(creador->crearMovimiento(nombreMov, danio, impacto, descripcion, extremidad, zonaImpacto, dificultad,costo));
     }
 
     archivo.close();
 
-    return movimientos;
+    return movements;
 }

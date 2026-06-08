@@ -12,7 +12,7 @@ using namespace std;
 
 class Movimiento : public IMostrar{
 protected:
-    string nombre;
+    string name;
     string extremidad; //brazo derecho, brazo izquierdo, cabeza, etc
     string zonaImpacto; //cabeza, torso, brazo, pierna, etc
     double danio;
@@ -21,10 +21,10 @@ protected:
     string info;
     int costo;
 public:
-    Movimiento(string nombre, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad,int costo);
+    Movimiento(string name, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad,int costo);
     virtual ~Movimiento() = default;
-    string getNombre();
-    double getDanio();
+    string getName();
+    double getDamage();
     double getImpacto();
     int getCosto();
 
@@ -51,7 +51,7 @@ public:
     std::string mostrar() override;
 
     bool operator==(const Movimiento &otro) const {
-        return nombre == otro.nombre &&
+        return name == otro.name &&
                extremidad == otro.extremidad &&
                zonaImpacto == otro.zonaImpacto;
     }

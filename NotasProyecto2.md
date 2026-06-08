@@ -61,4 +61,12 @@ Personaje Principal : 1
 
 -Agregar costo a los movimientos en el archivo 
 
+pendientes: 
+-Bitácora
+-Readme
+-Documento oficial
+-Traducción de comentarios
+-Traducir al español los detalles en couts
+
+ObjectMovement(para se puedan agregar movimientos de todo tipo, no necesariamente de Taekwondo)
 

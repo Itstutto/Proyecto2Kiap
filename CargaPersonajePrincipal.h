@@ -9,7 +9,7 @@
 
 #include "ListMovInferiores.h"
 using namespace std;
-#include "PersonajePrincipal.h"
+#include "Player.h"
 
 class CargaPersonajePrincipal {
 public:
@@ -31,8 +31,8 @@ public:
 
         char gender;
         double health;
-        int puntosCuracion;
-        int puntosExperiencia;
+        int healPoints;
+        int expPoints;
 
         if (!getline(archivo,name,',')) {
             cout<<"Ingrese el name del personaje: ";
@@ -65,11 +65,11 @@ public:
             }
         }
         if (!getline(archivo,puntosCuracionStr,',')) {
-            puntosCuracion = 3; // Valor por defecto
+            healPoints = 3; // Valor por defecto
         }
         else {
             try {
-                puntosCuracion = stoi(puntosCuracionStr);
+                healPoints = stoi(puntosCuracionStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Puntos de curación no es un número válido: '" + puntosCuracionStr + "'");
             } catch (const out_of_range& e) {
@@ -77,11 +77,11 @@ public:
             }
         }
         if (!getline(archivo,puntosExperienciaStr)) {
-            puntosExperiencia = 0; // Valor por defecto
+            expPoints = 0; // Valor por defecto
         }
         else {
             try {
-                puntosExperiencia = stoi(puntosExperienciaStr);
+                expPoints = stoi(puntosExperienciaStr);
             } catch (const invalid_argument& e) {
                 throw invalid_argument("Puntos de experiencia no es un número válido: '" + puntosExperienciaStr + "'");
             } catch (const out_of_range& e) {
@@ -95,7 +95,7 @@ public:
             throw invalid_argument("La health debe ser mayor a 0, recibido: " + to_string(health));
         }
 
-        PersonajePrincipal* p = new PersonajePrincipal(name, gender,health, puntosCuracion, puntosExperiencia);
+        Player* p = new Player(name, gender,health, healPoints, expPoints);
         stringstream ss;
         string linea;
         string zone;
@@ -129,7 +129,7 @@ public:
         return p;
     }
 
-    static Character* guardarPersonaje(PersonajePrincipal);
+    static Character* guardarPersonaje(Player);
 };
 
 

@@ -5,7 +5,7 @@
 #ifndef PROYECTO2KIAP_SIMULACION_H
 #define PROYECTO2KIAP_SIMULACION_H
 #include "Character.h"
-#include "PersonajeEnemigo.h"
+#include "Enemy.h"
 #include <random>
 
 #include "GestorCombates.h"

@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(Proyecto2Kiap main.cpp
         Character.cpp
         Character.h
-        PersonajePrincipal.cpp
-        PersonajePrincipal.h
+        Player.cpp
+        Player.h
         Movimientos.h
-        PersonajeEnemigo.cpp
-        PersonajeEnemigo.h
+        Enemy.cpp
+        Enemy.h
         Movimiento.cpp
         ZonaSuperior.cpp
         ZonaSuperior.h

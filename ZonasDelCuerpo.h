@@ -53,8 +53,8 @@ public:
         return s.str();
     }
 
-    bool operator==(const ZonaDelCuerpo &otro) const {
-        return name == otro.name;
+    bool operator==(const ZonaDelCuerpo &other) const {
+        return name == other.name;
     }
 
 };

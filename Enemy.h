@@ -10,16 +10,16 @@
 #include "Character.h"
 using namespace std;
 
-class PersonajeEnemigo : public Character {
+class Enemy : public Character {
 private:
-    string dificultad;
+    string difficulty;
 
 public:
-    PersonajeEnemigo(const string &dificultad,const string &name, char gender, double damage, double health = 100);
+    Enemy(const string &difficulty,const string &name, char gender, double damage, double health = 100);
     std::string mostrar() override;
     string getName() override;
-    string getDificultad();
-    bool operator==(const PersonajeEnemigo &otro) const;
+    string getDifficulty();
+    bool operator==(const Enemy &other) const;
     bool heal(int amount) override;
     string serializar() override;
     void resetStats() override;

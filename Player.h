@@ -7,17 +7,17 @@
 #include "Character.h"
 #include <sstream>
 
-class PersonajePrincipal : public Character{
+class Player : public Character{
 private:
-    int puntosCuracion;
-    int puntosExperiencia;
+    int healPoints;
+    int expPoints;
 public:
-    PersonajePrincipal(const string &name, char gender, double health, int puntosCuracion, int puntosExperiencia);
+    Player(const string &name, char gender, double health, int healPoints, int expPoints);
     string getName() override;
-    int getPuntosCuracion();
-    int getPuntosExperiencia();
-    void ganarExperiencia(int amount);
-    void comprar(int amount);
+    int getHealPoints();
+    int getExpPoints();
+    void gainExp(int amount);
+    void buy(int amount);
     std::string mostrar() override;
     bool heal(int amount) override;
     void resetStats() override;

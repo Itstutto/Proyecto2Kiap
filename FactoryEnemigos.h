@@ -4,7 +4,7 @@
 
 #ifndef PROYECTO2KIAP_FACTORYENEMIGOS_H
 #define PROYECTO2KIAP_FACTORYENEMIGOS_H
-#include "PersonajeEnemigo.h"
+#include "Enemy.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -26,7 +26,7 @@ private:
                 try {
                     enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
                     continue;
                 }
                 amount++;
@@ -48,7 +48,7 @@ private:
                 try {
                     enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
                     continue;
                 }
                 amount++;
@@ -69,7 +69,7 @@ private:
                 try {
                     enemigo->addMovement(mov->getName(), mov->getExtremidad());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con otro
+                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
                     continue;
                 }
                 amount++;
@@ -77,7 +77,7 @@ private:
         }
     }
 public:
-    static vector<Character*> crearEnemigo(const string& name, string dificultad) {
+    static vector<Character*> crearEnemigo(const string& name, string difficulty) {
         ifstream archivo(name);
         if (!archivo.is_open()) {
             throw runtime_error("No se pudo abrir el archivo de enemigos: " + name);
@@ -97,14 +97,14 @@ public:
             stringstream ss(linea);
             string dificultadArchivo, nombreEnemigo, generoStr, danioBaseStr, vidaStr;
 
-            // Leer dificultad del archivo
+            // Leer difficulty del archivo
             if (!getline(ss, dificultadArchivo, ',')) {
-                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la dificultad en el archivo de enemigos");
+                throw invalid_argument("Línea " + to_string(numeroLinea) + ": Falta la difficulty en el archivo de enemigos");
             }
 
-            // Verificar si la dificultad coincide
-            if (dificultadArchivo != dificultad) {
-                continue; // Saltar enemigos que no coincidan con la dificultad
+            // Verificar si la difficulty coincide
+            if (dificultadArchivo != difficulty) {
+                continue; // Saltar enemigos que no coincidan con la difficulty
             }
             // Leer los demás campos
             if (!getline(ss, nombreEnemigo, ',')) {
@@ -147,20 +147,20 @@ public:
             }
 
             // Validar género
-            char gender = generoStr.empty() ? 'O' : generoStr[0]; // 'O' para otro si no se especifica
+            char gender = generoStr.empty() ? 'O' : generoStr[0]; // 'O' para other si no se especifica
             if (gender != 'M' && gender != 'F' && gender != 'O') {
                 throw invalid_argument("Línea " + to_string(numeroLinea) + ": Género inválido: " + string(1, gender));
             }
             // Crear el enemigo (el constructor validará los valores)
-            PersonajeEnemigo* enemigo = new PersonajeEnemigo(dificultad, nombreEnemigo, gender, damage, health);
-            if (dificultad == "Facil") {
+            Enemy* enemigo = new Enemy(difficulty, nombreEnemigo, gender, damage, health);
+            if (difficulty == "Facil") {
                 cargarMovimientosFacil(enemigo);
-            } else if (dificultad == "Media") {
+            } else if (difficulty == "Media") {
                 cargarMovimientosMedia(enemigo);
-            } else if (dificultad == "Dificil") {
+            } else if (difficulty == "Dificil") {
                 cargarMovimientosDificil(enemigo);
             } else {
-                throw invalid_argument("Dificultad desconocida: " + dificultad);
+                throw invalid_argument("Dificultad desconocida: " + difficulty);
             }
             enemigos.push_back(enemigo);
 

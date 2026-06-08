@@ -6,8 +6,8 @@
 #include "ListMovInferiores.h"
 #include "Movimientos.h"
 #include "Character.h"
-#include "PersonajeEnemigo.h"
-#include "PersonajePrincipal.h"
+#include "Enemy.h"
+#include "Player.h"
 #include "Simulacion.h"
 #include "ZonaInferior.h"
 using namespace std;

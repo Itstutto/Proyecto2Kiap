@@ -5,7 +5,7 @@
 #ifndef PROYECTO2KIAP_COMBATEPRINCIPAL_H
 #define PROYECTO2KIAP_COMBATEPRINCIPAL_H
 #include "EstrategiaCombate.h"
-#include "PersonajePrincipal.h"
+#include "Player.h"
 
 
 class CombatePrincipal : public EstrategiaCombate{
@@ -60,18 +60,18 @@ public:
                 }
                 case 3: {
 
-                    PersonajePrincipal* pp = dynamic_cast<PersonajePrincipal*>(p);
+                    Player* pp = dynamic_cast<Player*>(p);
                     if (pp) {
-                        cout<<"Puntos de curacion disponibles: "<<pp->getPuntosCuracion()<<endl;
+                        cout<<"Puntos de curacion disponibles: "<<pp->getHealPoints()<<endl;
                         cout<<"Vida: "<<pp->getHealth()<<endl;
                         cout<<"Ingrese la amount de puntos de curacion a usar: ";
-                        int puntosCuracion = 0;
+                        int healPoints = 0;
                         try {
-                            cin>>puntosCuracion;
+                            cin>>healPoints;
                             if (cin.fail()){
                                 throw invalid_argument("Entrada inválida. Por favor, ingrese un número entero para los puntos de curación.");
                             }
-                            pp->heal(puntosCuracion);
+                            pp->heal(healPoints);
 
                         }catch (const invalid_argument& e) {
                             cout<<"No se ingreso un numero valido"<<endl;

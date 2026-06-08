@@ -10,8 +10,8 @@
 
 class CreadorMovimientosInferiores : public CrearMovimientos{
 public:
-    Movimiento* crearMovimiento(const string& name, double danio, double impacto, string info, string extremidad, string zonaImpacto, double dificultad, int costo) override {
-        return new MovimientosInferiores(name, danio, impacto, info, extremidad, zonaImpacto, dificultad,costo);
+    Movimiento* crearMovimiento(const string& name, double danio, double impacto, string info, string extremidad, string zonaImpacto, double difficulty, int costo) override {
+        return new MovimientosInferiores(name, danio, impacto, info, extremidad, zonaImpacto, difficulty,costo);
     }
 
 };

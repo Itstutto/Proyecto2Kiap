@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include "Character.h"
-#include "PersonajePrincipal.h"
+#include "Player.h"
 #include "Vectores.h"
 using namespace std;
 

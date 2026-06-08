@@ -5,7 +5,7 @@
 #ifndef PROYECTO2KIAP_COMBATEENEMIGO_H
 #define PROYECTO2KIAP_COMBATEENEMIGO_H
 #include "EstrategiaCombate.h"
-#include "PersonajeEnemigo.h"
+#include "Enemy.h"
 
 
 class CombateEnemigo : public EstrategiaCombate{
@@ -14,13 +14,13 @@ public:
     Movimiento* ejecutarEstrategia(Character* p, Character* c) override {
         //seleccionar un movimiento al azar de los movements disponibles del enemigo
         int adicionalDificultad = 0;
-        if (dynamic_cast<PersonajeEnemigo*>(p)) {
-            PersonajeEnemigo* enemigo = dynamic_cast<PersonajeEnemigo*>(p);
-            if (enemigo->getDificultad() == "Facil") {
+        if (dynamic_cast<Enemy*>(p)) {
+            Enemy* enemigo = dynamic_cast<Enemy*>(p);
+            if (enemigo->getDifficulty() == "Facil") {
                 adicionalDificultad = 10;
-            } else if (enemigo->getDificultad() == "Media") {
+            } else if (enemigo->getDifficulty() == "Media") {
                 adicionalDificultad = 20;
-            } else if (enemigo->getDificultad() == "Dificil") {
+            } else if (enemigo->getDifficulty() == "Dificil") {
                 adicionalDificultad = 30;
             }
         }

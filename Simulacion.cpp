@@ -28,9 +28,9 @@ Simulacion::Simulacion() {
         // Cargar personaje principal
         personajePrincipal = CargaPersonajePrincipal::cargarPersonaje(rutaPersonajePrincipal);
         // Cargar enemigos
-        enemigosFacil = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Facil"); // Cargar enemigos de dificultad fácil
-        enemigosMedia = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Media"); // Cargar enemigos de dificultad media
-        enemigosDificil = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Dificil"); // Cargar enemigos de dificultad difícil
+        enemigosFacil = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Facil"); // Cargar enemigos de difficulty fácil
+        enemigosMedia = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Media"); // Cargar enemigos de difficulty media
+        enemigosDificil = FactoryEnemigos::crearEnemigo(rutaEnemigos, "Dificil"); // Cargar enemigos de difficulty difícil
 
 
 
@@ -50,9 +50,9 @@ void Simulacion::ejecutarSimulacion() {
 
     while (personajePrincipal->isAlive() && round<=5) {
         cout<<"Round "<<round<<endl;
-        char dificultad = round<3 ? 'f' : round <5 ? 'm' : 'd'; // Asignar dificultad según el round
-        cout<<"Dificultad: "<<(dificultad == 'f' ? "Facil" : dificultad == 'm' ? "Media" : "Dificil")<<endl;
-        zonaPelea(dificultad);
+        char difficulty = round<3 ? 'f' : round <5 ? 'm' : 'd'; // Asignar difficulty según el round
+        cout<<"Dificultad: "<<(difficulty == 'f' ? "Facil" : difficulty == 'm' ? "Media" : "Dificil")<<endl;
+        zonaPelea(difficulty);
         round++;
         menuEntrePeleas();
     }
@@ -176,21 +176,21 @@ void Simulacion::menuEntrePeleas() {
 }
 
 void Simulacion::tienda() {
-    PersonajePrincipal* pp = dynamic_cast<PersonajePrincipal*>(personajePrincipal);
+    Player* pp = dynamic_cast<Player*>(personajePrincipal);
     if (!pp) {
         cout<<"Hey! La tienda solo es para el personaje principal, intruso >:c"<<endl;
         return;
     }
     vector<Movimiento*> movimientosDisponibles = ListMovInferiores::getInstancia()->getElementos();
     int opcion = 0;
-    cout<<"Bienvenido a la tienda, elija que movimiento desea comprar"<<endl;
+    cout<<"Bienvenido a la tienda, elija que movimiento desea buy"<<endl;
     while (opcion < 1 || opcion > movimientosDisponibles.size()) {
-        PersonajePrincipal* pp = dynamic_cast<PersonajePrincipal*>(personajePrincipal);
+        Player* pp = dynamic_cast<Player*>(personajePrincipal);
         if (!pp) {
             cout<<"Usted no es un personaje principal, jale de aqui"<<endl;
             break;
         }
-        cout<<"Tienes "<<pp->getPuntosExperiencia()<<" puntos de experiencia"<<endl;
+        cout<<"Tienes "<<pp->getExpPoints()<<" puntos de experiencia"<<endl;
         int index = 1;
         for (auto x : movimientosDisponibles) {
             cout<<index++<<") "<<x->mostrar()<<(personajePrincipal->canMakeMove(x) ? " (Ya lo tienes)" : "")<<endl;
@@ -209,30 +209,30 @@ void Simulacion::tienda() {
             break;
         }
         if (personajePrincipal->canMakeMove(movimientosDisponibles[opcion-1])) {
-            cout<<"Ya tienes ese movimiento, elige otro"<<endl;
+            cout<<"Ya tienes ese movimiento, elige other"<<endl;
             opcion = 0;
             continue;
         }
-        if (pp->getPuntosExperiencia() < movimientosDisponibles[opcion-1]->getCosto()) {
-            cout<<"No tienes suficientes puntos de experiencia para comprar este movimiento, sigue peleando para ganar mas puntos"<<endl;
+        if (pp->getExpPoints() < movimientosDisponibles[opcion-1]->getCosto()) {
+            cout<<"No tienes suficientes puntos de experiencia para buy este movimiento, sigue peleando para ganar mas puntos"<<endl;
             opcion = 0;
             continue;
         }
 
         personajePrincipal->addMovement(movimientosDisponibles[opcion-1]->getName(), movimientosDisponibles[opcion-1]->getExtremidad());
-        pp->comprar(movimientosDisponibles[opcion-1]->getCosto());
-        cout<<"Has comprado el movimiento "<<movimientosDisponibles[opcion-1]->getName()<<", te quedan "<<pp->getPuntosExperiencia()<<" puntos de experiencia"<<endl;
+        pp->buy(movimientosDisponibles[opcion-1]->getCosto());
+        cout<<"Has comprado el movimiento "<<movimientosDisponibles[opcion-1]->getName()<<", te quedan "<<pp->getExpPoints()<<" puntos de experiencia"<<endl;
     }
 }
 
 
 void Simulacion::zonaPelea(char tipo) {
-    // elegir un personaje enemigo al azar de la dificultad correspondiente
+    // elegir un personaje enemigo al azar de la difficulty correspondiente
 
     random_device rd;
     mt19937 motor(rd());
     uniform_int_distribution<int> distribucion(0,tipo == 'f' ? (enemigosFacil.size()-1 ): tipo == 'm' ? (enemigosMedia.size()-1) : (enemigosDificil.size()-1));
-    uniform_int_distribution<int> puntosExperiencia(20,35);
+    uniform_int_distribution<int> expPoints(20,35);
     enemigoActual = nullptr;
     int amount = 0;
     int seleccion = 0;
@@ -247,7 +247,7 @@ void Simulacion::zonaPelea(char tipo) {
         }
         amount++;
         if (amount>enemigos.size()*2) {
-            throw runtime_error("No hay enemigos vivos en esta dificultad");
+            throw runtime_error("No hay enemigos vivos en esta difficulty");
         }
     }
 
@@ -278,13 +278,13 @@ void Simulacion::zonaPelea(char tipo) {
     }
     if (personajePrincipal->isAlive()) {
         cout<<"Has ganado la pelea contra "<<enemigoActual->getName()<<endl;
-        PersonajePrincipal* pp = dynamic_cast<PersonajePrincipal*>(personajePrincipal);
+        Player* pp = dynamic_cast<Player*>(personajePrincipal);
         if (!pp) {
             cout<<"Error al otorgar experiencia, usted no es personaje principal tramposo"<<endl;
             return;
         }
-        int experienciaGanada = puntosExperiencia(motor);
-        pp->ganarExperiencia(experienciaGanada);
+        int experienciaGanada = expPoints(motor);
+        pp->gainExp(experienciaGanada);
         cout<<"Has ganado "<<experienciaGanada<<" puntos de experiencia"<<endl;
     } else {
         cout<<"Has perdido la pelea contra "<<enemigoActual->getName()<<endl;

@@ -4,7 +4,7 @@
 
 ```text
 Character
-├── PersonajePrincipal
+├── Player
 └── Enemigo (categorías 1, 2 y 3)
 ```
 
@@ -52,11 +52,11 @@ RealizarGolpe (clase por crear, que hará toda la lógica para saber si el golpe
 -Hacer las excepciones en todos los objetos que se crean con archivos(personajes, zonas, movements) revisar sus constructores
 -Llenar los archivos de textos: 
 -Movimientos: Todos
-Enemigos: 5 de cada dificultad de enemigos(en zonas inferiores y superiores)
+Enemigos: 5 de cada difficulty de enemigos(en zonas inferiores y superiores)
 Character Principal : 1
 
 -Separar los metodos de simulacion en clases(puede ser) 
--Ponerle un atributo al personaje principal, recuperar, y otro atributo que tenga guardado la experiencia 
+-Ponerle un atributo al personaje principal, recuperar, y other atributo que tenga guardado la experiencia 
 -Posibilidad de que el enemigo se cure
 
 -Agregar costo a los movements en el archivo 

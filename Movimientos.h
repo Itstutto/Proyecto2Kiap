@@ -17,11 +17,11 @@ protected:
     string zonaImpacto; //cabeza, torso, brazo, pierna, etc
     double danio;
     double impacto;
-    double dificultad; //determina que tan dificil es realizar el movimiento, con mayor dificultad menor probabilidad de realizarlo
+    double difficulty; //determina que tan dificil es realizar el movimiento, con mayor difficulty menor probabilidad de realizarlo
     string info;
     int costo;
 public:
-    Movimiento(string name, string extremidad, string zonaImpacto, double danio,double impacto,string info, double dificultad,int costo);
+    Movimiento(string name, string extremidad, string zonaImpacto, double danio,double impacto,string info, double difficulty,int costo);
     virtual ~Movimiento() = default;
     string getName();
     double getDamage();
@@ -35,7 +35,7 @@ public:
 
         int posibilidad = distribucion(motor);
 
-        if (posibilidad>dificultad*100) {
+        if (posibilidad>difficulty*100) {
             return false;
         }
         return true;
@@ -50,10 +50,10 @@ public:
 
     std::string mostrar() override;
 
-    bool operator==(const Movimiento &otro) const {
-        return name == otro.name &&
-               extremidad == otro.extremidad &&
-               zonaImpacto == otro.zonaImpacto;
+    bool operator==(const Movimiento &other) const {
+        return name == other.name &&
+               extremidad == other.extremidad &&
+               zonaImpacto == other.zonaImpacto;
     }
 
 

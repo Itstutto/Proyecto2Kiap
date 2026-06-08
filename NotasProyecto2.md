@@ -60,5 +60,15 @@ Personaje Principal : 1
 -Posibilidad de que el enemigo se cure
 
 -Agregar costo a los movimientos en el archivo 
+-Cambiarle la sensibilidad de curarse a los enemies 
 
+Para lo escrito:
+ObjectMovement(se creó de esa manera para permitir ser abierto a expansión, si se desea crear otros tipos de movimientoa que 
+no sean de Taekwondo)
+
+pendientee: 
+-Bitácora
+-Readme
+-Documento oficial
+-Traducir los comentarios y los cambiar en los couts lo que esté en inglés a español
 

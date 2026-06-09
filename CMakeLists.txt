@@ -42,4 +42,5 @@ add_executable(Proyecto2Kiap main.cpp
         CombatManager.h
         Save.h
         Serialize.h
+        Save.cpp
 )

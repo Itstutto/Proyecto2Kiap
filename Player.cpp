@@ -14,7 +14,7 @@ Player::Player(const string &name, char gender, double health, int healPoints, i
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
-    if (health <= 0) {
+    if (health <0) { // Health can be 0 because the character can be dead, but not negative
         throw invalid_argument("La vida del personaje principal debe ser mayor a 0, recibido: " + to_string(health));
     }
     this->healPoints = healPoints;

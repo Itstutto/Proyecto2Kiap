@@ -34,7 +34,7 @@ Character::Character(const string &name, char gender, double health, double dama
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
-    if (health <= 0) {
+    if (health < 0) {
         throw invalid_argument("La vida del personaje debe ser mayor a 0, recibido: " + to_string(health));
     }
     if (damage < 0) {

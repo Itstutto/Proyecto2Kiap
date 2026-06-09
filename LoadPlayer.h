@@ -92,7 +92,7 @@ public:
 
         // Validate positive health
         if (health <= 0) {
-            throw invalid_argument("La vida debe ser mayor a 0, recibido: " + to_string(health));
+            health = 100; // Default value
         }
 
         Player* p = new Player(name, gender,health, healPoints, expPoints);
@@ -119,7 +119,10 @@ public:
             }
         }
 
-
+        if (p->getMovements().empty()) { // If no movements were loaded, add a default basic attack
+            p->addMovement("Ap Chagui", "Pie derecho");
+            p->addMovement("Ap Chagui", "Pie izquierdo");
+        }
 
 
         file.close();

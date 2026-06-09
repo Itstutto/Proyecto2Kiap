@@ -17,7 +17,7 @@ Enemy::Enemy(const string &difficulty,const string &name, char gender, double da
     if (damage < 0) {
         throw invalid_argument("El daño base no puede ser negativo: " + to_string(damage));
     }
-    if (health <= 0) {
+    if (health < 0) {
         throw invalid_argument("La vida del enemigo debe ser mayor a 0, recibido: " + to_string(health));
     }
 

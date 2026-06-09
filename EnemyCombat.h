@@ -26,7 +26,7 @@ public:
         }
         random_device rd;
         mt19937 engine(rd());
-        uniform_int_distribution<int> distribution1(1, p->getAmountMovements()+5);
+        uniform_int_distribution<int> distribution1(1, p->getAmountMovements()+1);
         uniform_int_distribution<int> distribution2(0+extraDifficulty, 15+extraDifficulty);
 
         int movementIndex = distribution1(engine);

@@ -21,6 +21,7 @@ public:
         while (option < 1 || option > 3) {
             cout<<"1. Atacar"<<endl;
             cout<<"2. Ver informacion del rival"<<endl;
+            cout<<"3. Curarse"<<endl;
             cout<<"Opcion: ";
             cin >> option;
             if (cin.fail()) {

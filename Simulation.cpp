@@ -53,6 +53,7 @@ void Simulation::execSimulation() {
         char difficulty = round<3 ? 'f' : round <5 ? 'm' : 'd'; // Assign difficulty according to the round
         cout<<"Dificultad: "<<(difficulty == 'f' ? "Facil" : difficulty == 'm' ? "Media" : "Dificil")<<endl;
         fightZone(difficulty);
+        Save::logBattle("battle_log.txt", player1, actualEnemy, round);
         round++;
         betweenFightsMenu();
     }

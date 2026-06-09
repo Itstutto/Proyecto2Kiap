@@ -41,6 +41,19 @@ Simulation::Simulation() {
     actualEnemy = nullptr;
 }
 
+Simulation::~Simulation() {
+    delete player1;
+    for (auto enemy : easyEnemies) {
+        delete enemy;
+    }
+    for (auto enemy : mediumEnemies) {
+        delete enemy;
+    }
+    for (auto enemy : hardEnemies) {
+        delete enemy;
+    }
+
+}
 
 
 void Simulation::execSimulation() {
@@ -196,7 +209,7 @@ void Simulation::store() {
         for (auto x : availableMovements) {
             cout<<index++<<") "<<x->show()<<(player1->canMakeMove(x) ? " (Ya lo tienes)" : "")<<endl;
         }
-        cout<<index<<") Salir de la store"<<endl;
+        cout<<index<<") Salir de la tienda"<<endl;
         cout<<"Opcion: ";
         cin>>option;
         if (cin.fail() || option < 1 || option > availableMovements.size()+1) {
@@ -206,7 +219,7 @@ void Simulation::store() {
             continue;
         }
         if (option == availableMovements.size()+1) {
-            cout<<"Saliendo de la store..."<<endl;
+            cout<<"Saliendo de la tienda..."<<endl;
             break;
         }
         if (player1->canMakeMove(availableMovements[option-1])) {

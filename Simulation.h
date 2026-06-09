@@ -31,6 +31,7 @@ private:
 
 public:
     Simulation();
+    ~Simulation();
     void execSimulation();
     void starMenu();
     void betweenFightsMenu();

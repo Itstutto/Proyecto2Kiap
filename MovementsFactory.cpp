@@ -23,8 +23,8 @@ vector<Movement *> MovementsFactory::createMovements(const string &name) {
     string line;
 
 
-    MakeMoves* creador;
-    creador = new MovementMaker();
+    MakeMoves* creator;
+    creator = new MovementMaker();
 
 
     int numberLine = 1; // line counter
@@ -119,10 +119,11 @@ vector<Movement *> MovementsFactory::createMovements(const string &name) {
             throw invalid_argument("Línea " + to_string(numberLine) + ": Costo fuera de rango: '" + costoStr + "'");
         }
 
-        movements.push_back(creador->makeMove(nombreMov, damage, impact, descripcion, limb, impactZone, difficulty,cost));
+        movements.push_back(creator->makeMove(nombreMov, damage, impact, descripcion, limb, impactZone, difficulty,cost));
     }
 
     file.close();
+    delete creator;
 
     return movements;
 }

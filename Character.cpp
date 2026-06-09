@@ -80,6 +80,15 @@ Character::Character(const string &name, char gender, double health) {
     bodyZones.insert(bodyZones.end(), zonasInf.begin(), zonasInf.end());
 }
 
+Character::~Character() {
+        for (const auto& zone : bodyZones) {
+            if (zone) {
+                delete zone; // Free up memory from each zone
+            }
+        }
+
+}
+
 
 double Character::getDamage() {
     //temporary, to see functionality

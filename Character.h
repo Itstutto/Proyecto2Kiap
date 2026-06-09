@@ -27,7 +27,7 @@ public:
     Character();
     Character(const string &name,char gender,double health, double damage);
     Character(const string &name,char gender,double health);
-    virtual ~Character() = default;
+    virtual ~Character();
 
     virtual string getName() = 0;
     double getHealth();

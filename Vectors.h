@@ -14,6 +14,11 @@ class Vectors : public IShow{
 protected:
     vector<T*> elements;
 public:
+    ~Vectors() {
+        for (auto& element : elements) {
+            delete element; //Free up memory for each item.
+        }
+    }
     void addElement(T* element) {
 
         for (const auto x : elements) {

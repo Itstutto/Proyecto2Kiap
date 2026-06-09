@@ -14,7 +14,7 @@ using namespace std;
 class EnemyFactory {
 private:
     static void loadEasyMovements(Character* enemy) {
-        //se elige al azar 4 movements con damage base menor a 20
+        //Four movements with base damage less than 20 are randomly selected
         random_device rd;
         mt19937 engine(rd());
         uniform_int_distribution<int> distribution(0, LowerMovList::getInstance()->getElements().size() - 1);
@@ -26,7 +26,7 @@ private:
                 try {
                     enemy->addMovement(mov->getName(), mov->getLimb());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
+                    // If the move has already been added, simply ignore it and try another one.
                     continue;
                 }
                 amount++;
@@ -36,7 +36,7 @@ private:
     }
 
     static void loadMediumMovements(Character* enemy) {
-        //se elige al azar 4 movements con damage base entre 20 y 40
+        //Four moves with base damage between 20 and 40 are randomly selected
         random_device rd;
         mt19937 engine(rd());
         uniform_int_distribution<int> distribution(0, LowerMovList::getInstance()->getElements().size() - 1);
@@ -48,7 +48,7 @@ private:
                 try {
                     enemy->addMovement(mov->getName(), mov->getLimb());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
+                    // If the move has already been added, simply ignore it and try another one.
                     continue;
                 }
                 amount++;
@@ -57,7 +57,7 @@ private:
     }
 
     static void loadHardMovements(Character* enemy) {
-        //se elige al azar 4 movements con damage base mayor a 40
+        //Four movements with a base damage greater than 40 are randomly selected
         random_device rd;
         mt19937 engine(rd());
         uniform_int_distribution<int> distribution(0, LowerMovList::getInstance()->getElements().size() - 1);
@@ -69,7 +69,7 @@ private:
                 try {
                     enemy->addMovement(mov->getName(), mov->getLimb());
                 } catch (const invalid_argument& e) {
-                    // Si el movimiento ya fue agregado, simplemente se ignora y se intenta con other
+                    // If the move has already been added, simply ignore it and try another one.
                     continue;
                 }
                 amount++;
@@ -80,7 +80,7 @@ public:
     static vector<Character*> createEnemy(const string& name, string difficulty) {
         ifstream file(name);
         if (!file.is_open()) {
-            throw runtime_error("No se pudo abrir el file de enemies: " + name);
+            throw runtime_error("No se pudo abrir el archivo de enemies: " + name);
         }
         vector<Character*> enemies;
         string line;
@@ -89,7 +89,7 @@ public:
         while (getline(file, line)) {
             numberLine++;
 
-            // Ignorar líneas vacías
+            //Ignore empty lines
             if (line.empty()) {
                 continue;
             }
@@ -97,37 +97,37 @@ public:
             stringstream ss(line);
             string difficultyFile, enemyName, genderStr, damageStr, healthStr;
 
-            // Leer difficulty del file
+            //Read difficulty of the file
             if (!getline(ss, difficultyFile, ',')) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la difficulty en el file de enemies");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la dificultad en el archivo de enemigos");
             }
 
-            // Verificar si la difficulty coincide
+            // Check if the difficulty matches
             if (difficultyFile != difficulty) {
-                continue; // Saltar enemies que no coincidan con la difficulty
+                continue; // Skipping enemies that don't match the difficulty
             }
-            // Leer los demás campos
+            // Read the other fields
             if (!getline(ss, enemyName, ',')) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el name del enemy");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el nombre del enemigo");
             }
 
             if (enemyName.empty()) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": El name del enemy no puede estar vacío");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": El nombre del enemigo no puede estar vacío");
             }
 
             if (!getline(ss, genderStr, ',')) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el género del enemy");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el género del enemigo");
             }
 
             if (!getline(ss, damageStr, ',')) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el daño base del enemy");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el daño base del enemigo");
             }
 
             if (!getline(ss, healthStr)) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la health del enemy");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la vida del enemigo");
             }
 
-            // Convertir strings a números con validación
+            // Convert strings to numbers with validation
             double damage;
             double health;
             try {
@@ -146,12 +146,12 @@ public:
                 throw invalid_argument("Línea " + to_string(numberLine) + ": Vida fuera de rango: " + healthStr);
             }
 
-            // Validar género
-            char gender = genderStr.empty() ? 'O' : genderStr[0]; // 'O' para other si no se especifica
+            // Validate gender
+            char gender = genderStr.empty() ? 'O' : genderStr[0]; //'O' for other if not specified
             if (gender != 'M' && gender != 'F' && gender != 'O') {
                 throw invalid_argument("Línea " + to_string(numberLine) + ": Género inválido: " + string(1, gender));
             }
-            // Crear el enemy (el constructor validará los valores)
+            // Create the enemy (the constructor will validate the values)
             Enemy* enemy = new Enemy(difficulty, enemyName, gender, damage, health);
             if (difficulty == "Facil") {
                 loadEasyMovements(enemy);

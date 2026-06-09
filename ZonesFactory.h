@@ -6,7 +6,7 @@
 #define PROYECTO2KIAP_FACTORYZONAS_H
 #include "BodyZones.h"
 #include <fstream>
-//Fabrica zones del cuerpo a partir de un file de texto
+//Create body zones from a text file
 
 class ZonesFactory {
 public:
@@ -14,7 +14,7 @@ public:
         vector<BodyZone*> zones;
         ifstream file(fileName);
         if (!file.is_open()) {
-            throw runtime_error("No se pudo abrir el file: " + fileName);
+            throw runtime_error("No se pudo abrir el archivo: " + fileName);
         }
 
         string line;
@@ -23,31 +23,31 @@ public:
         while (getline(file, line)) {
             numberLine++;
 
-            // Ignorar líneas vacías
+            // Ignore empty lines
             if (line.empty()) {
                 continue;
             }
 
-            // Validar que el name de zone no esté vacío
+            // Validate that the zone name is not empty.
             if (line.length() == 0) {
-                throw invalid_argument("Línea " + to_string(numberLine) + ": El name de la zone no puede estar vacío");
+                throw invalid_argument("Línea " + to_string(numberLine) + ": El nombre de la zona no puede estar vacío");
             }
 
-            // Verificar si ya existe la zone (evitar duplicados)
+            // Check if the area already exists (avoid duplicates)
             for (const auto& existingZone : zones) {
                 if (existingZone->getName() == line) {
-                    throw invalid_argument("Línea " + to_string(numberLine) + ": La zone '" + line + "' ya existe");
+                    throw invalid_argument("Línea " + to_string(numberLine) + ": La zona '" + line + "' ya existe");
                 }
             }
-            // Crear la zone (el constructor de BodyZone también validará)
+            // Create the zone (the BodyZone builder will also validate)
             zones.push_back(new BodyZone(line));
         }
 
         file.close();
 
-        // Validar que se cargó al menos una zone
+        // Validate that at least one zone was loaded
         if (zones.empty()) {
-            throw runtime_error("Archivo de zones vacío o sin datos válidos: " + fileName);
+            throw runtime_error("Archivo de zonas vacío o sin datos válidos: " + fileName);
         }
 
         return zones;

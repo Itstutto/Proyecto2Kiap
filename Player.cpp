@@ -9,13 +9,13 @@
 Player::Player(const string &name, char gender, double health, int healPoints, int expPoints) : Character(name, gender, health) {
 
     if (name.empty()) {
-        throw invalid_argument("El name del personaje principal no puede estar vacío");
+        throw invalid_argument("El nombre del personaje principal no puede estar vacío");
     }
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
     if (health <= 0) {
-        throw invalid_argument("La health del personaje principal debe ser mayor a 0, recibido: " + to_string(health));
+        throw invalid_argument("La vida del personaje principal debe ser mayor a 0, recibido: " + to_string(health));
     }
     this->healPoints = healPoints;
     this->expPoints = expPoints;
@@ -35,17 +35,17 @@ int Player::getExpPoints() {
 
 void Player::gainExp(int amount) {
     if (amount < 0) {
-        throw invalid_argument("La amount de experiencia ganada no puede ser negativa: " + to_string(amount));
+        throw invalid_argument("La cantidad de experiencia ganada no puede ser negativa: " + to_string(amount));
     }
     expPoints += amount;
 }
 
 void Player::buy(int amount) {
     if (amount < 0) {
-        throw invalid_argument("La amount a buy no puede ser negativa: " + to_string(amount));
+        throw invalid_argument("La cantidad a comprar no puede ser negativa: " + to_string(amount));
     }
     if (amount>expPoints) {
-        throw invalid_argument("No tienes suficientes puntos de experiencia para buy esta amount de puntos de curación, te faltan " + to_string(amount-expPoints) + " puntos");
+        throw invalid_argument("No tienes suficientes puntos de experiencia para comprar esta cantidad de puntos de curación, te faltan " + to_string(amount-expPoints) + " puntos");
     }
     expPoints -= amount;
 }
@@ -54,19 +54,19 @@ std::string Player::show(){
     stringstream s;
     s<<"---------Character Principal--------"<<endl
     <<"Nombre: "<<name<<endl
-    <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "other")<<endl
+    <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "Otro")<<endl
     <<"Vida: "<<health<<endl
-    <<name<<(alive ? " sigue con health" : " ya no sigue con health :c")<<endl;
+    <<name<<(alive ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
     return s.str();
 }
 
 bool Player::heal(int amount) {
     if (amount < 0) {
-        throw invalid_argument("La amount de curación no puede ser negativa: " + to_string(amount));
+        throw invalid_argument("La cantidad de curación no puede ser negativa: " + to_string(amount));
     }
 
     if (healPoints <= amount || amount <= 0) {
-        return false; // No hay suficientes puntos de curación
+        return false; //There are not enough healing points
     }
     health+=amount;
     if (health>100) {

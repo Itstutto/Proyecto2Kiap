@@ -9,7 +9,7 @@ Enemy::Enemy(const string &difficulty,const string &name, char gender, double da
         throw invalid_argument("Dificultad inválida: '" + difficulty + "'. Debe ser 'Facil', 'Media' o 'Dificil'");
     }
     if (name.empty()) {
-        throw invalid_argument("El nombre del enemy no puede estar vacío");
+        throw invalid_argument("El nombre del enemigo no puede estar vacío");
     }
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
@@ -18,7 +18,7 @@ Enemy::Enemy(const string &difficulty,const string &name, char gender, double da
         throw invalid_argument("El daño base no puede ser negativo: " + to_string(damage));
     }
     if (health <= 0) {
-        throw invalid_argument("La health del enemy debe ser mayor a 0, recibido: " + to_string(health));
+        throw invalid_argument("La vida del enemigo debe ser mayor a 0, recibido: " + to_string(health));
     }
 
     this->difficulty = difficulty;
@@ -29,7 +29,7 @@ std::string Enemy::show() {
     s<<"---------Personaje Enemigo--------"<<endl
     <<"Nombre: "<<name<<endl
     <<"Dificultad: "<<difficulty<<endl
-    <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "other")<<endl
+    <<"Genero: "<<(gender == 'M' ? "Masculino" : gender == 'F' ? "Femenino" : "Other")<<endl
     <<"Vida: "<<health<<endl
     <<"Daño Base: "<<damage<<endl
     <<name<<(alive ? " sigue con vida" : " ya no sigue con vida :c")<<endl;
@@ -53,11 +53,11 @@ bool Enemy::heal(int amount) {
         throw invalid_argument("La cantidad a sanar no puede ser negativa: " + to_string(amount));
     }
     if (!alive) {
-        return false; // No se puede heal a un personaje muerto
+        return false; // You cannot heal a dead character
     }
     health += amount;
     if (health > 100) {
-        health = 100; // Limitar la health máxima a 100
+        health = 100; //Limit maximum health to 100
     }
     return true;
 }

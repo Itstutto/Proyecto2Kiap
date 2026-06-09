@@ -13,11 +13,11 @@ using namespace std;
 class BodyZone : public IShow{
 private:
     string name;
-    double condition; //determina que tan probable es que se realize un movimiento, con menor condition menor probabilidad
+    double condition; //It determines how likely a movement is to occur; a lower condition means lower probability.
 public:
     BodyZone(string name) {
         if (name.empty()) {
-            throw invalid_argument("El name de la zone no puede estar vacío");
+            throw invalid_argument("El nombre de la zona no puede estar vacío");
         }
         this->name = name;
         condition = 1;

@@ -29,16 +29,16 @@ Character::Character() {
 
 Character::Character(const string &name, char gender, double health, double damage) {
     if (name.empty()) {
-        throw invalid_argument("El name del Character no puede estar vacío");
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
     }
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
     if (health <= 0) {
-        throw invalid_argument("La health del Character debe ser mayor a 0, recibido: " + to_string(health));
+        throw invalid_argument("La vida del personaje debe ser mayor a 0, recibido: " + to_string(health));
     }
     if (damage < 0) {
-        throw invalid_argument("El daño base del Character no puede ser negativo, recibido: " + to_string(damage));
+        throw invalid_argument("El daño base del personaje no puede ser negativo, recibido: " + to_string(damage));
     }
     this->gender = gender;
     this->name = name;
@@ -57,18 +57,18 @@ Character::Character(const string &name, char gender, double health, double dama
 
 Character::Character(const string &name, char gender, double health) {
     if (name.empty()) {
-        throw invalid_argument("El name del Character no puede estar vacío");
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
     }
     if (gender != 'M' && gender != 'F' && gender != 'O') {
         throw invalid_argument("Género inválido: '" + string(1, gender) + "'. Debe ser M, F u O");
     }
     if (health <= 0) {
-        throw invalid_argument("La health del Character debe ser mayor a 0, recibido: " + to_string(health));
+        throw invalid_argument("La vida del personaje debe ser mayor a 0, recibido: " + to_string(health));
     }
     this->gender = gender;
     this->name = name;
     this->health = health;
-    this->damage = 5.0; // Valor por defecto
+    this->damage = 5.0; // Default value
     alive=true;
     UpperZone* zonaSup = UpperZone::getInstance();
     LowerZone* zonaInf = LowerZone::getInstance();
@@ -82,7 +82,7 @@ Character::Character(const string &name, char gender, double health) {
 
 
 double Character::getDamage() {
-    //temporal, para ver fucionalidad
+    //temporary, to see functionality
     return damage;
 }
 
@@ -144,7 +144,7 @@ double Character::getHealth() {
 
 void Character::setName(const string &name) {
     if (name.empty()) {
-        throw invalid_argument("El name del Character no puede estar vacío");
+        throw invalid_argument("El nombre del personaje no puede estar vacío");
     }
     this->name = name;
 }
@@ -163,10 +163,10 @@ void Character::resetStats() {
     movements.clear();
     for (const auto& zone : bodyZones) {
         if (zone) {
-            delete zone; // Liberar memoria de cada zone
+            delete zone; // Free up memory from each zone
         }
     }
-    bodyZones.clear(); // Limpiar el vector de zones
+    bodyZones.clear(); // Clear the vector of zones
 
     LowerZone* zonaInf = LowerZone::getInstance();
     UpperZone* zonaSup = UpperZone::getInstance();

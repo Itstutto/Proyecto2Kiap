@@ -21,7 +21,7 @@ public:
                 throw invalid_argument("Ya existe un elemento con ese nombre");
             }
         }
-        T* copy = new T(*element); // Crear una copy independiente en el heap
+        T* copy = new T(*element); //Create a separate copy in the heap
         elements.push_back(copy);
     }
     void addElement(vector<T*> elements) {
@@ -45,7 +45,7 @@ public:
         copy.reserve(elements.size());
         for (const auto z : elements) {
             if (z) {
-                // crea una copy independiente en el heap
+                // creates a separate copy in the heap
                 copy.push_back(new T(*z));
             } else {
                 copy.push_back(nullptr);
@@ -66,9 +66,9 @@ public:
 
     void clear() {
         for (auto& element : elements) {
-            delete element; // Liberar memoria de cada element
+            delete element; //Free up memory for each item.
         }
-        elements.clear(); // Limpiar el vector
+        elements.clear(); //Clean the vector
     }
 };
 

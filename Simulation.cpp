@@ -15,28 +15,28 @@
 #include "LowerZone.h"
 
 Simulation::Simulation() {
-    // Inicializar rutas de archivos
+    // Initialize file paths
     player1Path = "personaje_principal.txt";
     enemiesPath = "enemies.txt";
     movementsPath = "movimientos_inferiores.txt";
     upperZonePath = "zona_superior.txt";
     lowerZonePath = "zona_inferior.txt";
     try {
-        LowerMovList::getInstance()->addElement(MovementsFactory::createMovements(movementsPath)); // Cargar movements inferiores
-        UpperZone::getInstance()->addElement(ZonesFactory::createZones(upperZonePath)); // Cargar zones superiores
-        LowerZone::getInstance()->addElement(ZonesFactory::createZones(lowerZonePath)); // Cargar zones inferiores
+        LowerMovList::getInstance()->addElement(MovementsFactory::createMovements(movementsPath)); //Load lower file movements
+        UpperZone::getInstance()->addElement(ZonesFactory::createZones(upperZonePath)); // Load upper zones
+        LowerZone::getInstance()->addElement(ZonesFactory::createZones(lowerZonePath)); // Load lower zones
         // Cargar personaje principal
         player1 = LoadPlayer::loadPlayer(player1Path);
         // Cargar enemies
-        easyEnemies = EnemyFactory::createEnemy(enemiesPath, "Facil"); // Cargar enemies de difficulty fácil
-        mediumEnemies = EnemyFactory::createEnemy(enemiesPath, "Media"); // Cargar enemies de difficulty media
-        hardEnemies = EnemyFactory::createEnemy(enemiesPath, "Dificil"); // Cargar enemies de difficulty difícil
+        easyEnemies = EnemyFactory::createEnemy(enemiesPath, "Facil"); // Load enemies of easy difficulty
+        mediumEnemies = EnemyFactory::createEnemy(enemiesPath, "Media"); // Load medium difficulty enemies
+        hardEnemies = EnemyFactory::createEnemy(enemiesPath, "Dificil"); // Load enemies of hard difficulty
 
 
 
     } catch (const exception& e) {
         cout<<"Error al cargar los archivos, verifique que los archivos existan y tengan el formato correcto: "<<e.what()<<endl;
-        exit(1); // Salir del programa si hay un error al cargar los archivos
+        exit(1); // Exit the program if there is an error loading the files.
     }
     actualEnemy = nullptr;
 }
@@ -50,7 +50,7 @@ void Simulation::execSimulation() {
 
     while (player1->isAlive() && round<=5) {
         cout<<"Round "<<round<<endl;
-        char difficulty = round<3 ? 'f' : round <5 ? 'm' : 'd'; // Asignar difficulty según el round
+        char difficulty = round<3 ? 'f' : round <5 ? 'm' : 'd'; // Assign difficulty according to the round
         cout<<"Dificultad: "<<(difficulty == 'f' ? "Facil" : difficulty == 'm' ? "Media" : "Dificil")<<endl;
         fightZone(difficulty);
         round++;
@@ -83,8 +83,8 @@ void Simulation::starMenu() {
         cin>>option;
         if (cin.fail()) {
             cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 4." << endl;
-            cin.clear(); // Limpiar el estado de error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
+            cin.clear(); // Clear the error state
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Ignorar la entrada inválida
             continue;
         }
         switch (option) {
@@ -103,21 +103,21 @@ void Simulation::starMenu() {
                     cout<<"Error al cambiar el nombre: "<<e.what()<<endl;
                     continue;
                 }
-                option = 0; // Reiniciar opción para show el menú nuevamente
+                option = 0; // Reset option to show the menu again
                 break;
             }
             case 3: {
                 char newGender;
-                cout<<"Ingrese el nuevo gender (M/F/O): ";
+                cout<<"Ingrese el nuevo genero (M/F/O): ";
                 cin>>newGender;
                 try {
                     player1->setGender(newGender);
                     cout<<"Genero cambiado exitosamente"<<endl;
                 }catch (const invalid_argument& e) {
-                    cout<<"Error al cambiar el gender: "<<e.what()<<endl;
+                    cout<<"Error al cambiar el genero: "<<e.what()<<endl;
                     continue;
                 }
-                option = 0; // Reiniciar opción para show el menú nuevamente
+                option = 0; // Reset option to show the menu again
                 break;
             }
             case 4: {
@@ -132,7 +132,7 @@ void Simulation::starMenu() {
                     enemy->resetStats();
                 }
                 cout<<"Estadisticas reiniciadas exitosamente"<<endl;
-                option = 0; // Reiniciar opción para show el menú nuevamente
+                option = 0; // Reset option to show the menu again
                 break;
             }
             default: {
@@ -148,13 +148,13 @@ void Simulation::betweenFightsMenu() {
     int option = 0;
     while (option < 1 || option > 2) {
         cout<<"Elija una option: "<<endl;
-        cout<<"1. Ir a la store"<<endl;
+        cout<<"1. Ir a la tienda"<<endl;
         cout<<"2. Continuar a la siguiente pelea"<<endl;
         cin>>option;
         if (cin.fail()) {
             cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 2." << endl;
-            cin.clear(); // Limpiar el estado de error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
+            cin.clear(); // Clear the error state
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
             continue;
         }
         switch (option) {

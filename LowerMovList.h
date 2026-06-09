@@ -23,7 +23,7 @@ public:
                 return x;
             }
         }
-        throw invalid_argument("No existe un movimiento con ese name y zone");
+        throw invalid_argument("No existe un movimiento con ese nombre y zona");
     }
 
     static LowerMovList* getInstance();

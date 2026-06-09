@@ -13,11 +13,11 @@ using namespace std;
 class Movement : public IShow{
 protected:
     string name;
-    string limb; //brazo derecho, brazo izquierdo, cabeza, etc
-    string impactZone; //cabeza, torso, brazo, pierna, etc
+    string limb; //right arm, left arm, head, etc.
+    string impactZone; //head, torso, arm, leg, etc.
     double damage;
     double impact;
-    double difficulty; //determina que tan dificil es realizar el movimiento, con mayor difficulty menor probabilidad de realizarlo
+    double difficulty; //It determines how difficult the movement is to perform; the greater the difficulty, the lower the probability of performing it.
     string info;
     int cost;
 public:

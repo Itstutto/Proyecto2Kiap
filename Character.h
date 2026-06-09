@@ -14,14 +14,14 @@ using namespace std;
 class Character : public IShow, public Serialize{
 protected:
 
-    //decorator de equipamiento de proteccion, pendiente
-    //decorator de objetos para hacer daño, pendiente
+    //decorator of protective equipment, pending
+    //decorator of objects to cause harm, earring
     string name;
     char gender;
     double health;
     double damage;
     bool alive;
-    vector<BodyZone*> bodyZones; //para determinar que zones del cuerpo tiene el personaje, y asi determinar que movements puede realizar
+    vector<BodyZone*> bodyZones; //to determine which body zones the character has, and thus determine what movements they can perform
     Vectors<Movement> movements;
 public:
     Character();

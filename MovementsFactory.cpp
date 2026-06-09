@@ -8,16 +8,16 @@
 #include "MakeMoves.h"
 
 vector<Movement *> MovementsFactory::createMovements(const string &name) {
-    /*sintaxis de archivos
-     *type: inferior/superior
-     *name,limb,impactZone,damage,impact,descripcion,difficulty
-     *name,limb,impactZone,damage,impact,descripcion,difficulty
+    /*file syntax
+      *type: bottom/top
+      *name,limb,impactZone,damage,impact,description,difficulty
+      *name,limb,impactZone,damage,impact,description,difficulty
      *...
      */
     vector<Movement*> movements;
     ifstream file(name);
     if (!file.is_open()) {
-        throw runtime_error("No se pudo abrir el file: " + name);
+        throw runtime_error("No se pudo abrir el archivo: " + name);
     }
 
     string line;
@@ -27,12 +27,12 @@ vector<Movement *> MovementsFactory::createMovements(const string &name) {
     creador = new MovementMaker();
 
 
-    int numberLine = 1; // contador de líneas
+    int numberLine = 1; // line counter
 
     while (getline(file, line)) {
         numberLine++;
 
-        // Ignorar líneas vacías
+        // Ignore empty lines
         if (line.empty()) {
             continue;
         }
@@ -40,35 +40,35 @@ vector<Movement *> MovementsFactory::createMovements(const string &name) {
         stringstream ss(line);
         string nombreMov, limb, impactZone, danioStr, impactoStr, descripcion, dificultadStr,costoStr;
 
-        // Leer todos los campos separados por coma
+        // Read all comma-separated fields
         if (!getline(ss, nombreMov, ',')) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el name del movimiento");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el nombre del movimiento");
         }
 
         if (nombreMov.empty()) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": El name del movimiento no puede estar vacío");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": El nombre del movimiento no puede estar vacío");
         }
 
         if (!getline(ss, limb, ',')) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la limb");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la extremidad");
         }
         if (limb.empty()) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": La limb no puede estar vacía");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": La extremidad no puede estar vacía");
         }
 
         if (!getline(ss, impactZone, ',')) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la zone de impact");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la zona de impacto");
         }
 
         if (impactZone.empty()) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": La zone de impact no puede estar vacía");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": La zona de impacto no puede estar vacía");
         }
         if (!getline(ss, danioStr, ',')) {
             throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el daño");
         }
 
         if (!getline(ss, impactoStr, ',')) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el impact");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el impacto");
         }
 
         if (!getline(ss, descripcion, ',')) {
@@ -76,14 +76,14 @@ vector<Movement *> MovementsFactory::createMovements(const string &name) {
         }
 
         if (!getline(ss, dificultadStr, ',')) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la difficulty");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta la dificultad");
         }
 
         if (!getline(ss, costoStr)) {
-            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el cost");
+            throw invalid_argument("Línea " + to_string(numberLine) + ": Falta el costo");
         }
 
-        // Convertir a números con validación
+        //Convert to numbers with validation
         double damage;
         double impact;
         double difficulty;

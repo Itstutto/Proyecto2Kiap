@@ -18,7 +18,7 @@ public:
         if (!file.is_open()) {
             file.close();
 
-            //crear si no esta creado
+            //create if it is not created
             ofstream newFile(fileName);
             newFile.close();
             file.open(fileName);
@@ -38,7 +38,7 @@ public:
             cout<<"Ingrese el nombre del personaje: ";
             getline(cin, name);
         }
-        if (name.empty()) { // Validar name no vacío
+        if (name.empty()) { // Validate name not empty
             throw invalid_argument("El nombre del personaje no puede estar vacío");
         }
         if (!getline(file,genderStr,',')) {
@@ -48,12 +48,12 @@ public:
         }else{
             gender = genderStr.empty() ? 'O' : genderStr[0];
         }
-        // Validar género válido
+        // Validate valid gender
         if (gender != 'M' && gender != 'F' && gender != 'O') {
             throw invalid_argument("Genero invalido: '" + string(1, gender) + "'. Debe ser M, F u O");
         }
         if (!getline(file,healthStr,',') || healthStr.empty()) {
-            health = 100; // Valor por defecto
+            health = 100; // Default value
         }
         else {
             try {
@@ -65,7 +65,7 @@ public:
             }
         }
         if (!getline(file,healPointsStr,',')) {
-            healPoints = 3; // Valor por defecto
+            healPoints = 3; // Default value
         }
         else {
             try {
@@ -77,7 +77,7 @@ public:
             }
         }
         if (!getline(file,expPointsStr)) {
-            expPoints = 0; // Valor por defecto
+            expPoints = 0; // Default value
         }
         else {
             try {
@@ -90,7 +90,7 @@ public:
         }
 
 
-        // Validar health positiva
+        // Validate positive health
         if (health <= 0) {
             throw invalid_argument("La vida debe ser mayor a 0, recibido: " + to_string(health));
         }
@@ -100,11 +100,11 @@ public:
         string line;
         string zone;
 
-        //Las siguiente line son solo nombres de movements y su zone
+        //The following lines are just movement names and their zone
 
         while (getline(file, line)) {
             if (line.empty()) {
-                continue; // Saltar líneas vacías
+                continue; // Skip empty lines
             }
             ss.clear();
             ss.str(line);
@@ -115,7 +115,7 @@ public:
 
                 p->addMovement(name ,zone);
             }catch (const invalid_argument& e) {
-                cout << "Error al agregar movimiento '" << name << "' con zone '" << zone << "': " << e.what() << endl;
+                cout << "Error al agregar movimiento '" << name << "' con zona '" << zone << "': " << e.what() << endl;
             }
         }
 

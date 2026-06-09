@@ -26,7 +26,7 @@ public:
         BodyZone* zoneUsed = p1->getZone(mov->getLimb());
 
         if (!zoneUsed) {
-            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la limb "<<mov->getLimb()<<endl;
+            s<<p1->getName()<<" no pudo golpear a "<<p2->getName()<<" porque no tiene la extremidad "<<mov->getLimb()<<endl;
             return s.str();
         }
         else if (!zoneUsed->available()) {

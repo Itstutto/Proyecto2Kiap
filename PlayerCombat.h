@@ -25,8 +25,8 @@ public:
             cin >> option;
             if (cin.fail()) {
                 cout << "Entrada inválida. Por favor, ingrese un número entre 1 y 2." << endl;
-                cin.clear(); // Limpiar el estado de error
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
+                cin.clear(); // Clear the error state
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
                 continue;
             } else if (option < 1 || option > 3) {
                 cout << "Opción no válida. Por favor, ingrese un número entre 1 y 2." << endl;
@@ -43,11 +43,11 @@ public:
                     while (movementOption < 1 || movementOption > p->getAmountMovements()) {
                         cout<<"Opcion: ";
                         cin>>movementOption;
-                        // Validar que la opción sea un número válido
+                        // Validate that the option is a valid number
                         if (cin.fail() || movementOption < 1 || movementOption > p->getMovements().size()) {
                             cout << "Opción inválida. Por favor, ingrese un número entre 1 y " << p->getMovements().size() << "." << endl;
-                            cin.clear(); // Limpiar el estado de error
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignorar la entrada inválida
+                            cin.clear(); // Clear the error state
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
                         }
                     }
                     return p->getIndexMovement(movementOption);
@@ -75,11 +75,11 @@ public:
 
                         }catch (const invalid_argument& e) {
                             cout<<"No se ingreso un numero valido"<<endl;
-                            cin.clear(); // Limpiar el estado de error
+                            cin.clear(); // Clear the error state
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
                         }
-                        return nullptr; // No se realiza un movimiento, solo se cura
+                        return nullptr; // No movement is made, only healing occurs.
                     } else {
                         cout<<"Error: No se pudo acceder a los puntos de curación del personaje principal."<<endl;
                         continue;

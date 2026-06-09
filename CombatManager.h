@@ -19,7 +19,7 @@ public:
     }
     Movement* executeStrategy(Character* p, Character* c) {
         if (!strategy) {
-            throw runtime_error("No se ha establecido una strategy de combate");
+            throw runtime_error("No se ha establecido una estrategia de combate");
         }
         return strategy->executeStrategy(p,c);
     }

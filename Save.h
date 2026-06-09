@@ -16,15 +16,15 @@ public:
     static void savePlayer(Character* p, string &path){
         ofstream file(path);
         if (!file.is_open()) {
-            throw runtime_error("No se pudo abrir el file para guardar el personaje principal: " + path);
+            throw runtime_error("No se pudo abrir el archivo para guardar el personaje principal: " + path);
         }
         file << p->serialize() << endl;
         file.close();
     }
     static void saveEnemies(const vector<Character*> &enemies, const string &path) {
-        ofstream file(path , ios::app); // Abrir en modo append para agregar al final del file
+        ofstream file(path , ios::app); // Open in append mode to add to the end of the file
         if (!file.is_open()) {
-            throw runtime_error("No se pudo abrir el file para guardar los enemies: " + path);
+            throw runtime_error("No se pudo abrir el archivo para guardar los enemigos: " + path);
         }
         for (auto enemy : enemies) {
             file << enemy->serialize() << endl;

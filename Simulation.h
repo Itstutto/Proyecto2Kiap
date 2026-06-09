@@ -14,7 +14,7 @@
 
 class Simulation {
 private:
-    //atributos para manejar la simulacion, como personajes, movements, etc
+    //attributes for managing the simulation, such as characters, movements, etc.
 
     Character* player1;
     Character* actualEnemy;
@@ -35,7 +35,7 @@ public:
     void starMenu();
     void betweenFightsMenu();
     void store();
-    void fightZone(char type); //type facil, medio, dificil
+    void fightZone(char type); //type easy, medium, hard
 
 };
 

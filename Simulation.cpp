@@ -197,7 +197,7 @@ void Simulation::store() {
     }
     vector<Movement*> availableMovements = LowerMovList::getInstance()->getElements();
     int option = 0;
-    cout<<"Bienvenido a la tienda, elija que movimiento desea buy"<<endl;
+    cout<<"Bienvenido a la tienda, elija que movimiento desea comprar"<<endl;
     while (option < 1 || option > availableMovements.size()) {
         Player* pp = dynamic_cast<Player*>(player1);
         if (!pp) {
@@ -223,12 +223,12 @@ void Simulation::store() {
             break;
         }
         if (player1->canMakeMove(availableMovements[option-1])) {
-            cout<<"Ya tienes ese movimiento, elige other"<<endl;
+            cout<<"Ya tienes ese movimiento, elige otro"<<endl;
             option = 0;
             continue;
         }
         if (pp->getExpPoints() < availableMovements[option-1]->getCost()) {
-            cout<<"No tienes suficientes puntos de experiencia para buy este movimiento, sigue peleando para ganar mas puntos"<<endl;
+            cout<<"No tienes suficientes puntos de experiencia para comprar este movimiento, sigue peleando para ganar mas puntos"<<endl;
             option = 0;
             continue;
         }
@@ -261,7 +261,7 @@ void Simulation::fightZone(char type) {
         }
         amount++;
         if (amount>enemies.size()*2) {
-            throw runtime_error("No hay enemies vivos en esta difficulty");
+            throw runtime_error("No hay enemigos vivos en esta difficulty");
         }
     }
 

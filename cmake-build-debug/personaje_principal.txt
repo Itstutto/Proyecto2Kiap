@@ -1,4 +1,4 @@
-Cesar,M,0,7,139
+Cesar,M,0,7,232
 Ap Chagui,Pie derecho
 Ap Chagui,Pie izquierdo
 Nako Chagui,Pie derecho

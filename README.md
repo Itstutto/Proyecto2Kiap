@@ -4,7 +4,7 @@
 además de contar con los pasos a seguir para vivir toda la experiencia completa del juego programado.
 
     La simulación consta en un juego de batalla, el cual la dinámica del juego es hacer que el jugador realice
-un total de 3 rondas contra diferentes enemigos escogidos al azar, el jugador debe de ganar todas las rondas
+un total de 5 rondas contra diferentes enemigos escogidos al azar, el jugador debe de ganar todas las rondas
 para considerarse ganador de la simulación. En medio de sus peleas puede curarse (ganar puntos), 
 ver la información del enemigo y al final de cada round puede comprar más movimientos en base a los puntos 
 que haya obtenido durante la ronda.
@@ -23,5 +23,5 @@ causó al enemigo, si el enemigo decidió curarse y actualizando el número de v
 opciones se presentan hasta que alguno de los 2 jugadores gane el combate. Al final de cada round se
 presenta una opción de ir a la tienda en donde puede adquirir nuevos movimientos, los cuales puede “comprar” 
 dependiendo de cuántos puntos tenga de experiencia que se acumulan dependiendo de las batallas que haya ganado.
-De esta manera prosigue hasta el final de las 3 rondas, el jugador gana o pierde la simulación dependiendo de 
-si ganó los 3 rounds, se considera ganador absoluto de la simulación.
+De esta manera prosigue hasta el final de las 5 rondas, el jugador gana o pierde la simulación dependiendo de 
+si ganó los 5 rounds, se considera ganador absoluto de la simulación.

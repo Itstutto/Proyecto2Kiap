@@ -17,6 +17,7 @@ public:
     int getHealPoints();
     int getExpPoints();
     void gainExp(int amount);
+    void gainHealP(int amount);
     void buy(int amount);
     std::string show() override;
     bool heal(int amount) override;

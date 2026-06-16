@@ -65,7 +65,7 @@ public:
             }
         }
         if (!getline(file,healPointsStr,',')) {
-            healPoints = 3; // Default value
+            healPoints = 15; // Default value
         }
         else {
             try {

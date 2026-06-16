@@ -72,7 +72,11 @@ public:
                             if (cin.fail()){
                                 throw invalid_argument("Entrada inválida. Por favor, ingrese un número entero para los puntos de curación.");
                             }
-                            pp->heal(healPoints);
+                            if (pp->heal(healPoints)) {
+                                cout<<"Se ha curado exitosamente"<<endl;
+                            }else {
+                                cout<<"No se ha podido curar al personaje"<<endl;
+                            }
 
                         }catch (const invalid_argument& e) {
                             cout<<"No se ingreso un numero valido"<<endl;

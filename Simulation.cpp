@@ -68,7 +68,9 @@ void Simulation::execSimulation() {
         fightZone(difficulty);
         Save::logBattle("battle_log.txt", player1, actualEnemy, round);
         round++;
-        betweenFightsMenu();
+        if (player1->isAlive()) {
+            betweenFightsMenu();
+        }
     }
 
     if (player1->isAlive()) {
@@ -300,6 +302,9 @@ void Simulation::fightZone(char type) {
         int experienciaGanada = expPoints(engine);
         pp->gainExp(experienciaGanada);
         cout<<"Has ganado "<<experienciaGanada<<" puntos de experiencia"<<endl;
+        experienciaGanada = expPoints(engine);
+        pp->gainHealP(experienciaGanada);
+        cout<<"Has ganado"<<experienciaGanada<<" puntos de curacion"<<endl;
     } else {
         cout<<"Has perdido la pelea contra "<<actualEnemy->getName()<<endl;
     }

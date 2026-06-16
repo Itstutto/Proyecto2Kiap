@@ -1,5 +1,4 @@
-Cesar,M,0,7,232
+Jonathan,M,100,40,23
 Ap Chagui,Pie derecho
 Ap Chagui,Pie izquierdo
-Nako Chagui,Pie derecho
 

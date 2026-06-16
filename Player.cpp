@@ -40,6 +40,13 @@ void Player::gainExp(int amount) {
     expPoints += amount;
 }
 
+void Player::gainHealP(int amount) {
+    if (amount<0) {
+        throw invalid_argument("La cantidad de experiencia ganada no puede ser negativa: " + to_string(amount));
+    }
+    healPoints+=amount;
+}
+
 void Player::buy(int amount) {
     if (amount < 0) {
         throw invalid_argument("La cantidad a comprar no puede ser negativa: " + to_string(amount));
@@ -52,7 +59,7 @@ void Player::buy(int amount) {
 
 std::string Player::show(){
     stringstream s;
-    s<<"---------Character Principal--------"<<endl
+    s<<"---------Personaje Principal--------"<<endl
     <<"Nombre: "<<name<<endl
     <<"Genero: "<<(gender == 'M' ? "masculino" : gender == 'F' ? "Femenino" : "Otro")<<endl
     <<"Vida: "<<health<<endl
@@ -65,7 +72,7 @@ bool Player::heal(int amount) {
         throw invalid_argument("La cantidad de curación no puede ser negativa: " + to_string(amount));
     }
 
-    if (healPoints <= amount || amount <= 0) {
+    if (healPoints < amount || amount <= 0) {
         return false; //There are not enough healing points
     }
     health+=amount;

@@ -19,7 +19,7 @@ Al iniciar el combate, se brinda la información del round y el porcentaje de vi
 luego se dan las opciones de atacar, ver información del rival y curarse, al atacar el jugador
 puede escoger 1 de 3 movimientos disponibles que se brindan por defecto al jugador, luego de escoger 1 de 
 estos movimientos el programa presenta los acontecimientos debidos al golpe, como por ejemplo cuanto daño
-causó al enemigo, si el enemigo decidió curarse y actualizando el número de vida del jugador, estas 3
+causó al enemigo, si el enemigo decidió curarse y actualizando el número de vida del jugador, estas 2
 opciones se presentan hasta que alguno de los 2 jugadores gane el combate. Al final de cada round se
 presenta una opción de ir a la tienda en donde puede adquirir nuevos movimientos, los cuales puede “comprar” 
 dependiendo de cuántos puntos tenga de experiencia que se acumulan dependiendo de las batallas que haya ganado.
